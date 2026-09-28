@@ -1,0 +1,19 @@
+{
+  "description": "战争进化史 · 微信小游戏 PvE 原型",
+  "compileType": "game",
+  "appid": "touristappid",
+  "projectname": "The-development-of-war",
+  "miniprogramRoot": "./",
+  "setting": {"es6": true, "minified": true, "urlCheck": true},
+  "packOptions": {"ignore": [
+    {"type":"folder","value":"tests"},
+    {"type":"folder","value":"scripts"},
+    {"type":"folder","value":"introduction"},
+    {"type":"folder","value":".git"},
+    {"type":"suffix","value":".md"},
+    {"type":"suffix","value":".csv"},
+    {"type":"suffix","value":".html"},
+    {"type":"file","value":"assets/units/generation-plan.json"},
+    {"type":"file","value":"assets/units/generation-jobs.json"}
+  ]}
+}
