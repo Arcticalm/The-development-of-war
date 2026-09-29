@@ -49,3 +49,12 @@ Character requirements from the project art guide:
 
 攻击瞬间前腿发力，象牙向前，产生明显冲击感。
 ```
+
+## 2026-09-29 透明预览归档
+
+- 文件：`unit_age1_heavy_portrait_preview_v01.png`
+- 工具：Canva
+- 尺寸：200 × 200，保留预览实际像素
+- 媒体 ID：`MAHWkX4Ymtg`
+- [Open generated image](https://www.canva.com/M/MAHWkX4Ymtg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)
+- 校验：通过：存在透明像素

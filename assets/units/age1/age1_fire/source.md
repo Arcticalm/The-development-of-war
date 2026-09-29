@@ -26,3 +26,12 @@ Character requirements from the project art guide:
 - **动作**：取罐、点燃、双手抛出、等待；命中出现小范围火焰与碎陶片，不留下永久燃烧地形。
 - **辨识重点**：圆罐、火光和较慢的大幅抛掷动作，与投石猎手的投石索区别明确。
 ```
+
+## 2026-09-29 透明预览归档
+
+- 文件：`unit_age1_fire_portrait_preview_v01.png`
+- 工具：Canva
+- 尺寸：200 × 200，保留预览实际像素
+- 媒体 ID：`MAHWkWuSj5g`
+- [Open generated image](https://www.canva.com/M/MAHWkWuSj5g?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)
+- 校验：通过：存在透明像素

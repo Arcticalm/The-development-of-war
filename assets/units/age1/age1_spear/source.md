@@ -26,3 +26,12 @@ Character requirements from the project art guide:
 - **动作**：抽矛、后拉、前掷、取下一矛；骨矛命中重甲时显示集中冲击线，不能画成范围爆炸。
 - **辨识重点**：武器细长，区别于石棒战士的粗短钝器；投掷距离感介于近战和投石之间。
 ```
+
+## 2026-09-29 透明预览归档
+
+- 文件：`unit_age1_spear_portrait_preview_v01.png`
+- 工具：Canva
+- 尺寸：200 × 200，保留预览实际像素
+- 媒体 ID：`MAHWkdq9keU`
+- [Open generated image](https://www.canva.com/M/MAHWkdq9keU?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)
+- 校验：通过：存在透明像素

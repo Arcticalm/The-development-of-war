@@ -44,3 +44,12 @@ Character requirements from the project art guide:
 
 长矛向前突刺，攻击距离明显超过剑盾兵。
 ```
+
+## 2026-09-29 透明预览归档
+
+- 文件：`unit_age2_heavy_portrait_preview_v01.png`
+- 工具：Canva
+- 尺寸：200 × 200，保留预览实际像素
+- 媒体 ID：`MAHWkYWn5xY`
+- [Open generated image](https://www.canva.com/M/MAHWkYWn5xY?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)
+- 校验：通过：存在透明像素

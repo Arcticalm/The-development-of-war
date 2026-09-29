@@ -42,3 +42,12 @@ Character requirements from the project art guide:
 
 受击时可使用盾牌产生轻微格挡动作。
 ```
+
+## 2026-09-29 透明预览归档
+
+- 文件：`unit_age2_melee_portrait_preview_v01.png`
+- 工具：Canva
+- 尺寸：200 × 200，保留预览实际像素
+- 媒体 ID：`MAHWkVRVC-E`
+- [Open generated image](https://www.canva.com/M/MAHWkVRVC-E?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)
+- 校验：通过：存在透明像素

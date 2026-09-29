@@ -23,3 +23,16 @@
 - 战地医师：[Open generated image](https://www.canva.com/M/MAHWe0OYstk?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
 
 原图与正式头像后续另行导出；本轮先交付用户确认的预览图。
+
+## 2026-09-29 续作进度
+
+新增 6 张透明 PNG 预览：猛犸骑手、骨矛猎手、火罐投手、剑盾士兵、长弓手、重甲枪兵。当前共 12 张概念图、8 张透明图；8 个合格兵种全部以透明图接入小游戏。
+
+Canva 新图生成两次返回 `Too many requests`，未创建新生成任务；18 个兵种尚未生成，4 个旧概念仍需重绘，不计作已完成。
+
+- 猛犸骑手：[Open generated image](https://www.canva.com/M/MAHWkX4Ymtg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_heavy/unit_age1_heavy_portrait_preview_v01.png)
+- 骨矛猎手：[Open generated image](https://www.canva.com/M/MAHWkdq9keU?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_spear/unit_age1_spear_portrait_preview_v01.png)
+- 火罐投手：[Open generated image](https://www.canva.com/M/MAHWkWuSj5g?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_fire/unit_age1_fire_portrait_preview_v01.png)
+- 剑盾士兵：[Open generated image](https://www.canva.com/M/MAHWkVRVC-E?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_melee/unit_age2_melee_portrait_preview_v01.png)
+- 长弓手：[Open generated image](https://www.canva.com/M/MAHWkWMGJRg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_range/unit_age2_range_portrait_preview_v01.png)
+- 重甲枪兵：[Open generated image](https://www.canva.com/M/MAHWkYWn5xY?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_heavy/unit_age2_heavy_portrait_preview_v01.png)
