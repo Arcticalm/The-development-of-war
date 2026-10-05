@@ -1,11 +1,12 @@
 'use strict';
 const {ERAS,UNITS,BY_ID}=require('./data');
 const ART=require('./art-map');
+const {BattleAnimation}=require('./animation');
 const C={paper:'#eee4ce',ink:'#283a36',muted:'#6f7568',teal:'#347b70',red:'#b9664e',gold:'#d0a34f',panel:'#faf4e6',line:'#cec4ae'};
 const DAMAGE={normal:'普通',piercing:'穿甲',explosive:'爆破',siege:'攻城',energy:'能量'};
 const TRAITS={base:'对基地伤害提高',splashBase:'范围爆破 / 攻城加成',haste:'附近友军攻速 +15%',shieldWall:'单体远程普攻减伤 20%',mechanical:'机械单位',charge:'首次攻击强化',heal:'治疗单个生物友军',mechanicalSplash:'机械 / 范围攻城',splash:'范围伤害',march:'附近友军移动速度 +20%',sniper:'优先攻击射程内支援兵',warmup:'架枪 0.8 秒后持续射击',heal3:'治疗最多 3 个生物友军',shield:'出场护盾为生命值的 20%',rail:'穿透最多 2 个目标',repair:'维修机械与动力装甲友军'};
 class Renderer {
-  constructor(app){this.app=app;this.ctx=app.ctx;this.buttons=[];this.images={};Object.keys(ART).forEach(id=>{const img=app.wx.createImage();img.onload=()=>{this.images[id]=img;};img.onerror=()=>{};img.src=ART[id].path;});}
+  constructor(app){this.app=app;this.ctx=app.ctx;this.buttons=[];this.images={};this.animation=new BattleAnimation();this.worldCamera={zoom:1,x:0,y:0};Object.keys(ART).forEach(id=>{const img=app.wx.createImage();img.onload=()=>{this.images[id]=img;};img.onerror=()=>{};img.src=ART[id].path;});}
   rect(x,y,w,h,color){const c=this.ctx;c.fillStyle=color;c.fillRect(x,y,w,h);}
   text(text,x,y,size=22,color=C.ink,align='left'){const c=this.ctx;c.fillStyle=color;c.font=`${size}px sans-serif`;c.textAlign=align;c.textBaseline='middle';c.fillText(String(text),x,y);}
   line(x,y,x2,y2,color=C.line,width=2){const c=this.ctx;c.beginPath();c.moveTo(x,y);c.lineTo(x2,y2);c.strokeStyle=color;c.lineWidth=width;c.stroke();}
@@ -34,15 +35,59 @@ class Renderer {
     this.bar(28,57,326,13,p.hp/p.maxHp,C.teal);this.bar(900,57,326,13,enemy.hp/enemy.maxHp,C.red);this.text(`${Math.ceil(p.hp)} / ${p.maxHp}`,28,90,18);this.text(`${Math.ceil(enemy.hp)} / ${enemy.maxHp}`,900,90,18);
     this.text('金币 '+Math.floor(p.gold),390,30,24);this.text('人口 '+b.population(0)+' / 30',390,64,21);this.text('经验 '+Math.floor(p.xp)+(p.era<4?' / '+ERAS[p.era+1].xp:' · 已达顶峰'),390,99,20);
     const t=Math.floor(b.time);this.text(`${Math.floor(t/60).toString().padStart(2,'0')}:${(t%60).toString().padStart(2,'0')}`,751,32,25);this.button('暂停',720,66,130,48,()=>{a.paused=true;a.save();},!b.result);
-    this.rect(0,143,1280,310,'#dce2d0');const c=this.ctx;c.beginPath();c.moveTo(0,338);[[180,240],[340,330],[480,255],[650,345],[850,230],[1100,325],[1280,265]].forEach(v=>c.lineTo(v[0],v[1]));c.lineTo(1280,453);c.lineTo(0,453);c.fillStyle='#c8d1bf';c.fill();
-    this.rect(0,414,1280,76,'#a7ac80');this.line(0,414,1280,414,'#798966',4);this.base(0,p);this.base(1,enemy);
+    const c=this.ctx;this.animation.update(b);this.worldCamera=this.animation.camera();
+    c.save();c.beginPath();c.rect(0,143,1280,347);c.clip();c.translate(640+this.worldCamera.x,414+this.worldCamera.y);c.scale(this.worldCamera.zoom,this.worldCamera.zoom);c.translate(-640,-414);
+    this.landscape(p.era,b.time);this.base(0,p);this.base(1,enemy);
     b.strikes.forEach(s=>{const x=100+s.x*1.08;c.beginPath();c.arc(x,381,110,0,Math.PI*2);c.strokeStyle=s.side?C.red:C.teal;c.lineWidth=3;c.stroke();this.text('技能预警',x,255,19,s.side?C.red:C.teal,'center');});
-    b.units.slice().sort((u,v)=>u.id-v.id).forEach(u=>{const d=BY_ID[u.typeId],size=d.pop===3?76:58,x=100+u.x*1.08-size/2,y=410-size+(u.id%3)*3;this.portrait(d,x,y,size,u.side);this.bar(x,y-10,size,5,u.hp/d.hp,u.side?C.red:C.teal);if(u.shield>0)this.bar(x,y-16,size,4,u.shield/(d.hp*0.2),'#61a9bd');});
-    b.effects.forEach(e=>{const x=100+e.to*1.08;if(e.blast){c.beginPath();c.arc(x,380,105,0,Math.PI*2);c.fillStyle='rgba(207,163,79,0.4)';c.fill();}else this.line(100+e.from*1.08,365,x,378,e.side?C.red:C.teal,3);});
-    this.text('我方基地',94,450,18,C.ink,'center');this.text('敌方基地',1184,450,18,C.ink,'center');this.controls(p,b);
+    this.animation.fallen.forEach(u=>this.unit(u,true));
+    b.units.slice().sort((u,v)=>(u.id%3)-(v.id%3)||u.id-v.id).forEach(u=>this.unit(u));
+    b.effects.forEach(e=>this.effect(e));
+    this.text('我方基地',94,466,18,C.ink,'center');this.text('敌方基地',1184,466,18,C.ink,'center');c.restore();this.controls(p,b);
     if(a.skillMode){this.text('点击战场选择技能落点',640,181,27,C.teal,'center');this.button('取消施放',550,216,180,40,()=>{a.skillMode=false;},true,true);}
     if(a.modal==='defense')this.defense(p);if(a.modal&&a.modal.unit)this.details(BY_ID[a.modal.unit]);
     if(a.paused&&!b.result)this.pause();if(a.modal==='help')this.help();if(b.result)this.result(b.result);
+  }
+  screenXToBattle(x){const camera=this.worldCamera;return(((x-640-camera.x)/camera.zoom+640)-100)/1.08;}
+  landscape(era,time){
+    const c=this.ctx,palettes=[['#dce2d0','#bfcbb4','#8b9b78'],['#e6dfc8','#c8c8ad','#a0a17b'],['#ddd9cc','#b7bfbd','#85958c'],['#d7e0df','#b6c5c3','#829896'],['#d3e2e1','#a7c6c4','#698f90']],colors=palettes[era];
+    this.rect(-32,130,1344,360,colors[0]);
+    c.save();c.globalAlpha=0.25;c.fillStyle='#fff8df';c.beginPath();c.arc(1040,203,36,0,Math.PI*2);c.fill();
+    for(let i=0;i<4;i++){const x=((i*390+time*2)%1600)-160;c.beginPath();c.ellipse(x,210+i%2*26,80,10,0,0,Math.PI*2);c.fill();}c.restore();
+    c.beginPath();c.moveTo(-32,352);for(let i=0;i<9;i++)c.lineTo(i*180-32,300+Math.sin(i*1.7+era)*42);c.lineTo(1312,447);c.lineTo(-32,447);c.fillStyle=colors[1];c.fill();
+    c.save();c.globalAlpha=0.4;
+    for(let i=0;i<13;i++){const x=i*112+Math.sin(i*2)*24,y=365+Math.sin(i)*9;if(era<2){c.fillStyle=colors[2];c.beginPath();c.moveTo(x,y-50);c.lineTo(x-22,y);c.lineTo(x+25,y);c.fill();this.rect(x-3,y,6,18,colors[2]);}else{this.rect(x,y-38-(i%3)*16,34,62,colors[2]);for(let j=0;j<3;j++)this.rect(x+7,y-26+j*13,5,5,colors[0]);}}c.restore();
+    this.rect(-32,410,1344,80,colors[2]);this.rect(-32,413,1344,33,'rgba(238,228,206,0.16)');
+    this.line(-32,410,1312,410,colors[1],3);
+    for(let i=0;i<33;i++){const x=i*41+12,y=466+(i%3)*8;this.line(x,y,x+5+Math.sin(time*1.8+i)*2,y-7,'rgba(40,58,54,0.22)',2);}
+  }
+  unit(u,fallen=false){
+    const d=BY_ID[u.typeId],c=this.ctx,mounted=/chariot|age1_heavy/.test(d.id),size=mounted?126:d.mechanical?110:d.pop===3?105:83;
+    const x=100+u.x*1.08,ground=414+(u.id%3)*7,pose=this.animation.pose(u),dir=u.side?-1:1;
+    c.save();c.globalAlpha=0.19;c.fillStyle=C.ink;c.beginPath();c.ellipse(x,ground+2,size*0.28,4,0,0,Math.PI*2);c.fill();c.restore();
+    c.save();c.translate(x,ground);c.scale(dir,1);
+    if(fallen){const progress=(this.animation.time-u.deathAt)/0.65;c.globalAlpha=1-progress;c.translate(progress*9,progress*7);c.rotate(progress*1.15);}
+    else{c.globalAlpha=0.5+pose.spawn*0.5;c.translate(pose.lunge,-pose.bob);c.rotate(pose.tilt);}
+    const image=this.images[d.id];
+    if(image){
+      if(!fallen&&!pose.machine&&!pose.mounted){
+        const iw=image.width||200,ih=image.height||200,hip=size*0.66;
+        for(let leg=0;leg<2;leg++){c.save();c.translate((leg?1:-1)*pose.stride,0);c.drawImage(image,leg*iw/2,ih*0.65,iw/2,ih*0.35,-size/2+leg*size/2,-size*0.35,size/2,size*0.35);c.restore();}
+        c.drawImage(image,0,0,iw,ih*0.67,-size/2,-size,size,hip+size*0.01);
+      }else c.drawImage(image,-size/2,-size,size,size);
+    }else this.portrait(d,-size/2,-size,size);
+    if(!fallen){
+      if(pose.flash&&!d.support){c.save();c.globalAlpha=0.85;if(d.range<=70){c.beginPath();c.arc(size*0.35,-size*0.45,size*0.22,-1.4,1.1);c.strokeStyle=d.type==='energy'?'#80e9df':'#f8e5ad';c.lineWidth=4;c.stroke();}else{const color=d.type==='energy'?'#7fe9ed':'#ffe4a0';c.beginPath();c.moveTo(size*0.35,-size*0.48);c.lineTo(size*0.65,-size*0.48-5);c.lineTo(size*0.47,-size*0.48+5);c.closePath();c.fillStyle=color;c.fill();}c.restore();}
+      if(pose.hurt>0){for(let i=0;i<4;i++){const a=i*1.5+0.3,r=(1-pose.hurt)*14+3;this.line(Math.cos(a)*r,-size*0.55+Math.sin(a)*r,Math.cos(a)*(r+4),-size*0.55+Math.sin(a)*(r+4),'#fff3c8',2);}}
+      if(pose.healing>0||pose.supporting){c.save();c.globalAlpha=pose.healing||0.4;const rhythm=d.trait==='haste'||d.trait==='march',color=rhythm?C.gold:d.trait==='repair'?'#aee6ee':'#7ace9a';if(rhythm){c.beginPath();c.arc(size*0.1,-size*0.48,12+Math.sin(this.animation.time*9)*3,-1,1);c.strokeStyle=color;c.lineWidth=2;c.stroke();}else for(let i=0;i<3;i++){const cy=-size*0.32-((this.animation.time*22+i*16)%35);this.line(i*11-10,cy,i*11-10,cy-6,color,2);this.line(i*11-13,cy-3,i*11-7,cy-3,color,2);}c.restore();}
+      if(pose.moving){c.save();c.globalAlpha=0.18;for(let i=0;i<2;i++){c.beginPath();c.arc(-size*0.22-i*8,2-i*2,2+(Math.abs(pose.step))*2,0,Math.PI*2);c.fillStyle='#ede0bf';c.fill();}c.restore();}
+    }
+    c.restore();
+    if(!fallen){this.bar(x-size*0.32,ground-size-5,size*0.64,4,u.hp/d.hp,u.side?C.red:C.teal);if(u.shield>0){this.bar(x-size*0.32,ground-size-11,size*0.64,3,u.shield/(d.hp*0.2),'#61a9bd');c.save();c.globalAlpha=0.18+Math.sin(this.animation.time*3)*0.04;c.beginPath();c.ellipse(x,ground-size*0.46,size*0.4,size*0.5,0,0,Math.PI*2);c.strokeStyle='#7cdbed';c.lineWidth=2;c.stroke();c.restore();}}
+  }
+  effect(e){
+    const c=this.ctx,from=100+e.from*1.08,to=100+e.to*1.08;
+    if(e.blast){const p=1-e.life/0.4;c.save();c.globalAlpha=1-p;c.beginPath();c.arc(to,387,30+p*90,0,Math.PI*2);c.strokeStyle=C.gold;c.lineWidth=12*(1-p)+2;c.stroke();for(let i=0;i<8;i++){const angle=i*Math.PI/4;this.line(to+Math.cos(angle)*p*70,387+Math.sin(angle)*p*30,to+Math.cos(angle)*(p*70+14),387+Math.sin(angle)*(p*30+8),'#f6df94',3);}c.restore();}
+    else{const p=Math.max(0,Math.min(1,1-e.life/0.2)),x=from+(to-from)*p,y=366-Math.sin(p*Math.PI)*14;c.save();c.globalAlpha=Math.min(1,e.life*8);this.line(x-(to-from)*0.12,y,x,y,e.side?'#eab59b':'#e7d89d',3);c.beginPath();c.arc(x,y,3,0,Math.PI*2);c.fillStyle='#fff0b7';c.fill();c.restore();}
   }
   base(side,s){const x=side?1166:46;this.rect(x,324,68,90,side?C.red:C.teal);this.rect(x-10,310,88,22,C.ink);this.rect(x+24,371,23,43,'#263a32');this.text(String(s.era+1),x+34,350,25,'#fff','center');s.towers.forEach((t,i)=>{if(t){this.rect(x-2+i*25,279,18,28,C.ink);this.rect(x-2+i*25,271,18,8,C.gold);}});}
   controls(p,b){const a=this.app;this.rect(0,495,1280,225,C.panel);this.text('生产队列 · 点击取消',24,515,17,C.muted);

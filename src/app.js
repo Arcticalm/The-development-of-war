@@ -44,7 +44,7 @@ class GameApp {
     if(x<0||x>1280||y<0||y>720)return;
     const button=this.renderer.buttons.slice().reverse().find(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h);
     if(button){button.action();return;}
-    if(this.skillMode&&!this.paused&&!this.modal&&y>=160&&y<=490&&x>=100&&x<=1180){this.command({type:'skill',x:(x-100)/1080*1000});this.skillMode=false;}
+    if(this.skillMode&&!this.paused&&!this.modal&&y>=160&&y<=490&&x>=100&&x<=1180){this.command({type:'skill',x:Math.max(0,Math.min(1000,this.renderer.screenXToBattle(x)))});this.skillMode=false;}
   }
   frame(timestamp){
     const now=Number.isFinite(timestamp)?timestamp:Date.now();
