@@ -1,5 +1,5 @@
 {
-  "description": "战争进化史 · 微信小游戏 PvE 原型",
+  "description": "战争进化史 · 文字单机原型与 PvP 大厅",
   "compileType": "game",
   "appid": "wx57286ff037b55beb",
   "projectname": "The-development-of-war",
@@ -29,6 +29,14 @@
   },
   "packOptions": {
     "ignore": [
+      {
+        "value": "assets/units",
+        "type": "folder"
+      },
+      {
+        "value": "output",
+        "type": "folder"
+      },
       {
         "value": "tests",
         "type": "folder"

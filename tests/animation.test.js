@@ -4,7 +4,7 @@ const {Battle,STEP}=require('../src/battle');const {BattleAnimation}=require('..
 test('presentation follows real movement, attack, damage and death without changing combat state',()=>{
   const b=new Battle(),a=new BattleAnimation(),u=b.spawn(0,'age1_melee');a.update(b);
   b.tick(STEP,false);const before=b.snapshot();a.update(b);assert.equal(a.pose(u).moving,true);assert.deepEqual(b.snapshot(),before);
-  const enemy=b.spawn(1,'age1_melee');u.x=490;enemy.x=510;u.clock=0;a.reset(b);a.update(b);b.tick(STEP,false);a.update(b);
+  const enemy=b.spawn(1,'age1_melee');u.x=490;enemy.x=510;u.clock=0;a.reset(b);a.update(b);for(let i=0;i<7;i++){b.tick(STEP,false);a.update(b);}
   assert.equal(a.pose(u).moving,false);assert.equal(a.pose(u).flash,true);assert.ok(a.pose(u).hurt>0);
   const hp=u.hp;b.units=b.units.filter(v=>v!==u);b.time+=STEP;a.update(b);assert.equal(a.units.has(u.id),false);assert.equal(a.fallen.length,1);assert.equal(a.fallen[0].hp,hp);
   b.time+=0.7;a.update(b);assert.equal(a.fallen.length,0);

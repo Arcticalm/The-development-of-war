@@ -1,6 +1,6 @@
 'use strict';
 // 原型数值，待平衡验证；配置版本固定于开局。
-const VERSION = 'prototype-0.1';
+const VERSION = 'text-prototype-0.2';
 const ERAS = [
   ['原始时代',0,1,'落石冲击','骨矛塔','投石塔'],
   ['古典文明时代',300,1.2,'箭雨覆盖','重弩塔','火油塔'],
@@ -19,12 +19,12 @@ const rows = [
   ['melee','剑盾士兵',0,1,'light','normal',230,25,25,1,30,'shieldWall'],
   ['range','长弓手',1,1,'light','normal',100,35,210,1.6,25,''],
   ['heavy','重甲枪兵',2,3,'heavy','piercing',580,56,60,1.6,21,''],
-  ['ballista','弩车手',2,2,'light','siege',180,74,220,2.8,18,'mechanical'],
+  ['ballista','弩车手',2,2,'light','siege',180,74,300,2.8,18,'mechanical'],
   ['chariot','战车突袭兵',1,2,'light','normal',270,34,30,1.2,46,'charge'],
   ['support','战地医师',1,1,'light','normal',130,22,135,1.5,26,'heal'],
   ['melee','刺刀步兵',0,1,'light','normal',200,29,25,0.9,32,''],
   ['range','火枪手',1,1,'light','normal',110,72,175,2.5,24,''],
-  ['heavy','重炮兵',2,3,'light','siege',230,100,230,3.5,16,'mechanicalSplash'],
+  ['heavy','重炮兵',2,3,'light','siege',230,100,300,3.5,16,'mechanicalSplash'],
   ['grenade','掷弹兵',1,2,'light','explosive',160,46,130,2,28,'splash'],
   ['antiarmor','穿甲枪手',1,1,'light','piercing',110,48,180,2,25,''],
   ['support','军旗鼓手',1,1,'light','normal',165,0,140,1,30,'march'],
@@ -38,12 +38,47 @@ const rows = [
   ['range','等离子射手',1,1,'light','energy',125,40,180,1.7,27,'splash'],
   ['heavy','动力装甲兵',2,3,'heavy','energy',600,53,120,1.3,22,'shield'],
   ['rail','磁轨炮手',1,2,'light','piercing',130,72,220,2.5,24,'rail'],
-  ['siege','攻城机甲',2,3,'heavy','siege',700,105,150,2.8,18,'mechanical'],
+  ['siege','攻城机甲',2,3,'heavy','siege',700,105,300,2.8,18,'mechanical'],
   ['support','维修机兵',1,1,'light','normal',180,30,140,1.5,26,'repair']
+];
+const SHORT_NAMES = ['石棒','投石','猛犸','骨矛','火罐','图腾','剑盾','长弓','重枪','弩车','战车','医师','刺刀','火枪','重炮','掷弹','穿甲','军旗','突击','精射','重机','火箭','履带','医疗','能剑','等离子','动甲','磁轨','机甲','维修'];
+// 与兵种行一一对应；图鉴和战斗详情共享这些说明。
+const GUIDE = [
+  ['廉价前排','快速补线、保护远程','怕重甲和范围火力','投石猎手、图腾鼓手'],
+  ['后排输出','远程消耗轻兵','怕重甲和贴身突击','石棒战士'],
+  ['承伤攻城','高生命、基地伤害加成','昂贵、怕穿甲','骨矛猎手、图腾鼓手'],
+  ['反重甲','穿甲伤害克制猛犸','怕远程和兵群','石棒战士、投石猎手'],
+  ['范围爆破','处理密集兵群、辅助攻城','装填慢、怕重甲','石棒战士、骨矛猎手'],
+  ['攻速支援','附近友军攻速提高','无攻击、需要保护','投石猎手、猛犸骑手'],
+  ['防御前排','抵挡单体远程普攻','怕近战重击和范围爆破','长弓手、战地医师'],
+  ['远程输出','射程长、消耗轻兵','怕重甲和贴身突击','剑盾士兵'],
+  ['承伤反重甲','高生命与穿甲突刺','慢、贵、怕远程穿甲','长弓手、战地医师'],
+  ['机械攻城','建筑伤害高','怕突击、不能接受医疗','重甲枪兵、战车突袭兵'],
+  ['快速突击','出场首击强化','不能穿越敌军、怕枪阵','剑盾士兵、弩车手'],
+  ['单体治疗','恢复生物前排生命','不能治疗机械、怕爆发','重甲枪兵、剑盾士兵'],
+  ['快速补线','低费用、保护火器','怕范围火力','火枪手、军旗鼓手'],
+  ['齐射输出','单发伤害高','装填慢、怕近身','刺刀步兵、掷弹兵'],
+  ['机械范围攻城','炮弹处理密集阵形与建筑','慢、装填长、怕突击','刺刀步兵、军旗鼓手'],
+  ['反轻兵群','爆破范围伤害','对重甲效率低','火枪手、穿甲枪手'],
+  ['远程反重甲','单体穿甲射击','怕廉价兵群','刺刀步兵、掷弹兵'],
+  ['推进支援','友军移动速度提高','不提高伤害与攻速','重炮兵、刺刀步兵'],
+  ['机动前排','快速补线、中短程射击','不擅长破甲','精确射手、战地医疗兵'],
+  ['支援点杀','优先攻击射程内支援兵','怕集火、不能越过前排','重装机枪兵'],
+  ['持续火力','预热后快速连射','怕穿甲、移动慢','火箭筒兵、战地医疗兵'],
+  ['反装甲','高伤害单体穿甲火箭','装填慢、怕廉价兵','突击兵、重装机枪兵'],
+  ['机械承伤攻城','装甲推进与攻城炮击','怕反装甲、医疗无效','火箭筒兵、精确射手'],
+  ['群体治疗','最多治疗三名生物友军','不能维修车辆','突击兵、重装机枪兵'],
+  ['能量突击','快速接敌、首次攻击强化','不能瞬移、怕集火','动力装甲兵、等离子射手'],
+  ['能量群攻','小范围能量弹','怕突击、装填慢','动力装甲兵'],
+  ['重装前排','出场一次性护盾','昂贵、护盾不能恢复','磁轨炮手、维修机兵'],
+  ['穿透反重甲','最多命中两名敌兵','蓄力慢、怕兵群','动力装甲兵、等离子射手'],
+  ['机械攻城','高建筑伤害','展开慢、对兵效率低','动力装甲兵、维修机兵'],
+  ['维修支援','维修机械与动力装甲','不修基地、塔或护盾','攻城机甲、动力装甲兵']
 ];
 const UNITS = rows.map((r,i)=>{
   const era=Math.floor(i/6), scale=1+era*0.38;
-  return {id:`age${era+1}_${r[0]}`,era,name:r[1],cost:Math.ceil([70,110,200][r[2]]*ERAS[era].cost),train:[2,3,5][r[2]],pop:r[3],armor:r[4],type:r[5],hp:Math.round(r[6]*scale),damage:Math.round(r[7]*scale),range:r[8],interval:r[9],speed:r[10],trait:r[11],support:r[0]==='support',mechanical:r[11].indexOf('mechanical')===0||r[11]==='repair',powerArmor:era===4&&i%6<4};
+  const splash=/splash/i.test(r[11]),support=r[0]==='support';
+  return {id:`age${era+1}_${r[0]}`,era,name:r[1],shortName:SHORT_NAMES[i],role:GUIDE[i][0],strength:GUIDE[i][1],weakness:GUIDE[i][2],partners:GUIDE[i][3],cost:Math.ceil([70,110,200][r[2]]*ERAS[era].cost),train:[2,3,5][r[2]],pop:r[3],armor:r[4],type:r[5],hp:Math.round(r[6]*scale),damage:Math.round(r[7]*scale),range:r[8],interval:r[9],speed:r[10],trait:r[11],support,mechanical:r[11].indexOf('mechanical')===0||r[11]==='repair',powerArmor:era===4&&i%6<4,windup:r[11]==='rail'?0.6:!support&&(splash||r[5]==='siege')?0.5:support||r[8]>70?0.3:0.2,projectileSpeed:600,splashRadius:splash?48:0,pierce:r[11]==='rail'?2:1};
 });
 const BY_ID = {}; UNITS.forEach(u=>{ BY_ID[u.id]=u; });
 const ARMOR = {normal:{light:1,heavy:0.65,building:0.5},piercing:{light:0.8,heavy:1.4,building:0.7},explosive:{light:1.2,heavy:0.7,building:0.8},siege:{light:0.65,heavy:0.8,building:1.8},energy:{light:1,heavy:0.9,building:0.6}};
