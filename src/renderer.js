@@ -5,11 +5,14 @@ const {unlocked}=require('./services/storage');
 const screens=require('./ui/screens');
 const {TextUnitPresenter}=require('./ui/units');
 const {UIComponents}=require('./ui/components');
+const {BattleEffects}=require('./ui/battle-effects');
+const {containRect}=require('./ui/portraits');
+const WORLD_ART=require('./config/world-art');
 const {COLORS:C,ERA_COLORS,ERA_ICONS}=require('./ui/theme');
 const DAMAGE={normal:'普通',piercing:'穿甲',explosive:'爆破',siege:'攻城',energy:'能量'};
 const TRAITS={base:'对基地伤害提高 50%',splashBase:'范围爆破 / 基地伤害提高 50%',haste:'附近友军攻速 +15%，同名光环不叠加',shieldWall:'单体远程普攻减伤 20%',mechanical:'机械单位，接受维修，不接受医疗',charge:'出场首次攻击伤害提高 80%',heal:'前摇后治疗一名生物友军',mechanicalSplash:'机械 / 范围攻城',splash:'落点范围伤害',march:'附近友军移动速度 +20%',sniper:'优先锁定射程内支援兵',warmup:'架枪预热 0.8 秒，停火重新预热',heal3:'前摇后治疗最多三名生物友军',shield:'出场护盾为最大生命的 20%，不恢复',rail:'蓄力发射，穿透最多两个敌兵',repair:'维修机械与动力装甲，不恢复护盾'};
 class Renderer extends UIComponents {
-  constructor(app){super(app);this.units=new TextUnitPresenter();this.resultVisible=false;}
+  constructor(app){super(app);this.units=new TextUnitPresenter();this.combatEffects=new BattleEffects();this.resultVisible=false;}
   get worldCamera(){return this.app.camera;}
   set worldCamera(value){this.app.camera=value;}
   draw(){
@@ -40,8 +43,9 @@ class Renderer extends UIComponents {
     this.landscape(p.era);this.base(0,p);this.base(1,enemy);
     b.strikes.forEach(s=>{const x=100+s.x*1.08;c.save();c.setLineDash([7,6]);this.line(x-113,457,x+113,457,s.side?C.red:C.teal,3);c.restore();this.tag('技能预警',x-55,422,C.redLight,C.red,18,110);});
     b.projectiles.forEach(p=>{const progress=1-p.remaining/p.duration,x=100+(p.from+(p.to-p.from)*progress)*1.08;this.text(p.splash?'●':p.side?'←':'→',x,468,19,p.side?C.red:C.teal,'center');});
+    this.combatEffects.draw(this,b);
     this.units.draw(this,b.units);
-    this.text('我方基地',94,478,19,C.teal,'center');this.text('敌方基地',1184,478,19,C.red,'center');c.restore();
+    [0,1].forEach(side=>{const x=side?1184:94;this.painter.shape(x-48,465,96,24,C.panel,null,'round',9);this.text(side?'敌方基地':'我方基地',x,478,17,side?C.red:C.teal,'center');});c.restore();
     this.tag(b.rules.mode==='campaign'?b.rules.levelId+' '+b.rules.name:'经典对战 · '+({easy:'简单',normal:'普通',hard:'困难'}[b.rules.difficulty]),24,151,C.panel,C.ink,20);
     this.button(camera.zoom>1?'全景':'局部视图',960,150,139,40,()=>{a.camera=camera.zoom>1?{zoom:1,x:0,y:0}:{zoom:1.8,x:0,y:0};},true,true,{id:'camera',variant:'soft',icon:'eye'});
     this.button('回到基地',1110,150,147,40,()=>{a.camera={zoom:1.8,x:432,y:0};},true,true,{id:'camera-home',variant:'soft',icon:'home'});
@@ -50,6 +54,13 @@ class Renderer extends UIComponents {
   }
   screenXToBattle(x){const camera=this.worldCamera;return(((x-640-camera.x)/camera.zoom+640)-100)/1.08;}
   landscape(era){
+    if(!this.app.settings.simpleBackground){
+      const background=this.app.worldArt.get('battlefield_shared');
+      if(background&&background.status==='ready'){
+        const scale=1280/background.width;
+        this.ctx.drawImage(background.image,0,456-background.ground_y*scale,1280,background.height*scale);return;
+      }
+    }
     const palettes=[['#e3e8d0','#b8c4a0','#cfd6b8'],['#eadfc8','#cabc9c','#d9cbb1'],['#dee3df','#afbeb7','#c7d0c7'],['#dce4d9','#a9b99f','#c3cfbb'],['#d9e8e0','#9fc4b7','#c1d9cd']],colors=palettes[era];
     this.rect(-800,143,2900,347,colors[0]);
     if(!this.app.settings.simpleBackground){
@@ -64,6 +75,18 @@ class Renderer extends UIComponents {
     this.rect(-800,456,2900,34,'#c7cbae');this.line(-800,458,2100,458,'#86967b',2);
   }
   base(side,s){
+    const id='base_age'+(s.era+1),center=side?1180:100,color=side?C.red:C.teal;
+    const meta=WORLD_ART.buildings[id],box=containRect(meta.width,meta.height,center-80,341,160,115),top=456-box.h;
+    const mirror=meta.source_facing==='left'?!side:!!side;
+    if(!this.worldImage(id,center-80,341,160,115,{mirror,bottom:true}))this.basePlaceholder(side,s);
+    // Stable faction flag and slot markers remain visible without recoloring the art.
+    this.line(center-66,top+10,center-66,top-16,color,2);this.painter.polygon([[center-66,top-16],[center-40,top-12],[center-48,top],[center-66,top-3]],color);
+    s.towers.forEach((t,i)=>{if(!t)return;const x=center+(side?-1:1)*(i-1)*48,y=top+8,key='tower_age'+(t.era+1)+'_'+t.kind;
+      if(!this.worldImage(key,x-23,y-51,46,51,{mirror:!!side,bottom:true}))this.badge('tower',x,y-20,17,C.panel,color);
+      this.text((i+1)+(t.level===2?'★':''),x,y+9,13,color,'center');
+    });
+  }
+  basePlaceholder(side,s){
     const x=side?1150:32,color=side?C.red:C.teal,era=s.era;
     this.painter.shape(x-7,433,103,24,'#6c8166',null,'round',10);
     if(era===0){this.painter.shape(x,384,85,62,color,null,'round',9);this.painter.polygon([[x-13,388],[x+42,342],[x+99,388]],color);this.painter.polygon([[x+9,383],[x+42,355],[x+75,383]],'#cfb074');}
@@ -71,8 +94,6 @@ class Renderer extends UIComponents {
     else if(era===2){this.painter.shape(x,374,87,70,color,null,'round',10);this.rect(x+11,361,28,18,color);this.painter.shape(x+44,386,55,15,color,null,'round',5);this.line(x+48,381,x+101,370,color,7);}
     else if(era===3){this.painter.shape(x-3,386,96,58,color,null,'round',24);this.rect(x+14,367,55,31,color);this.painter.shape(x+17,400,52,10,C.dark,null,'round',5);}
     else{this.painter.polygon([[x+42,344],[x+87,372],[x+87,439],[x,439],[x,372]],color);this.painter.polygon([[x+42,360],[x+66,376],[x+66,403],[x+42,418],[x+19,403],[x+19,376]],'#8ec4af');this.icon('bolt',x+42,390,32,C.white);}
-    this.line(x+12,351,x+12,326,C.dark,2);this.painter.polygon([[x+12,326],[x+48,330],[x+35,344],[x+12,340]],C.gold);
-    s.towers.forEach((t,i)=>{if(t){this.badge('tower',x+41,312-i*27,13,C.panel,color);this.text(i+1,x+61,312-i*27,17,color);}});
   }
   unitLabel(x,y,w,label,side,hp,shield){
     const color=side?C.red:C.teal;this.painter.shape(x,y-14,w,27,C.panel,null,'round',12);this.painter.circle(x+12,y,8,color);this.fitText(label,x+27,y,w-32,19,color);this.bar(x+3,y+16,w-6,3,hp,color);if(shield>0)this.bar(x+3,y+21,w-6,2,shield,'#58998d');
@@ -99,7 +120,7 @@ class Renderer extends UIComponents {
     this.button('防御塔',762,623,170,66,()=>{a.modal='defense';a.skillMode=false;},true,false,{id:'defense',variant:'primary',icon:'tower'});
     const ready=p.cooldown<=1e-8;
     this.control({id:'skill',x:950,y:557,w:304,h:79,radius:28,action:()=>{a.skillMode=!a.skillMode;},enabled:ready,disabledReason:'技能尚未冷却'},state=>{
-      this.painter.shape(950,557,304,79,state.pressed?C.goldLight:C.tealLight,a.skillMode?C.gold:null,'round',28);this.dial(994,596,30,1-p.cooldown/60,ready?C.gold:C.teal);this.icon('bolt',994,596,26,ready?C.gold:C.teal);this.fitText(ERAS[p.era].skill,1040,582,198,25);this.text(ready?'点击选择落点':'冷却 '+Math.ceil(p.cooldown)+'秒',1040,612,20,ready?C.teal:C.muted);
+      this.painter.shape(950,557,304,79,state.pressed?C.goldLight:C.tealLight,a.skillMode?C.gold:null,'round',28);this.dial(994,596,30,1-p.cooldown/60,ready?C.gold:C.teal);if(!this.worldImage('skill_age'+(p.era+1),972,574,44,44))this.icon('bolt',994,596,26,ready?C.gold:C.teal);this.fitText(ERAS[p.era].skill,1040,582,198,25);this.text(ready?'点击选择落点':'冷却 '+Math.ceil(p.cooldown)+'秒',1040,612,20,ready?C.teal:C.muted);
     });
     const capped=p.era>=b.rules.maxEra,evolved=!capped&&p.xp>=ERAS[p.era+1].xp;
     this.button(capped?'已达时代上限':'进化 → '+ERAS[p.era+1].name,950,650,304,41,()=>a.command({type:'evolve'}),evolved,true,{id:'evolve',variant:'gold',shape:'cut',icon:'xp',disabledReason:capped?'已达到本局时代上限':'进化经验不足'});
@@ -137,8 +158,8 @@ class Renderer extends UIComponents {
     this.overlay('基地防御','tower');this.close();const a=this.app;
     p.towers.forEach((t,i)=>{const x=178+i*313,state=a.feedback.state('battle:defense:tower:'+i);this.panel(x,185,296,355,state.alpha>0?C.goldLight:'#f0efdd');this.badge(i>=p.slots?'lock':'tower',x+32,222,19,C.tealLight);this.text('塔位 '+(i+1),x+60,222,26);
       if(i>=p.slots){this.text('尚未开放',x+16,275,23,C.muted);if(i===p.slots)this.button('开放 '+[0,200,350][i]+' 金',x+16,450,264,55,()=>a.command({type:'unlock'}),true,true,{id:'unlock:'+i,variant:'gold'});}
-      else if(!t){this.text('空塔位',x+16,275,23,C.muted);[0,1].forEach(kind=>this.button(ERAS[p.era].towers[kind]+' '+Math.ceil([180,240][kind]*ERAS[p.era].cost)+'金',x+12,334+kind*81,272,60,()=>a.command({type:'build',slot:i,kind}),true,true,{id:'build:'+i+':'+kind,variant:kind?'outline':'primary'}));}
-      else{this.fitText(ERAS[t.era].towers[t.kind],x+16,275,264,24);this.tag('等级 '+t.level,x+16,309,C.tealLight,C.teal,19);this.button(t.level===2?'已满级':'升级 '+Math.ceil(t.cost*0.6)+'金',x+16,366,264,55,()=>a.command({type:'upgrade',slot:i}),t.level<2,true,{id:'upgrade:'+i,variant:'gold',disabledReason:'防御塔已满级'});this.button('出售 +'+Math.floor(t.paid*0.5)+'金',x+16,445,264,55,()=>a.command({type:'sell',slot:i}),true,true,{id:'sell:'+i,variant:'outline'});}
+      else if(!t){this.text('空塔位',x+16,275,23,C.muted);[0,1].forEach(kind=>this.button(ERAS[p.era].towers[kind]+' '+Math.ceil([180,240][kind]*ERAS[p.era].cost)+'金',x+12,334+kind*81,272,60,()=>a.command({type:'build',slot:i,kind}),true,true,{id:'build:'+i+':'+kind,variant:kind?'outline':'primary',worldAssetId:'tower_age'+(p.era+1)+'_'+kind}));}
+      else{this.fitText(ERAS[t.era].towers[t.kind],x+16,275,264,24);this.tag('等级 '+t.level,x+16,309,C.tealLight,C.teal,19);this.worldImage('tower_age'+(t.era+1)+'_'+t.kind,x+186,292,92,58);this.button(t.level===2?'已满级':'升级 '+Math.ceil(t.cost*0.6)+'金',x+16,366,264,55,()=>a.command({type:'upgrade',slot:i}),t.level<2,true,{id:'upgrade:'+i,variant:'gold',disabledReason:'防御塔已满级'});this.button('出售 +'+Math.floor(t.paid*0.5)+'金',x+16,445,264,55,()=>a.command({type:'sell',slot:i}),true,true,{id:'sell:'+i,variant:'outline'});}
     });this.text('面板打开时战斗继续；旧时代防御塔会保留。',184,582,22,C.muted);
   }
   pause(){const a=this.app;this.overlay('对战已暂停','pause');this.text('双方计时、收入、前摇与弹丸都已停止。',184,213,25,C.muted);this.text('本局每 5 秒和进入后台时自动保存。',184,270,24,C.muted);

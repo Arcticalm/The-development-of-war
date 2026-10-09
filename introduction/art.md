@@ -1,6 +1,6 @@
 # 《战争进化史》美术规范与绘图提示词
 
-> 更新：2026-10-09；美术规范版本：`aow1-reference-v1`。当前交付：**30 张静态角色立绘已生成、验收并接入静态页面**；原图在 `assets/units/age1/`～`age5/`，透明 PNG，以单位 ID 命名。图鉴、详情、出兵卡片、生产队列及取消弹窗使用展示图，战场实体继续使用文字。动作帧与场景／建筑／特效图未生成，现有 UI、音效、点击反馈和玩法保持兼容。
+> 更新：2026-10-09；美术规范版本：`aow1-reference-v1`。当前交付：**30 张静态角色立绘已生成、验收并接入静态页面**；原图在 `assets/units/age1/`～`age5/`，透明 PNG，以单位 ID 命名。**5 个时代基地、10 种防御塔与共享战场背景已生成并接入**（`assets/buildings/`、`assets/battlefield/`，命名与规范一致，风格与角色统一，详见 [素材说明](../assets/buildings/README.md)）。**5 种时代技能与 4 种基础命中特效已生成并接入**（`assets/effects/`，横向 3 帧序列条、透明 PNG、以资源键命名，详见 [特效说明](../assets/effects/README.md)）。图鉴、详情、出兵卡片、生产队列及取消弹窗使用展示图，战场实体继续使用文字。动作帧未生成（age1_melee 样板在 `assets/units/animations/` 待验收），现有 UI、音效、点击反馈和玩法保持兼容。
 
 ## 1. 参考与改动原则
 
@@ -146,10 +146,12 @@ Draw a wide horizontal battlefield background staying very close to the FIRST Ag
 
 清单保持 JSON 数组结构，每项包含 `unit_id`、`name`、`age`、`role`、`style_version`、`reference_urls`、`description_zh`、`prompt`、`negative_prompt`、`animation_prompts` 和 `status`。`animation_prompts` 中每个动作包含 `description_zh`、`frames`、`loop`、`prompt`；英文动作提示词包含单位装备与风格，可单独复制使用。五个基础动作键为 `idle`、`move`、`attack`、`hurt`、`death`，附加动作按需要补充。
 
-当前 30 项状态为 `已生成并验收通过（2026-10-09）`，`generated` 字段记录了实际工具（image_edit / seedream_5.0_flash）、日期、尺寸（1536×2048 或 2048×2048）、文件路径与透明度（真 RGBA）。提示词完成、静态图片生成、透明图验收、动作帧验收和运行时接入是不同阶段，不能相互代替；动作帧与场景图尚未生成。
+当前 30 项状态为 `已生成并验收通过（2026-10-09）`，`generated` 字段记录了实际工具（image_edit / seedream_5.0_flash）、日期、尺寸（1536×2048 或 2048×2048）、文件路径与透明度（真 RGBA）。提示词完成、静态图片生成、透明图验收、动作帧验收和运行时接入是不同阶段，不能相互代替；5 个基地、10 种防御塔与共享背景已按 §5／§6 生成（2026-10-09），5 种技能与 4 种命中特效已按 §6 生成（2026-10-09，`assets/effects/`，横向 3 帧序列条），动作帧尚未生成（age1_melee 样板待验收）。
 
 静态展示图由 `scripts/build-unit-portraits.py` 从原图派生：仅裁外围透明留白，等比缩至最长边 360 像素，加四边各 12 像素透明边距，保存 RGBA PNG 至 `assets/unit-portraits/`；索引在 `src/config/unit-portraits.js`。原图哈希保持不变。图片按需加载，最多缓存 12 张，等比完整展示，加载中或失败时回退图标与文字。资源只进入表现层，不写入战斗数值、快照或 PvP 协议。
 
 动作源帧默认 512×512 透明 PNG，统一比例与脚底锚点、朝右方向；按 `assets/units/animations/<age>/<unit_id>/v01/<action>/0001.png` 归档，工作文件在 `assets/units/_work/animations/` 下的对应路径。支援兵的 `attack` 是 `encourage`／`heal`／`repair` 别名，不重复生成。177 条动作提示词对应 172 组独立动画、1136 帧，全部待生成；30 兵制作表、版本和 manifest 格式见[素材说明](../assets/units/README.md)。未来运行时图集另行构建，制作源帧不直接打包。
 
-游戏包包含静态展示图，排除 `assets/units/`、未引用的 `assets/ui/` 和 `assets/reference-screenshots/` 以及 `output/`，验收预算 3.5 MiB。现有指挥台 UI 的米色、深绿与金色继续作为界面规范。
+基地、防御塔、共享战场和技能／命中特效现已接入。`scripts/build-world-art.py` 输出 `assets/world-art/` 与 `src/config/world-art.js`：基地最长边 208、塔 96，特效每帧最长边 192／96，透明图四边各留 4 像素；背景等比缩至最长边 960 的 RGB JPEG（质量 78）。三帧原图宽 3547 不能整除 3，采用边界 0／1182／2365／3547，按共同裁边和锚点构建并保留透明帧。原图不修改；现代掩体原图朝左，我方翻转、敌方保留，其余建筑按实际原图朝向处理。背景地面与基地底部共用世界 y=456，简化设置或图片失败时回退 Canvas 场景。完整使用方式见[建筑说明](../assets/buildings/README.md)、[特效说明](../assets/effects/README.md)和[背景说明](../assets/battlefield/README.md)。角色战斗动画仍未接入。
+
+游戏包包含静态展示图和 `assets/world-art/` 派生图，排除 `assets/units/`、`assets/buildings/`、`assets/effects/`、`assets/battlefield/`、`assets/_work/`、未引用的 `assets/ui/` 和 `assets/reference-screenshots/` 以及 `output/`，验收预算 3.5 MiB。现有指挥台 UI 的米色、深绿与金色继续作为界面规范。

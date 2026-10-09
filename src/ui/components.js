@@ -32,6 +32,19 @@ class UIComponents {
     this.badge(d.support?'heart':d.mechanical?'gear':d.range>70?'target':'swords',x+w/2,y+h/2-(compact?0:10),r);
     if(!compact)this.fitText(d.shortName,x+w/2,y+h/2+r+8,w-4,Math.min(19,w/3),C.muted,'center');
   }
+  worldImage(id,x,y,w,h,{mirror=false,bottom=false,frame=1}={}){
+    const entry=this.app.worldArt.get(id);if(!entry||entry.status!=='ready')return false;
+    const source=entry.frames?entry.frames[frame]:{x:0,y:0,width:entry.width,height:entry.height};if(!source)return false;
+    const box=containRect(source.width,source.height,x,y,w,h);if(bottom)box.y=y+h-box.h;
+    const c=this.ctx;c.save();if(mirror){c.translate(box.x*2+box.w,0);c.scale(-1,1);}
+    c.drawImage(entry.image,source.x,source.y,source.width,source.height,box.x,box.y,box.w,box.h);c.restore();return true;
+  }
+  effectImage(id,frame,x,y,size){
+    const entry=this.app.worldArt.get(id);if(!entry||entry.status!=='ready')return false;
+    const source=entry.frames&&entry.frames[frame];if(!source)return false;
+    const scale=size/Math.max(source.width,source.height),anchor=entry.anchor;
+    this.ctx.drawImage(entry.image,source.x,source.y,source.width,source.height,x-anchor.x*scale,y-anchor.y*scale,source.width*scale,source.height*scale);return true;
+  }
   tag(label,x,y,fill=C.tealLight,color=C.teal,size=18,width){const w=width||this.measure(label,size)+22;this.painter.shape(x,y,w,28,fill,null,'round',14);this.text(label,x+w/2,y+14,size,color,'center');return w;}
   bar(x,y,w,h,value,color){const v=Math.max(0,Math.min(1,value));this.painter.shape(x,y,w,h,C.line,null,'round',h/2);if(v>0)this.painter.shape(x,y,Math.max(h,w*v),h,color,null,'round',h/2);}
   control(spec,draw){
@@ -50,9 +63,10 @@ class UIComponents {
       this.painter.shape(x,y,w,h,fill,stroke,shape,radius);
       if(state.pressed)this.painter.shape(x,y,w,h,'rgba(255,255,255,0.16)',null,shape,radius);
       if(state.kind==='success')this.painter.shape(x,y,w,h,null,C.teal,shape,radius);
-      if(options.portraitId)this.unitPortrait(options.portraitId,x+5,y+3,29,h-6);
+      if(options.worldAssetId){if(!this.worldImage(options.worldAssetId,x+5,y+5,38,h-10))this.icon('tower',x+24,y+h/2,23,color);}
+      else if(options.portraitId)this.unitPortrait(options.portraitId,x+5,y+3,29,h-6);
       else if(options.icon)this.icon(options.icon,x+(options.iconOnly?w/2:26),y+h/2,options.iconOnly?26:22,color);
-      if(!options.iconOnly){const inset=options.portraitId?35:options.icon?26:0,center=x+inset+(w-inset)/2;this.fitText(label,center,y+h/2,w-inset-12,small?20:24,color,'center');}
+      if(!options.iconOnly){const inset=options.worldAssetId?44:options.portraitId?35:options.icon?26:0,center=x+inset+(w-inset)/2;this.fitText(label,center,y+h/2,w-inset-12,small?20:24,color,'center');}
     });
   }
   region(x,y,w,h,action,longAction,options={}){return this.control({id:options.id||'region@'+x+','+y,x,y,w,h,action,longAction,enabled:options.enabled!==false,disabledReason:options.disabledReason,shape:options.shape||'round',radius:options.radius},options.draw);}

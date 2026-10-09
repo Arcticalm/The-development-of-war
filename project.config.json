@@ -80,6 +80,22 @@
       {
         "value": "assets/reference-screenshots",
         "type": "folder"
+      },
+      {
+        "value": "assets/buildings",
+        "type": "folder"
+      },
+      {
+        "value": "assets/effects",
+        "type": "folder"
+      },
+      {
+        "value": "assets/battlefield",
+        "type": "folder"
+      },
+      {
+        "value": "assets/_work",
+        "type": "folder"
       }
     ],
     "include": []

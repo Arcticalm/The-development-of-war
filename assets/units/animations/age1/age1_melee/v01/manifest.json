@@ -1,0 +1,83 @@
+{
+  "unit_id": "age1_melee",
+  "version": "v01",
+  "canvas": {
+    "width": 512,
+    "height": 512
+  },
+  "anchor": {
+    "x": 256,
+    "y": 460
+  },
+  "acceptance": "pending",
+  "aliases": {},
+  "actions": {
+    "idle": {
+      "frame_count": 6,
+      "loop": true,
+      "frames": [
+        "idle/0001.png",
+        "idle/0002.png",
+        "idle/0003.png",
+        "idle/0004.png",
+        "idle/0005.png",
+        "idle/0006.png"
+      ],
+      "acceptance": "pending"
+    },
+    "move": {
+      "frame_count": 8,
+      "loop": true,
+      "frames": [
+        "move/0001.png",
+        "move/0002.png",
+        "move/0003.png",
+        "move/0004.png",
+        "move/0005.png",
+        "move/0006.png",
+        "move/0007.png",
+        "move/0008.png"
+      ],
+      "acceptance": "pending"
+    },
+    "attack": {
+      "frame_count": 8,
+      "loop": false,
+      "frames": [
+        "attack/0001.png",
+        "attack/0002.png",
+        "attack/0003.png",
+        "attack/0004.png",
+        "attack/0005.png",
+        "attack/0006.png",
+        "attack/0007.png",
+        "attack/0008.png"
+      ],
+      "acceptance": "pending"
+    },
+    "hurt": {
+      "frame_count": 4,
+      "loop": false,
+      "frames": [
+        "hurt/0001.png",
+        "hurt/0002.png",
+        "hurt/0003.png",
+        "hurt/0004.png"
+      ],
+      "acceptance": "pending"
+    },
+    "death": {
+      "frame_count": 6,
+      "loop": false,
+      "frames": [
+        "death/0001.png",
+        "death/0002.png",
+        "death/0003.png",
+        "death/0004.png",
+        "death/0005.png",
+        "death/0006.png"
+      ],
+      "acceptance": "pending"
+    }
+  }
+}

@@ -1,0 +1,6298 @@
+{
+  "date": "2026-10-09",
+  "origin": "WeChat simulator Canvas with isolated storage and fixed battle clock",
+  "scene_count": 48,
+  "world_asset_count": 25,
+  "devices": [
+    {
+      "width": 844,
+      "height": 390,
+      "dpr": 3,
+      "safe_area": {
+        "left": 47,
+        "right": 797,
+        "bottom": 369
+      },
+      "menu_bottom": 34
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "dpr": 1
+    }
+  ],
+  "source_hashes": {
+    "assets/buildings/base_age1.png": "973d349debc3f5839395330e9e9c3d71e711d83b737fefb24ab4cc57040ab6af",
+    "assets/buildings/base_age2.png": "7e40d0e803f8745d9a0a41db0635ac8879389b4b33dbc5742868ad73ae45c263",
+    "assets/buildings/base_age3.png": "00b8af657f698f53f79df22fc0c7e19f7e57fc931b9be22c170852a3f61fdb3c",
+    "assets/buildings/base_age4.png": "25a5e89996d475d0a13d27d6c7f740a84c51f6f29fb2080b068271183c9d55b1",
+    "assets/buildings/base_age5.png": "8eb34493200d6a56c1be5f5ec471fb504287772bcb8b8180a965f345e3921dc3",
+    "assets/buildings/tower_age1_0.png": "165fbba776848a66fd6db83cc8ce7d466058c2ee267d8af0d81690261cc97f3d",
+    "assets/buildings/tower_age1_1.png": "832b1483eaf8a47b44591568124a446c4727f4d5bd8f5f29c27478d4b204e22a",
+    "assets/buildings/tower_age2_0.png": "cae006e4dc7adf3846dffbd4fab7b443679610ed1baf0fca1987c9bdde1e47a6",
+    "assets/buildings/tower_age2_1.png": "fb90dbf38772cc0fb9a6a280d15be68f85e4bd1343db98f127f3f1738c3ee645",
+    "assets/buildings/tower_age3_0.png": "d711de7a154f3f9b803f3e3ca0889bad9b7a2f332cbd361efbd3a07923d83a8c",
+    "assets/buildings/tower_age3_1.png": "fed754d9501b9691c8de2bdb39feef7780f44daf776dfd850f5afbb22d37bf89",
+    "assets/buildings/tower_age4_0.png": "d0a8855fa0bbd1e7702b92c1a64ebbebf6c6cc923931ca4967e728eb52972d65",
+    "assets/buildings/tower_age4_1.png": "d895ae85c07257eb55f1b2b20883a5df364b5a43d14ec0c8753dfad370a60c4a",
+    "assets/buildings/tower_age5_0.png": "6b2138dafc0b60e7ca596214cbc05c4e9364523dd9154095ecf7096761c7879b",
+    "assets/buildings/tower_age5_1.png": "676dca671d758eadc46477b4570d1bfa1d5561ae8a13ae82f6bb7c7e15be8e31",
+    "assets/effects/hit_dust.png": "d5c0c0fcd648057f4db332436550453e526e5595b43246d10a3f54dee92c3fea",
+    "assets/effects/hit_energy.png": "fe8a109ea42413454fd61fdb4dcf2c05f8008e6471d8a6d08a0f4ca56936ff12",
+    "assets/effects/hit_explosion.png": "9cee74636f27d1cef482bee44f5af4f64b3da4d5f2d67787b2cdd30a714717a0",
+    "assets/effects/hit_metal.png": "ed3db9bf692f1829994e4609ba6d1573a66ddeffb2486e1b60c474edd0eea6ba",
+    "assets/effects/skill_age1.png": "cd6cfd02686df05120ae0e1d3735eca7dd4e92ce1e151dec74e41153a97b895e",
+    "assets/effects/skill_age2.png": "5155845c5a3fb00ec1ccdfb6a449cf9125b4dcd2fa7c458f1cc25e7d4dff7022",
+    "assets/effects/skill_age3.png": "92c81db974a33a61b1410d3bed1ed58b917db944b636a52dea399ec5f0961925",
+    "assets/effects/skill_age4.png": "f81376bb99020058db41c045a0773454b5093beeaf329531cacec8e368360cd3",
+    "assets/effects/skill_age5.png": "720f7d502dfc6121e69f89f543666a0eec2a05ad30d969cc0e5a8f504498485a",
+    "assets/battlefield/battlefield_shared.png": "382e9b3886dc01a543b34bc6443f9b1c7ba018659168ba9d819ba07fe0f4219b"
+  },
+  "scenes": [
+    {
+      "name": "base-age1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 3,
+        "effects": 1,
+        "backgrounds": 1,
+        "portraits": 3
+      },
+      "items": [],
+      "file": "base-age1-phone.jpg",
+      "source_png_sha256": "4ceebc1cbca8e6579d1a02df5ae498ded0f4fbd98c016c966268723880919a3f",
+      "archive_sha256": "7bf17fa0d54b597eb70bdf0235e23db1aef78cabcb44827adbd9ece981079158"
+    },
+    {
+      "name": "skill-age1-frame0",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 3,
+        "effects": 1,
+        "backgrounds": 1,
+        "portraits": 3
+      },
+      "items": [
+        {
+          "asset": "skill_age1",
+          "frame": 0
+        }
+      ],
+      "file": "skill-age1-frame0-phone.jpg",
+      "source_png_sha256": "11a8fa332e96ffbe119e1b77e80c2ae8bfb518b6421eeb3936c79d6370023ab9",
+      "archive_sha256": "9f373f5622f0d5ad16e277e660bc373cd184586200c9be81cb0cbf95a14789a6"
+    },
+    {
+      "name": "skill-age1-frame1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 3,
+        "effects": 1,
+        "backgrounds": 1,
+        "portraits": 3
+      },
+      "items": [
+        {
+          "asset": "skill_age1",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age1-frame1-phone.jpg",
+      "source_png_sha256": "2c16b95854541725f2ed1571045d2529a7b81de37677be51fb4e37b5b29f4488",
+      "archive_sha256": "64726dd05e701c9a90f4e13715cdda791d98397acda7ff1b2b1fa951cb34cff1"
+    },
+    {
+      "name": "skill-age1-frame2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 3,
+        "effects": 1,
+        "backgrounds": 1,
+        "portraits": 3
+      },
+      "items": [
+        {
+          "asset": "skill_age1",
+          "frame": 2
+        }
+      ],
+      "file": "skill-age1-frame2-phone.jpg",
+      "source_png_sha256": "8bd8d8ca1b5f3e4cceb12c6359d92683e03cb0dee25e56057ee80bb5f90ea6f4",
+      "archive_sha256": "ebfe3df6dcaaad38ce7bccc46425757c8ca3d3dce48edb3c8c7c9a4c184442e1"
+    },
+    {
+      "name": "base-age2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 6,
+        "effects": 2,
+        "backgrounds": 1,
+        "portraits": 6
+      },
+      "items": [],
+      "file": "base-age2-phone.jpg",
+      "source_png_sha256": "9ff3138f25999fc367cb5d693b179c5cab2bd308909ce2de738d2eaaf329b136",
+      "archive_sha256": "7fbf7cf4de62d1afb4212ac391ad7902b5f71e0956a16e59727c99eee2345c44"
+    },
+    {
+      "name": "skill-age2-frame0",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 6,
+        "effects": 2,
+        "backgrounds": 1,
+        "portraits": 6
+      },
+      "items": [
+        {
+          "asset": "skill_age2",
+          "frame": 0
+        }
+      ],
+      "file": "skill-age2-frame0-phone.jpg",
+      "source_png_sha256": "65ad0bed66bb602da5d3397b6dae29fb459eb185d55263d8dd1d6ad2c22918e3",
+      "archive_sha256": "241ef2d37ef1b5426ea34ede42eb03363f0f0d67955efb7a512432cd0df32fec"
+    },
+    {
+      "name": "skill-age2-frame1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 6,
+        "effects": 2,
+        "backgrounds": 1,
+        "portraits": 6
+      },
+      "items": [
+        {
+          "asset": "skill_age2",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age2-frame1-phone.jpg",
+      "source_png_sha256": "c7e8943d4896aa6c26fba24ad4d70f1bbab6678ab5734917e72e69cb14336ec0",
+      "archive_sha256": "975be043249aad6eb6446bc1471a5bde37ef7cd04f31cfef4d7d4dd5b2296614"
+    },
+    {
+      "name": "skill-age2-frame2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 6,
+        "effects": 2,
+        "backgrounds": 1,
+        "portraits": 6
+      },
+      "items": [
+        {
+          "asset": "skill_age2",
+          "frame": 2
+        }
+      ],
+      "file": "skill-age2-frame2-phone.jpg",
+      "source_png_sha256": "a86f4a035046d1aad5c41cab673a4f668a8ca66de005a685a27130e18d668830",
+      "archive_sha256": "368db9a6000c9c2db4b40007a42ba533eec83dbb15ee2ff695e456552645b175"
+    },
+    {
+      "name": "base-age3",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 9,
+        "effects": 3,
+        "backgrounds": 1,
+        "portraits": 9
+      },
+      "items": [],
+      "file": "base-age3-phone.jpg",
+      "source_png_sha256": "2c8a6594283392ca88f7f1e440ac9e49037a5da181165eb9160850f5651ecc0c",
+      "archive_sha256": "c0062359eaf96abe551bc066c1e4caed0b24a007674e29db571c466f31d509c3"
+    },
+    {
+      "name": "skill-age3-frame0",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 9,
+        "effects": 3,
+        "backgrounds": 1,
+        "portraits": 9
+      },
+      "items": [
+        {
+          "asset": "skill_age3",
+          "frame": 0
+        }
+      ],
+      "file": "skill-age3-frame0-phone.jpg",
+      "source_png_sha256": "46c6d230207aebe06d54ee64e95741d4ce96ed75323ad985e937090bf995ba59",
+      "archive_sha256": "f47ec9d5b8df0019fbee43e43d2ba3b3953f54d42c27007c7079903619f5e063"
+    },
+    {
+      "name": "skill-age3-frame1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 9,
+        "effects": 3,
+        "backgrounds": 1,
+        "portraits": 9
+      },
+      "items": [
+        {
+          "asset": "skill_age3",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age3-frame1-phone.jpg",
+      "source_png_sha256": "cee5134cbd5317d17f333fe35cbace059d14fcf12284ff6454301c88217e3a87",
+      "archive_sha256": "7b9fd90519d154cae2fc6d37647bd00213533009c386b80eb17daf5a010d647d"
+    },
+    {
+      "name": "skill-age3-frame2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 9,
+        "effects": 3,
+        "backgrounds": 1,
+        "portraits": 9
+      },
+      "items": [
+        {
+          "asset": "skill_age3",
+          "frame": 2
+        }
+      ],
+      "file": "skill-age3-frame2-phone.jpg",
+      "source_png_sha256": "ef490384d2fa0f67065d38bbcecf314f23c2cd3ea3385da726864534cd6c0e25",
+      "archive_sha256": "3d4a452873a977b2a7b4a8cbdeb283200a36543075185f516d5e4637aa007833"
+    },
+    {
+      "name": "base-age4",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 4,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age4-phone.jpg",
+      "source_png_sha256": "89f3a84b6e8e93b7fbe3d6c4c0e444dbe82217ed51a7929e150f428c3fd75085",
+      "archive_sha256": "257663f9136c49c2575dd004d571858f63af820ab5fc1062297a4416fd35796c"
+    },
+    {
+      "name": "skill-age4-frame0",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 4,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 0
+        }
+      ],
+      "file": "skill-age4-frame0-phone.jpg",
+      "source_png_sha256": "7c999e39f2d1139ea5d806f008d1c7463b14e4694b26eeaa59b5ff37eb087c23",
+      "archive_sha256": "86d73d5b6562bd7dc89cae372839a59b8090e5e68e6968c736023df9230dc1b5"
+    },
+    {
+      "name": "skill-age4-frame1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 4,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age4-frame1-phone.jpg",
+      "source_png_sha256": "5fa8a3a027fde2b329eee24bfe20b85574047399a759025a722047bc9e6a0396",
+      "archive_sha256": "e3ca10b741786c50fa6c5718307258792f233a42c7a6d7e5062bc1f97736e3c3"
+    },
+    {
+      "name": "skill-age4-frame2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 4,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 2
+        }
+      ],
+      "file": "skill-age4-frame2-phone.jpg",
+      "source_png_sha256": "be3534be9d986fe21c8709d359a9b8a430026ebbab62f11f35e40d6f9ac8d9e0",
+      "archive_sha256": "3b384bb418468745d25520f6857902fb5151451295c6c7c024d151251c1e8162"
+    },
+    {
+      "name": "base-age5",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age5-phone.jpg",
+      "source_png_sha256": "167eb8efb642ca31f637542d515d7bf24e5ac4814042178ee42f969350380340",
+      "archive_sha256": "1205e8ba2a5a1993bdcd5e4e20717281fa30547f95eaaf55b4f71888b650c72c"
+    },
+    {
+      "name": "skill-age5-frame0",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age5",
+          "frame": 0
+        }
+      ],
+      "file": "skill-age5-frame0-phone.jpg",
+      "source_png_sha256": "934d84aeaf118776e5f9543b860af444e611d189f65d352ceb5369cab92095f2",
+      "archive_sha256": "a6a4a2230774bba00c89783e8c9f0f5b926f7ac8248ae73de48fb47ac0f73f09"
+    },
+    {
+      "name": "skill-age5-frame1",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age5",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age5-frame1-phone.png",
+      "source_png_sha256": "25f0666e7c3819695bd7f23fedbc453ef95430f07e691a8c1cd1ac342751387d",
+      "archive_sha256": "25f0666e7c3819695bd7f23fedbc453ef95430f07e691a8c1cd1ac342751387d"
+    },
+    {
+      "name": "skill-age5-frame2",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age5",
+          "frame": 2
+        }
+      ],
+      "file": "skill-age5-frame2-phone.jpg",
+      "source_png_sha256": "33bcf198d8addeae61ff024f02ba009e2881a26df96597a0bd0d7f0f71c393be",
+      "archive_sha256": "47c2163a4620b62c94173f69ff61c4c577732dc454b9b49d3652b9b78584bee0"
+    },
+    {
+      "name": "defense-age5",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-age5-phone.png",
+      "source_png_sha256": "3f77e8fefe3fc8492a64b2ed57cdf8ad90df060f2e2da2020d05847b30948bdf",
+      "archive_sha256": "3f77e8fefe3fc8492a64b2ed57cdf8ad90df060f2e2da2020d05847b30948bdf"
+    },
+    {
+      "name": "crowd-skill",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 1
+        }
+      ],
+      "file": "crowd-skill-phone.jpg",
+      "source_png_sha256": "271fe94d104a8fec06341fde84a029b66cc242d2e34fc07294c02528c76d901b",
+      "archive_sha256": "3de1019fdce05960f1a7e7515046e48f6eeb61358dafb858a5b93fca963cbc0c"
+    },
+    {
+      "name": "paused-skill",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "paused": true,
+      "items": [
+        {
+          "asset": "skill_age2",
+          "frame": 1
+        }
+      ],
+      "file": "paused-skill-phone.jpg",
+      "source_png_sha256": "feb31adbe265f98ed57ed8dad06a70ffb1764e8c57dc4eb9bfcc1866eece5a50",
+      "archive_sha256": "5aab770904cd651ce56e573514178a8f063bf9ec5462e946b33789fb7373d4d0"
+    },
+    {
+      "name": "zoom-skill",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 5,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age3",
+          "frame": 1
+        }
+      ],
+      "file": "zoom-skill-phone.jpg",
+      "source_png_sha256": "5394157b79ea8a6b8a385d51ea1231ab3fd3c555060b218817afbc3ca999343a",
+      "archive_sha256": "65dbdbbdc64dc8e6b878d41bb78dec9d65082962b54d505f2faaf1ca11c6a3ae"
+    },
+    {
+      "name": "hit_dust",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 6,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "hit_dust",
+          "frame": 1
+        }
+      ],
+      "file": "hit_dust-phone.jpg",
+      "source_png_sha256": "de95364722bb325a1acc5f106b2c3127ba649cb02d553d6cf8c0c1f514621492",
+      "archive_sha256": "50b9877669b42daeb3b7c4e0e90d3b207c9b9f22eb2c5c7122921076fb0b3d88"
+    },
+    {
+      "name": "hit_metal",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 7,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "hit_metal",
+          "frame": 1
+        }
+      ],
+      "file": "hit_metal-phone.jpg",
+      "source_png_sha256": "af02bd9a53cdcd6a0e9176c81676d17565ea11f588471e6bb1fd405b35ad5869",
+      "archive_sha256": "b02c345e71f2f0e80a6d75d36578d93bf1b90dddd308e3be3eb42594fb45710d"
+    },
+    {
+      "name": "hit_explosion",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 8,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "hit_explosion",
+          "frame": 1
+        }
+      ],
+      "file": "hit_explosion-phone.jpg",
+      "source_png_sha256": "78c87f408110eb81b681051c16c6ed3ae3ebde0c47a596a6bdeeacd16f9f2a7d",
+      "archive_sha256": "95ed514eb660ff304e2b7a81eab4c656981ca2793f6af789ef20f4f3fae9c373"
+    },
+    {
+      "name": "hit_energy",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "hit_energy",
+          "frame": 1
+        }
+      ],
+      "file": "hit_energy-phone.jpg",
+      "source_png_sha256": "e95f4f56530a644c64986da8137368248920d12a7cecbd3b7b7a874460469bcf",
+      "archive_sha256": "17f0e31c21a1e62068b6dda0161b94cf1a944dc72ddc922db38cda54dbb6edc5"
+    },
+    {
+      "name": "defense-empty-age1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-empty-age1-phone.jpg",
+      "source_png_sha256": "5237ef7c42b55c6104025f0f4b138aa99d1c25056b847789ead913164575e0cf",
+      "archive_sha256": "aa014e0fafc0ac974f439edbe44ec27dd93cf88e9408774f1ab5c0bcff4d6599"
+    },
+    {
+      "name": "defense-empty-age2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-empty-age2-phone.jpg",
+      "source_png_sha256": "8c7fa7e6f9ccc4ef00f40113c5553f511b81e6efb3d5f4bf763da14f97ee027d",
+      "archive_sha256": "32a46a9d2fab19ac4762b44d1603400e4fd6e269a8bae6410f3e101081c0d1c4"
+    },
+    {
+      "name": "defense-empty-age3",
+      "states": [
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-empty-age3-phone.jpg",
+      "source_png_sha256": "8f1f8a04a8b502a796240d017e82f1e7e8e341a1334cf956ccf8681f5ed11911",
+      "archive_sha256": "79d37ee41f5dc21272151deb9e44f772f841609b876c1fced753e40c49b6d131"
+    },
+    {
+      "name": "defense-empty-age4",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-empty-age4-phone.jpg",
+      "source_png_sha256": "8c695e3e86ec6044c7f3eda47b1b5eca9e3a622d3c52a3246b52501779be7ac3",
+      "archive_sha256": "e57f2009960d60a098143a038d52bfd4fbebb6a5a4d47928a5e93bbf12fd653d"
+    },
+    {
+      "name": "defense-empty-age5",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-empty-age5-phone.jpg",
+      "source_png_sha256": "9f8d673d4802d1d38726838b07fbe92c9c9270bab1b37e29d0713c4502f94235",
+      "archive_sha256": "6ce245abe5bcc0e580ad2594280a3a30563ea6fa3fc5ccb2f80e1de6815a5d32"
+    },
+    {
+      "name": "base-age1",
+      "states": [
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age1-wide.jpg",
+      "source_png_sha256": "2783d3b117408f8a5049749a371621c7fe4fc6867e5e2c2093951a158fd4f8ed",
+      "archive_sha256": "4e6085d1929681275847e37d98e15d4c6b94337e1f8562d565754533bba0ab13"
+    },
+    {
+      "name": "skill-age1-impact",
+      "states": [
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age1",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age1-impact-wide.jpg",
+      "source_png_sha256": "8d095a2c678a76aedb2f9b11b04d65302566e460eacc693f154fe473bb49c782",
+      "archive_sha256": "e0e043ec5cbb859b55bae7461cca1d9ae3f274ef12fac8da7e92d03880cb1c14"
+    },
+    {
+      "name": "base-age2",
+      "states": [
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age2-wide.jpg",
+      "source_png_sha256": "205cffaff1c18f26a61cce0774554bdbdf687bc55735016a518924638953848f",
+      "archive_sha256": "6b835dfc27f219a90c1ff821f7bd9f32c4752607e2a6df1642c9f71cc03daa3e"
+    },
+    {
+      "name": "skill-age2-impact",
+      "states": [
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age2",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age2-impact-wide.jpg",
+      "source_png_sha256": "41ebcdde2a3dcdb84b1bde54b006ffe7e3bfe3d9bd3e4588e517ea43206e9ffc",
+      "archive_sha256": "f343741d9921c9b79f453c6ed26af0f4b073069583d24448ea8fc7e2f30a8b77"
+    },
+    {
+      "name": "base-age3",
+      "states": [
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age3-wide.jpg",
+      "source_png_sha256": "e40c77e3665a9797f855a16794f9500f281f133a26760010127e639c85e6d69a",
+      "archive_sha256": "adce82fd0da215dc9569e0b5bbbeb54ad0261c3e971a74b51c7ea4d85bd952e0"
+    },
+    {
+      "name": "skill-age3-impact",
+      "states": [
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age3",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age3-impact-wide.jpg",
+      "source_png_sha256": "6a16852dd5b35b80aa9f5744df79c152425716e623be81b41c228293d1085790",
+      "archive_sha256": "d8f2e5335b3b0d896a85659b31205cbc2cea587a913620dd05b95c60c0d1cb8d"
+    },
+    {
+      "name": "base-age4",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age4-wide.png",
+      "source_png_sha256": "e1bd7d0f94af8732c81298fbbeeedd4fe7f7402e8d74f28dc06f4a29f18faeb3",
+      "archive_sha256": "e1bd7d0f94af8732c81298fbbeeedd4fe7f7402e8d74f28dc06f4a29f18faeb3"
+    },
+    {
+      "name": "skill-age4-impact",
+      "states": [
+        {
+          "path": "assets/world-art/base_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age1_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age4-impact-wide.jpg",
+      "source_png_sha256": "48cefac121230c515d1fd7912f2224c8bfdd3218adc7cb6fefe2c847f54b5a04",
+      "archive_sha256": "ac962bd22952d8800677fc33f0f884d7ed24f3e7e909e9b96423d659aae5275c"
+    },
+    {
+      "name": "base-age5",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "base-age5-wide.jpg",
+      "source_png_sha256": "b1cf9bde94dbcb4ded92b656586335e703efe491763c5536104683317545102f",
+      "archive_sha256": "64cd1be7a32aca806216763324ab12e81a7873ae89a030ec2262a2468cf52fd8"
+    },
+    {
+      "name": "skill-age5-impact",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age5",
+          "frame": 1
+        }
+      ],
+      "file": "skill-age5-impact-wide.jpg",
+      "source_png_sha256": "51e02e06974762125794ca19d0936e6a3df17c01eeb59ed77e76d0b5b0ff0e2c",
+      "archive_sha256": "5604c43089e504eae98c41479eda25b81070addb124b0917db2921b022061724"
+    },
+    {
+      "name": "crowd",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [
+        {
+          "asset": "skill_age4",
+          "frame": 1
+        }
+      ],
+      "file": "crowd-wide.jpg",
+      "source_png_sha256": "c213b3eabb5cf90430fa21c4c14469a00570f435b47f03d7e38ac3ffb8c64343",
+      "archive_sha256": "420e5d8c305aa39dc2bb48d554f223e81cd45d78c659d8400e41daaf087bdde8"
+    },
+    {
+      "name": "defense",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "defense-wide.jpg",
+      "source_png_sha256": "9ba1be2e561120371963650551170936386a53571b529cf42bedbdfa8426fcee",
+      "archive_sha256": "9280d051421781fca087ca4c853923afad14b518dc36c7b8dce09a9054ed17f2"
+    },
+    {
+      "name": "pan-home",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "pan-home-wide.jpg",
+      "source_png_sha256": "59cd9de34de56cc82ce6467924641d58643cc30f87bd8acf3a2af375f687dbc2",
+      "archive_sha256": "c1cc327a40a1c07b73e78595fe078f819f994e417283fbd22b6b0fe6763a5691"
+    },
+    {
+      "name": "pan-enemy",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "pan-enemy-wide.jpg",
+      "source_png_sha256": "bfd1723ac20277c1fa0934e08d003ed354a86eb67c79ac4de72cebd4a52fd2b3",
+      "archive_sha256": "91b22074d557c869b616355dffba9d4b06c64274bc75faf128294b392143b2fd"
+    },
+    {
+      "name": "simple-background",
+      "states": [
+        {
+          "path": "assets/world-art/tower_age2_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age2_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age3_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age5_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/base_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age4_1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/tower_age1_0.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_dust.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_metal.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_explosion.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/hit_energy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age1.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age2.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age3.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age5.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/skill_age4.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/world-art/battlefield_shared.jpg",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age2_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age3_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age5_heavy.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_melee.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_range.png",
+          "status": "ready"
+        },
+        {
+          "path": "assets/unit-portraits/age4_heavy.png",
+          "status": "ready"
+        }
+      ],
+      "cache": {
+        "buildings": 12,
+        "effects": 9,
+        "backgrounds": 1,
+        "portraits": 12
+      },
+      "items": [],
+      "file": "simple-background-wide.jpg",
+      "source_png_sha256": "edd5e58400de4da5b2b981078abc2ead51a3766b848e384570eaff845adf2ca1",
+      "archive_sha256": "3d25faa19b2ab123a145b908197afe5cd0c187be640b6f5a2e6d10f8c7e70506"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+"""Build small RGBA building portraits and aligned three-frame effect strips.
+
+Accepted source files are never modified. Requires Pillow.
+"""
+import hashlib
+import json
+from pathlib import Path
+
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[1]
+PADDING = 4
+# Ground/impact anchors measured in the accepted 1182px-high source cells.
+ANCHORS = {'skill_age1': (591, 1000), 'skill_age2': (591, 842),
+           'skill_age3': (591, 970), 'skill_age4': (591, 960),
+           'skill_age5': (591, 890), 'hit_dust': (591, 960),
+           'hit_metal': (591, 620), 'hit_energy': (591, 730),
+           'hit_explosion': (591, 600)}
+
+
+def build_building(source, target):
+    with Image.open(source) as im:
+        assert im.mode == 'RGBA' and im.getchannel('A').getextrema() == (0, 255)
+        crop = im.getchannel('A').getbbox()
+        content = im.crop(crop)
+        content.thumbnail((208, 208) if source.stem.startswith('base_') else (96, 96), Image.Resampling.LANCZOS)
+        out = Image.new('RGBA', (content.width + 8, content.height + 8))
+        out.paste(content, (PADDING, PADDING))
+        out.save(target, optimize=True)
+        # The modern bunker is the sole accepted base with its entrance on the left.
+        facing = 'left' if source.stem == 'base_age4' else 'front' if source.stem in ('base_age1', 'base_age2') else 'right'
+        return {'width': out.width, 'height': out.height, 'source_crop': crop, 'source_facing': facing}
+
+
+def build_background(source, target):
+    with Image.open(source) as im:
+        out = im.convert('RGB')
+        out.thumbnail((960, 540), Image.Resampling.LANCZOS)
+        out.save(target, quality=78, optimize=True)
+        return {'width': out.width, 'height': out.height,
+                'ground_y': round(1280 * out.height / im.height, 4)}
+
+
+def build_effect(source, target):
+    with Image.open(source) as im:
+        assert im.mode == 'RGBA' and im.getchannel('A').getextrema() == (0, 255)
+        # Preserve every column, including the middle cell's one-pixel remainder.
+        edges = [round(i * im.width / 3) for i in range(4)]
+        cell_width = max(edges[i + 1] - edges[i] for i in range(3))
+        frames = []
+        for i in range(3):
+            cell = Image.new('RGBA', (cell_width, im.height))
+            cell.paste(im.crop((edges[i], 0, edges[i + 1], im.height)), (0, 0))
+            frames.append(cell)
+        boxes = [f.getchannel('A').getbbox() for f in frames if f.getchannel('A').getbbox()]
+        crop = (min(b[0] for b in boxes), min(b[1] for b in boxes), max(b[2] for b in boxes), max(b[3] for b in boxes))
+        size = 192 if source.stem.startswith('skill_') else 96
+        content = frames[0].crop(crop)
+        content.thumbnail((size, size), Image.Resampling.LANCZOS)
+        fw, fh = content.width + 8, content.height + 8
+        out = Image.new('RGBA', (fw * 3, fh))
+        rects = []
+        for i, frame in enumerate(frames):
+            content = frame.crop(crop).resize((fw - 8, fh - 8), Image.Resampling.LANCZOS)
+            out.paste(content, (i * fw + PADDING, PADDING))
+            rects.append({'x': i * fw, 'y': 0, 'width': fw, 'height': fh})
+        out.save(target, optimize=True)
+        ax, ay = ANCHORS[source.stem]
+        anchor = {'x': round(PADDING + (ax - crop[0]) * (fw - 8) / (crop[2] - crop[0]), 4),
+                  'y': round(PADDING + (ay - crop[1]) * (fh - 8) / (crop[3] - crop[1]), 4)}
+        return {'width': out.width, 'height': out.height, 'frames': rects, 'anchor': anchor,
+                'source_edges': edges, 'source_crop': crop,
+                'empty_frames': [i for i, f in enumerate(frames) if f.getchannel('A').getbbox() is None]}
+
+
+def build():
+    output = ROOT / 'assets/world-art'
+    output.mkdir(exist_ok=True)
+    index = {'buildings': {}, 'effects': {}, 'backgrounds': {}}
+    keys = ([f'base_age{age}' for age in range(1, 6)]
+            + [f'tower_age{age}_{kind}' for age in range(1, 6) for kind in range(2)]
+            + list(ANCHORS))
+    for key in keys:
+        group = 'effects' if key in ANCHORS else 'buildings'
+        source = ROOT / 'assets' / group / (key + '.png')
+        target = output / (key + '.png')
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()
+        meta = (build_effect if group == 'effects' else build_building)(source, target)
+        assert hashlib.sha256(source.read_bytes()).hexdigest() == digest
+        index[group][key] = {'path': target.relative_to(ROOT).as_posix(), **meta}
+    source = ROOT / 'assets/battlefield/battlefield_shared.png'
+    target = output / 'battlefield_shared.jpg'
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    index['backgrounds']['battlefield_shared'] = {'path': target.relative_to(ROOT).as_posix(), **build_background(source, target)}
+    assert hashlib.sha256(source.read_bytes()).hexdigest() == digest
+    code = "'use strict';\n// Generated by scripts/build-world-art.py.\nmodule.exports=" + json.dumps(index, indent=2) + ';\n'
+    (ROOT / 'src/config/world-art.js').write_text(code, encoding='utf-8')
+    print(json.dumps({'buildings': len(index['buildings']), 'effects': len(index['effects']),
+                      'backgrounds': 1, 'bytes': sum((ROOT / meta['path']).stat().st_size for group in index.values() for meta in group.values())}))
+
+
+if __name__ == '__main__':
+    build()

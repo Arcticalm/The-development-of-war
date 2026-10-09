@@ -68,7 +68,7 @@ test('mixed-era queue and cancel confirmation reuse the original queued unit por
   const q=a.view.sides[0].queue[1],count=w.made.length;a.queueCancel(q.id);w.draws.length=0;a.renderer.draw();const image=w.draws.find(([i,x,y])=>i.path===INDEX[q.typeId].path&&x>=184&&x<350&&y>=194&&y<434);assert.ok(image);assert.equal(w.made.length,count);assert.ok(a.renderer.buttons.some(b=>b.id.endsWith(':confirm-cancel')));
 });
 test('battle actors only draw text; production portraits remain outside the world area',()=>{
-  const w=platform(true),a=new GameApp(w);a.startBattle();a.renderer.draw();const requests=w.made.length;for(const d of UNITS)a.battle.spawn(0,d.id);w.draws.length=0;a.renderer.draw();assert.equal(w.made.length,requests);assert.ok(w.draws.every(([,x,y])=>y>=495));
+  const w=platform(true),a=new GameApp(w);a.startBattle();a.renderer.draw();const requests=w.made.length;for(const d of UNITS)a.battle.spawn(0,d.id);w.draws.length=0;a.renderer.draw();assert.equal(w.made.length,requests);assert.ok(w.draws.filter(([image])=>image.path.includes('/unit-portraits/')).every(([,x,y])=>y>=495));
   const before=w.made.length;new TextUnitPresenter().draw(a.renderer,a.view.units);assert.equal(w.made.length,before);assert.ok(w.texts.some(t=>t.includes('我·')));
 });
 test('README action table matches 30 units, five support aliases and 172 groups / 1136 frames',()=>{

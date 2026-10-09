@@ -45,6 +45,13 @@ function fixture(){
     if(name==='队列成功'){app.command({type:'train',id:UNITS[0].id});app.feedback.update(.09);}
     if(name==='按下状态'){app.renderer.draw();const b=app.renderer.buttons.find(b=>b.id.endsWith(':train:'+UNITS[0].id));app.feedback.press(b.id);}
   }
+  if(previewParams.has('worldEra')){
+    const era=Math.max(0,Math.min(4,Number(previewParams.get('worldEra'))-1));if(!app.battle)app.startBattle();
+    app.battle.sides.forEach(s=>{s.era=era;s.slots=3;s.towers=[{era,kind:0,level:1,clock:0},{era,kind:1,level:2,clock:0},{era:0,kind:0,level:1,clock:0}];});
+    app.battle.sides.forEach(s=>s.towers.forEach(t=>{t.cost=Math.ceil([180,240][t.kind]*[1,1.2,1.45,1.75,2.1][t.era]);t.paid=t.cost+(t.level===2?Math.ceil(t.cost*.6):0);}));
+    app.battle.sides[0].cooldown=0;
+    if(previewParams.has('effectTime')){app.battle.strikes=[{era,side:0,x:500,wait:1,pulses:era===1?3:1}];app.renderer.combatEffects.sync(app.view);app.battle.time=Number(previewParams.get('effectTime'));app.battle.strikes=[];}
+  }
   app.renderer.draw();canvas.style.maxWidth=width+'px';document.querySelector('#error').textContent='';
 }
 function send(name,e){const box=canvas.getBoundingClientRect(),t={clientX:(e.clientX-box.left)*app.width/box.width,clientY:(e.clientY-box.top)*app.height/box.height};handlers[name]({changedTouches:[t],touches:name==='end'?[]:[t]});app.renderer.draw();}
