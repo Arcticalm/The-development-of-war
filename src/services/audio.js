@@ -1,5 +1,5 @@
 'use strict';
-const SOUNDS={click:'assets/audio/click.wav',spawn:'assets/audio/spawn.wav',evolve:'assets/audio/evolve.wav',skill:'assets/audio/skill.wav',win:'assets/audio/win.wav',lose:'assets/audio/lose.wav',draw:'assets/audio/draw.wav'};
+const SOUNDS={click:'assets/audio/click.wav',confirm:'assets/audio/confirm.wav',reject:'assets/audio/reject.wav',spawn:'assets/audio/spawn.wav',evolve:'assets/audio/evolve.wav',skill:'assets/audio/skill.wav',win:'assets/audio/win.wav',lose:'assets/audio/lose.wav',draw:'assets/audio/draw.wav'};
 /** 短音效平台适配；不可用或被系统拒绝时，游戏继续运行。 */
 class AudioService {
   constructor(platform,settings){this.platform=platform;this.settings=settings;this.players={};this.hidden=false;this.failed=false;this.lastPlayed={};}

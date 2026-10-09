@@ -4,140 +4,168 @@ const {LEVEL_BY_ID,LEVELS}=require('./config/modes');
 const {unlocked}=require('./services/storage');
 const screens=require('./ui/screens');
 const {TextUnitPresenter}=require('./ui/units');
-const C={paper:'#eee4ce',ink:'#283a36',muted:'#6f7568',teal:'#347b70',red:'#b9664e',gold:'#d0a34f',panel:'#faf4e6',line:'#cec4ae'};
+const {UIComponents}=require('./ui/components');
+const {COLORS:C,ERA_COLORS,ERA_ICONS}=require('./ui/theme');
 const DAMAGE={normal:'普通',piercing:'穿甲',explosive:'爆破',siege:'攻城',energy:'能量'};
 const TRAITS={base:'对基地伤害提高 50%',splashBase:'范围爆破 / 基地伤害提高 50%',haste:'附近友军攻速 +15%，同名光环不叠加',shieldWall:'单体远程普攻减伤 20%',mechanical:'机械单位，接受维修，不接受医疗',charge:'出场首次攻击伤害提高 80%',heal:'前摇后治疗一名生物友军',mechanicalSplash:'机械 / 范围攻城',splash:'落点范围伤害',march:'附近友军移动速度 +20%',sniper:'优先锁定射程内支援兵',warmup:'架枪预热 0.8 秒，停火重新预热',heal3:'前摇后治疗最多三名生物友军',shield:'出场护盾为最大生命的 20%，不恢复',rail:'蓄力发射，穿透最多两个敌兵',repair:'维修机械与动力装甲，不恢复护盾'};
-class Renderer {
-  constructor(app){this.app=app;this.ctx=app.ctx;this.buttons=[];this.colors=C;this.units=new TextUnitPresenter();}
+class Renderer extends UIComponents {
+  constructor(app){super(app);this.units=new TextUnitPresenter();this.resultVisible=false;}
   get worldCamera(){return this.app.camera;}
   set worldCamera(value){this.app.camera=value;}
-  rect(x,y,w,h,color){this.ctx.fillStyle=color;this.ctx.fillRect(x,y,w,h);}
-  text(text,x,y,size=24,color=C.ink,align='left'){const c=this.ctx;c.fillStyle=color;c.font=size+'px sans-serif';c.textAlign=align;c.textBaseline='middle';c.fillText(String(text),x,y);}
-  wrap(value,x,y,width,size=22,height=32){
-    let line='',row=0;for(const ch of String(value)){if(line.length*size>=width||ch==='\n'){this.text(line,x,y+row*height,size);row++;line=ch==='\n'?'':ch;}else line+=ch;}
-    if(line)this.text(line,x,y+row*height,size);
-  }
-  line(x,y,x2,y2,color=C.line,width=2){const c=this.ctx;c.beginPath();c.moveTo(x,y);c.lineTo(x2,y2);c.strokeStyle=color;c.lineWidth=width;c.stroke();}
-  button(label,x,y,w,h,action,active=true,small=false){
-    this.rect(x,y,w,h,active?C.teal:'#c4c4b5');this.text(label,x+w/2,y+h/2,small?20:24,active?'#fff':'#566057','center');
-    this.buttons.push({x,y,w,h,action});
-  }
-  region(x,y,w,h,action,longAction){this.buttons.push({x,y,w,h,action,longAction});}
-  bar(x,y,w,h,value,color){this.rect(x,y,w,h,C.line);this.rect(x,y,w*Math.max(0,Math.min(1,value)),h,color);}
   draw(){
-    const a=this.app,c=this.ctx;this.buttons=[];c.setTransform(a.dpr,0,0,a.dpr,0,0);this.rect(0,0,a.width,a.height,'#202e2a');c.translate(a.offsetX,a.offsetY);c.scale(a.scale,a.scale);this.rect(0,0,1280,720,C.paper);
-    if(a.scene==='battle'&&a.session)this.battle();else (screens[a.scene]||screens.home)(this);
-    const view=a.scene==='battle'?a.view:null;
+    const a=this.app,c=this.ctx;this.buttons=[];const view=a.scene==='battle'&&a.session?a.view:null;this.resultVisible=!!(view&&view.result);
+    c.setTransform(a.dpr,0,0,a.dpr,0,0);this.rect(0,0,a.width,a.height,C.shell);c.translate(a.offsetX,a.offsetY);c.scale(a.scale,a.scale);this.rect(0,0,1280,720,C.paper);
+    if(view)this.battle(view);else (screens[a.scene]||screens.home)(this);
     if(view&&view.result)this.result(view.result);
     else if(a.modal==='help')this.help();
-    else if(a.modal==='defense')this.defense(view.sides[0]);
+    else if(a.modal==='defense'&&view)this.defense(view.sides[0]);
     else if(a.modal&&a.modal.unit)this.details(BY_ID[a.modal.unit]);
     else if(a.modal&&a.modal.levelId)this.levelDetails(LEVEL_BY_ID[a.modal.levelId]);
     else if(a.modal&&a.modal.confirm)this.confirm();
-    else if(a.modal&&a.modal.cancel!==undefined)this.cancelQueue();
-    else if(a.scene==='battle'&&a.paused)this.pause();
-    if(a.toastTime>0){this.rect(190,670,900,42,C.ink);this.text(a.toast,640,691,21,'#fff','center');}
+    else if(a.modal&&a.modal.cancel!==undefined)this.cancelQueue(view);
+    else if(view&&a.paused)this.pause();
+    this.drawFeedback();this.toast();
   }
-  battle(){
-    const a=this.app,b=a.view,p=b.sides[0],enemy=b.sides[1];this.rect(0,0,1280,142,C.panel);
-    this.text('我方 · '+ERAS[p.era].name,28,30,25,C.teal);this.text('敌方 · '+ERAS[enemy.era].name,900,30,25,C.red);
-    this.bar(28,57,326,13,p.hp/p.maxHp,C.teal);this.bar(900,57,326,13,enemy.hp/enemy.maxHp,C.red);this.text(Math.ceil(p.hp)+' / '+p.maxHp,28,90,20);this.text(Math.ceil(enemy.hp)+' / '+enemy.maxHp,900,90,20);
-    this.text('金币 '+Math.floor(p.gold),390,30,24);this.text('人口 '+b.livingPopulation+'+'+(b.population-b.livingPopulation)+' / 30',390,64,22);
-    this.text('经验 '+Math.floor(p.xp)+(p.era<b.rules.maxEra?' / '+ERAS[p.era+1].xp:' · 时代上限'),390,99,20);
-    const remaining=Math.max(0,Math.ceil(b.rules.timeLimit-b.time));this.text(Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0'),770,30,25);
-    this.button('暂停',720,66,130,48,()=>a.pauseBattle(),!b.result);
+  battle(b){
+    const a=this.app,p=b.sides[0],enemy=b.sides[1];this.rect(0,0,1280,142,C.dark);
+    [p,enemy].forEach((s,i)=>{const x=i?948:20,color=i?C.red:'#79a78d',evolving=!i&&a.feedback.state('battle:main:era').alpha>0;this.painter.shape(x,17,312,111,evolving?'#456844':'#25493d',evolving?C.gold:'#40614e','round',16);this.badge('shield',x+31,48,21,'#355b49',i?'#e8a98a':C.goldLight);this.fitText((i?'敌方 · ':'我方 · ')+ERAS[s.era].name,x+63,45,234,23,C.white);this.text(Math.ceil(s.hp)+' / '+s.maxHp,x+63,79,22,'#c9d9c6');this.bar(x+24,108,264,8,s.hp/s.maxHp,color);});
+    const wallet=this.app.feedback.state('battle:main:wallet');
+    this.painter.shape(353,22,179,51,wallet.alpha>0?C.goldLight:'#2b5142',null,'round',14);this.icon('coin',380,48,26,C.gold);this.text(Math.floor(p.gold),403,48,29,wallet.alpha>0?C.ink:C.white);
+    this.painter.shape(544,22,227,51,'#2b5142',null,'round',14);this.icon('people',570,48,24,'#b1c8b2');this.text(b.livingPopulation+'+'+(b.population-b.livingPopulation)+' / 30',598,48,23,C.white);
+    const remaining=Math.max(0,Math.ceil(b.rules.timeLimit-b.time));this.icon('clock',804,46,22,C.goldLight);this.text(Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0'),826,46,25,C.white);
+    this.icon('xp',368,95,22,C.gold);this.text('经验 '+Math.floor(p.xp)+(p.era<b.rules.maxEra?' / '+ERAS[p.era+1].xp:' · 时代上限'),390,93,20,'#c6d6c4');
+    this.bar(390,116,368,5,p.era<b.rules.maxEra?p.xp/ERAS[p.era+1].xp:1,C.gold);
+    this.button('暂停',793,84,120,43,()=>a.pauseBattle(),true,true,{id:'pause',variant:'outline',icon:'pause',onDark:true});
     const c=this.ctx,camera=this.worldCamera;c.save();c.beginPath();c.rect(0,143,1280,347);c.clip();c.translate(640+camera.x,414+camera.y);c.scale(camera.zoom,camera.zoom);c.translate(-640,-414);
     this.landscape(p.era);this.base(0,p);this.base(1,enemy);
-    b.strikes.forEach(s=>{const x=100+s.x*1.08;this.rect(x-113,431,226,25,'rgba(185,102,78,0.16)');this.text('技能预警',x,448,19,s.side?C.red:C.teal,'center');});
+    b.strikes.forEach(s=>{const x=100+s.x*1.08;c.save();c.setLineDash([7,6]);this.line(x-113,457,x+113,457,s.side?C.red:C.teal,3);c.restore();this.tag('技能预警',x-55,422,C.redLight,C.red,18,110);});
     b.projectiles.forEach(p=>{const progress=1-p.remaining/p.duration,x=100+(p.from+(p.to-p.from)*progress)*1.08;this.text(p.splash?'●':p.side?'←':'→',x,468,19,p.side?C.red:C.teal,'center');});
     this.units.draw(this,b.units);
     this.text('我方基地',94,478,19,C.teal,'center');this.text('敌方基地',1184,478,19,C.red,'center');c.restore();
-    this.text(b.rules.mode==='campaign'?b.rules.levelId+' '+b.rules.name+' · '+(b.rules.objective==='survive'?'生存或摧毁敌基地':'摧毁敌基地'):'经典对战 · '+({easy:'简单',normal:'普通',hard:'困难'}[b.rules.difficulty]),24,164,20,C.muted);
-    this.button(camera.zoom>1?'全景':'局部视图',966,151,128,38,()=>{a.camera=camera.zoom>1?{zoom:1,x:0,y:0}:{zoom:1.8,x:0,y:0};},!b.result,true);
-    this.button('回到基地',1108,151,148,38,()=>{a.camera={zoom:1.8,x:432,y:0};},!b.result,true);
+    this.tag(b.rules.mode==='campaign'?b.rules.levelId+' '+b.rules.name:'经典对战 · '+({easy:'简单',normal:'普通',hard:'困难'}[b.rules.difficulty]),24,151,C.panel,C.ink,20);
+    this.button(camera.zoom>1?'全景':'局部视图',960,150,139,40,()=>{a.camera=camera.zoom>1?{zoom:1,x:0,y:0}:{zoom:1.8,x:0,y:0};},true,true,{id:'camera',variant:'soft',icon:'eye'});
+    this.button('回到基地',1110,150,147,40,()=>{a.camera={zoom:1.8,x:432,y:0};},true,true,{id:'camera-home',variant:'soft',icon:'home'});
     this.controls(p,b);
-    if(a.skillMode){this.rect(240,190,800,43,C.panel);this.text('点击战场选择落点；拖动只移动视野',640,212,24,C.teal,'center');this.button('取消施放',532,238,216,40,()=>{a.skillMode=false;},true,true);}
+    if(a.skillMode){this.painter.shape(270,194,650,45,C.panel,C.gold,'round',20);this.text('点击战场选择落点；拖动只移动视野',595,216,22,C.teal,'center');this.button('取消施放',540,246,200,41,()=>{a.skillMode=false;},true,true,{id:'skill-cancel',variant:'outline'});}
   }
   screenXToBattle(x){const camera=this.worldCamera;return(((x-640-camera.x)/camera.zoom+640)-100)/1.08;}
   landscape(era){
-    const colors=[['#dce2d0','#bfcbb4'],['#e6dfc8','#c8c8ad'],['#ddd9cc','#b7bfbd'],['#d7e0df','#b6c5c3'],['#d3e2e1','#a7c6c4']][era];
-    this.rect(-800,143,2900,347,colors[0]);if(!this.app.settings.simpleBackground){for(let i=0;i<13;i++)this.rect(i*110-32,370-(i%3)*20,65,120,colors[1]);}this.line(-800,460,2100,460,C.muted,2);
+    const palettes=[['#e3e8d0','#b8c4a0','#cfd6b8'],['#eadfc8','#cabc9c','#d9cbb1'],['#dee3df','#afbeb7','#c7d0c7'],['#dce4d9','#a9b99f','#c3cfbb'],['#d9e8e0','#9fc4b7','#c1d9cd']],colors=palettes[era];
+    this.rect(-800,143,2900,347,colors[0]);
+    if(!this.app.settings.simpleBackground){
+      for(let i=-2;i<14;i++){const x=i*125,y=346+(i%3)*18;
+        if(era===0){this.painter.polygon([[x-58,438],[x+22,y-30],[x+86,438]],colors[2]);this.painter.polygon([[x+21,438],[x+90,y+15],[x+146,438]],colors[1]);}
+        else if(era===1){this.rect(x,y,86,107,colors[2]);this.painter.polygon([[x-7,y],[x+43,y-31],[x+92,y]],colors[1]);}
+        else if(era===2){this.rect(x,y,87,118,colors[2]);this.rect(x+53,y-31,17,52,colors[1]);this.painter.shape(x-11,y+37,110,80,colors[1],null,'round',18);}
+        else if(era===3){this.painter.shape(x,y,91,108,colors[2],null,'round',14);this.line(x,y+26,x+91,y+26,colors[1],3);}
+        else{this.painter.polygon([[x,y+33],[x+43,y],[x+87,y+33],[x+87,455],[x,455]],colors[2]);this.line(x+43,y+18,x+43,455,colors[1],2);}
+      }
+    }
+    this.rect(-800,456,2900,34,'#c7cbae');this.line(-800,458,2100,458,'#86967b',2);
   }
-  base(side,s){const x=side?1166:46;this.rect(x,345,68,110,side?C.red:C.teal);this.text('基地',x+34,398,22,'#fff','center');s.towers.forEach((t,i)=>{if(t)this.text('塔'+(i+1),x+34,309-i*24,18,C.ink,'center');});}
+  base(side,s){
+    const x=side?1150:32,color=side?C.red:C.teal,era=s.era;
+    this.painter.shape(x-7,433,103,24,'#6c8166',null,'round',10);
+    if(era===0){this.painter.shape(x,384,85,62,color,null,'round',9);this.painter.polygon([[x-13,388],[x+42,342],[x+99,388]],color);this.painter.polygon([[x+9,383],[x+42,355],[x+75,383]],'#cfb074');}
+    else if(era===1){this.rect(x+4,367,79,78,color);for(let i=0;i<4;i++)this.rect(x+1+i*23,352,17,30,color);this.painter.shape(x+32,406,23,39,'#233e34',null,'round',10);}
+    else if(era===2){this.painter.shape(x,374,87,70,color,null,'round',10);this.rect(x+11,361,28,18,color);this.painter.shape(x+44,386,55,15,color,null,'round',5);this.line(x+48,381,x+101,370,color,7);}
+    else if(era===3){this.painter.shape(x-3,386,96,58,color,null,'round',24);this.rect(x+14,367,55,31,color);this.painter.shape(x+17,400,52,10,C.dark,null,'round',5);}
+    else{this.painter.polygon([[x+42,344],[x+87,372],[x+87,439],[x,439],[x,372]],color);this.painter.polygon([[x+42,360],[x+66,376],[x+66,403],[x+42,418],[x+19,403],[x+19,376]],'#8ec4af');this.icon('bolt',x+42,390,32,C.white);}
+    this.line(x+12,351,x+12,326,C.dark,2);this.painter.polygon([[x+12,326],[x+48,330],[x+35,344],[x+12,340]],C.gold);
+    s.towers.forEach((t,i)=>{if(t){this.badge('tower',x+41,312-i*27,13,C.panel,color);this.text(i+1,x+61,312-i*27,17,color);}});
+  }
+  unitLabel(x,y,w,label,side,hp,shield){
+    const color=side?C.red:C.teal;this.painter.shape(x,y-14,w,27,C.panel,null,'round',12);this.painter.circle(x+12,y,8,color);this.fitText(label,x+27,y,w-32,19,color);this.bar(x+3,y+16,w-6,3,hp,color);if(shield>0)this.bar(x+3,y+21,w-6,2,shield,'#58998d');
+  }
   controls(p,b){
-    const a=this.app;this.rect(0,495,1280,225,C.panel);this.text('队列',24,517,20,C.muted);
-    p.queue.forEach((q,i)=>{const d=BY_ID[q.typeId],x=160+i*178;this.button(d.name,x,500,167,31,()=>a.queueCancel(q.id),!b.result,true);this.text(i===0?q.remaining.toFixed(1)+'秒':'等待',x+83,540,17,C.muted,'center');if(i===0)this.bar(x,553,167,3,1-q.remaining/d.train,C.gold);});
-    UNITS.filter(u=>u.era===p.era).slice(a.page*3,a.page*3+3).forEach((d,i)=>{
-      const x=24+i*244;this.rect(x,565,230,128,'#e6e3d2');this.region(x,565,230,128,()=>a.command({type:'train',id:d.id}),()=>{a.modal={unit:d.id};a.skillMode=false;});
-      this.text(d.name,x+12,586,24);this.text(d.cost+' 金 / '+d.pop+' 人 · '+d.role,x+12,615,17,C.muted);
-      const reason=p.gold<d.cost?'金币不足':p.queue.length>=5?'队列已满':b.population+d.pop>30?'人口已满':null;
-      this.button('详情',x+8,643,64,40,()=>{a.modal={unit:d.id};a.skillMode=false;},!b.result,true);
-      this.button(reason||'生产 '+d.train+'秒',x+82,638,139,49,()=>a.command({type:'train',id:d.id}),!b.result&&!reason,true);
+    const a=this.app;this.painter.shape(0,495,1280,225,C.panel,null,'round',18);this.icon('clock',36,524,23,C.muted);this.text('队列',55,524,21,C.muted);
+    if(!p.queue.length)this.text('选择兵种，组织下一轮推进。',141,525,21,C.muted);
+    p.queue.forEach((q,i)=>{const d=BY_ID[q.typeId],x=140+i*180,state=a.feedback.state('battle:main:queue:'+q.id);
+      this.button(d.shortName+(i===0?' '+q.remaining.toFixed(1)+'秒':' · 等待'),x,504,169,39,()=>a.queueCancel(q.id),true,true,{id:'queue:'+q.id,variant:'soft',selected:state.alpha>0,icon:i===0?'clock':null});
+      if(i===0)this.bar(x+9,548,151,4,1-q.remaining/d.train,C.gold);
     });
-    this.button(a.page?'B 组 → A 组':'A 组 → B 组',762,565,172,42,()=>{a.page=1-a.page;},!b.result,true);
-    this.button('防御塔',762,619,172,66,()=>{a.modal='defense';a.skillMode=false;},!b.result);
-    this.button(p.cooldown>1e-8?'技能 '+Math.ceil(p.cooldown)+'秒':'技能 · 选择落点',950,565,304,48,()=>{if(p.cooldown>1e-8)a.notify('技能尚未冷却');else a.skillMode=!a.skillMode;},!b.result&&p.cooldown<=1e-8,true);
-    const capped=p.era>=b.rules.maxEra,ready=!capped&&p.xp>=ERAS[p.era+1].xp;
-    this.button(capped?'已达时代上限':'进化 → '+ERAS[p.era+1].name,950,637,304,48,()=>a.command({type:'evolve'}),!b.result&&ready,true);
-    this.text('短按卡片生产 · 长按查看详情 · 密集同类部队显示数量',24,708,17,C.muted);
+    UNITS.filter(u=>u.era===p.era).slice(a.page*3,a.page*3+3).forEach((d,i)=>{
+      const x=24+i*244,reason=p.gold<d.cost?'金币不足':p.queue.length>=5?'队列已满':b.population+d.pop>30?'人口已满':null,queueIndex=p.queue.findIndex(q=>q.typeId===d.id),producing=queueIndex===0?p.queue[0]:null;
+      this.region(x,565,230,129,()=>a.command({type:'train',id:d.id}),()=>{a.modal={unit:d.id};a.skillMode=false;},{id:'card:'+d.id,enabled:!reason,disabledReason:reason,draw:state=>{
+        this.panel(x,565,230,129,state.pressed||state.kind==='success'&&state.alpha>0?C.goldLight:C.panel,14);this.badge(d.support?'heart':d.mechanical?'gear':d.range>70?'target':'swords',x+24,587,13,C.tealLight,ERA_COLORS[d.era]);this.fitText(d.name,x+45,586,175,24);
+        this.tag(d.role,x+10,605,C.tealLight,C.teal,17);this.icon('coin',x+21,642,19,C.gold);this.text(d.cost+' 金 · '+d.pop+' 人',x+36,642,20,C.muted);
+        if(producing){const progress=Math.max(0,Math.min(1,1-producing.remaining/d.train));this.bar(x+10,569,210,3,progress,C.gold);this.text('生产 '+Math.round(progress*100)+'%',x+216,619,17,C.teal,'right');}
+        else if(queueIndex>0)this.text('排队中',x+216,619,17,C.muted,'right');
+      }});
+      this.button('详情',x+9,660,61,29,()=>{a.modal={unit:d.id};a.skillMode=false;},true,true,{id:'detail:'+d.id,variant:'ghost'});
+      this.button(reason||'生产 '+d.train+'秒',x+82,655,139,36,()=>a.command({type:'train',id:d.id}),!reason,true,{id:'train:'+d.id,variant:'primary',disabledReason:reason});
+    });
+    this.button(a.page?'B 组 → A 组':'A 组 → B 组',762,565,170,42,()=>{a.page=1-a.page;},true,true,{id:'roster-page',variant:'soft',selected:!!a.page});
+    this.button('防御塔',762,623,170,66,()=>{a.modal='defense';a.skillMode=false;},true,false,{id:'defense',variant:'primary',icon:'tower'});
+    const ready=p.cooldown<=1e-8;
+    this.control({id:'skill',x:950,y:557,w:304,h:79,radius:28,action:()=>{a.skillMode=!a.skillMode;},enabled:ready,disabledReason:'技能尚未冷却'},state=>{
+      this.painter.shape(950,557,304,79,state.pressed?C.goldLight:C.tealLight,a.skillMode?C.gold:null,'round',28);this.dial(994,596,30,1-p.cooldown/60,ready?C.gold:C.teal);this.icon('bolt',994,596,26,ready?C.gold:C.teal);this.fitText(ERAS[p.era].skill,1040,582,198,25);this.text(ready?'点击选择落点':'冷却 '+Math.ceil(p.cooldown)+'秒',1040,612,20,ready?C.teal:C.muted);
+    });
+    const capped=p.era>=b.rules.maxEra,evolved=!capped&&p.xp>=ERAS[p.era+1].xp;
+    this.button(capped?'已达时代上限':'进化 → '+ERAS[p.era+1].name,950,650,304,41,()=>a.command({type:'evolve'}),evolved,true,{id:'evolve',variant:'gold',shape:'cut',icon:'xp',disabledReason:capped?'已达到本局时代上限':'进化经验不足'});
+    this.text('短按生产 · 长按详情 · A / B 查看六兵 · 密集部队按数量显示',24,709,17,C.muted);
   }
-  overlay(title){this.buttons=[];this.rect(0,0,1280,720,'rgba(20,35,30,0.76)');this.rect(144,72,992,580,C.panel);this.text(title,184,119,32);}
-  close(){this.button('关闭',962,93,136,44,()=>{this.app.modal=null;},true,true);}
+  overlay(title,icon='flag',tone=C.teal){
+    this.buttons=[];this.rect(0,0,1280,720,'rgba(15,35,26,0.78)');this.panel(136,64,1008,592,C.panel,25);this.badge(icon,194,112,27,tone===C.red?C.redLight:C.goldLight,tone);this.fitText(title,237,113,710,32);this.line(176,157,1104,157,C.line,1);
+  }
+  close(){this.button('关闭',968,88,137,47,()=>{this.app.modal=null;},true,true,{id:'close',variant:'ghost',icon:'close'});}
   details(d){
-    if(!d)return;this.overlay(d.name+' · '+d.role);this.close();
-    this.text(ERAS[d.era].name+' / '+(d.armor==='heavy'?'重甲':'轻甲')+' / '+(d.mechanical?'机械':'生物'),184,177,24);
-    this.text('生命 '+d.hp+' · '+(d.support?'支援量 ':'伤害 ')+d.damage+' · 射程 '+d.range+' · 移速 '+d.speed,184,219,24);
-    this.text(d.cost+' 金 · '+d.pop+' 人 · '+d.train+' 秒生产 · 间隔 '+d.interval+' 秒 · 前摇 '+d.windup+' 秒',184,261,22);
-    this.wrap(TRAITS[d.trait]||(DAMAGE[d.type]+'伤害，自动锁定最近有效敌兵'),184,306,850,23,32);
-    this.wrap('优势：'+d.strength,184,374,850,23,32);this.wrap('弱点：'+d.weakness,184,426,850,23,32);this.wrap('搭配：'+d.partners,184,478,850,23,32);
-    this.text(this.app.scene==='battle'?'详情不暂停战斗；需要时请先暂停。':'每个时代六种兵，进化后全部开放。',184,591,22,C.muted);
+    if(!d)return;this.overlay(d.name+' · '+d.role,d.support?'heart':d.mechanical?'gear':'swords');this.close();
+    this.text(ERAS[d.era].name+' / '+(d.armor==='heavy'?'重甲':'轻甲')+' / '+(d.mechanical?'机械':'生物'),184,177,22,C.muted);
+    [['heart','生命',d.hp],['swords',d.support?'支援量':'伤害',d.damage],['target','射程',d.range],['flag','移速',d.speed]].forEach(([icon,label,value],i)=>{const x=184+i*220;this.painter.shape(x,202,204,63,C.tealLight,null,'round',12);this.icon(icon,x+24,233,25,C.teal);this.text(label,x+46,219,18,C.muted);this.text(value,x+46,246,25,C.ink);});
+    this.text(d.cost+' 金 · '+d.pop+' 人 · '+d.train+' 秒生产 · 间隔 '+d.interval+' 秒 · 前摇 '+d.windup+' 秒',184,289,22);
+    this.wrap(TRAITS[d.trait]||(DAMAGE[d.type]+'伤害，自动锁定最近有效敌兵'),184,331,850,23,30);
+    this.icon('check',197,402,24,C.teal);this.wrap('优势：'+d.strength,221,402,813,23,30);
+    this.icon('shield',197,457,24,C.red);this.wrap('弱点：'+d.weakness,221,457,813,23,30);
+    this.icon('people',197,512,24,C.gold);this.wrap('搭配：'+d.partners,221,512,813,23,30);
+    this.text(this.app.scene==='battle'?'详情不暂停战斗；需要时请先暂停。':'每个时代六种兵，进化后全部开放。',184,592,22,C.muted);
   }
   levelDetails(l){
-    const a=this.app;this.overlay(l.id+' '+l.name);this.close();this.text(l.lesson,184,178,25,C.teal);
+    const a=this.app;this.overlay(l.id+' '+l.name,'flag');this.close();this.text(l.lesson,184,178,25,C.teal);
     this.text('时代：'+ERAS[l.startEra].name+(l.startEra===l.maxEra?'（固定）':' → '+ERAS[l.maxEra].name),184,225,23);
     this.text('目标：'+(l.objective==='survive'?'存活到时限，或提前摧毁敌基地':'在时限内摧毁敌基地')+' · '+l.timeLimit/60+' 分钟',184,272,23);
     this.text('双方金币 '+Math.ceil(200*ERAS[l.startEra].cost)+' · EXP '+ERAS[l.startEra].xp+' · 我方基地 3000',184,319,23);
     this.text('敌基地 '+l.enemyHp+' · 敌金币收入 ×'+l.enemyIncome+(l.initialTower!==null?' · 初始'+ERAS[l.startEra].towers[l.initialTower]:''),184,366,23);
     const strategy={melee:'石棒为主，少量投石',beast:'存钱生产猛犸，石棒掩护',tribe:'石棒、投石混编，后段加入猛犸',mixed:'普通混编，达标后进化',phalanx:'重甲枪兵配长弓，间歇补线',fort:'建塔、剑盾掩护长弓',volley:'前期战车，进化后火枪齐射',crowd:'连续刺刀步兵配火枪',artillery:'塔下火枪、间歇重炮',armor:'偏重机枪与履带车',medical:'机枪配医疗推进',pressure:'突击、火箭、履带车混编',energy:'动力装甲配等离子',repair:'动力装甲、维修与塔',adaptive:'按敌军调整反制、支援和攻城组合'};
-    this.wrap('敌军：'+strategy[l.strategy],184,413,850,23,32);
-    this.text('敌方防御策略：'+(l.buildTowers?'根据战线建塔':'不建塔'),184,455,22,C.muted);
+    this.wrap('敌军：'+strategy[l.strategy],184,413,850,23,32);this.text('敌方防御策略：'+(l.buildTowers?'根据战线建塔':'不建塔'),184,455,22,C.muted);
     if(l.wave)this.text('补兵指令：每 '+l.wave.period+' 秒，前 '+l.wave.active+' 秒补兵；休整时队列继续。',184,486,22,C.muted);
-    const open=unlocked(a.progress,l.id);this.button(open?'开始挑战':'先通关前一关',184,542,426,62,()=>a.requestStartBattle({mode:'campaign',levelId:l.id}),open);
-    this.button('查看本章兵种',642,542,426,62,()=>{a.codexEra=l.chapter;a.navigate('codex');});
+    const open=unlocked(a.progress,l.id);this.button(open?'开始挑战':'先通关前一关',184,542,426,62,()=>a.requestStartBattle({mode:'campaign',levelId:l.id}),open,false,{id:'start-level',variant:'gold',shape:'cut',icon:open?'play':'lock',disabledReason:'请先通关前一关'});
+    this.button('查看本章兵种',642,542,426,62,()=>{a.codexEra=l.chapter;a.navigate('codex');},true,false,{id:'codex',variant:'outline',icon:'book'});
   }
   defense(p){
-    this.overlay('基地防御');this.close();const a=this.app;
-    p.towers.forEach((t,i)=>{const x=178+i*313;this.rect(x,185,296,355,'#e3e4d5');this.text('塔位 '+(i+1),x+16,220,26);
-      if(i>=p.slots){this.text('尚未开放',x+16,275,23,C.muted);if(i===p.slots)this.button('开放 '+[0,200,350][i]+' 金',x+16,450,264,55,()=>a.command({type:'unlock'}),true,true);}
-      else if(!t){this.text('空塔位',x+16,275,23,C.muted);[0,1].forEach(kind=>this.button(ERAS[p.era].towers[kind]+' '+Math.ceil([180,240][kind]*ERAS[p.era].cost)+'金',x+12,334+kind*81,272,60,()=>a.command({type:'build',slot:i,kind}),true,true));}
-      else{this.text(ERAS[t.era].towers[t.kind],x+16,275,24);this.text('等级 '+t.level,x+16,320,22);this.button(t.level===2?'已满级':'升级 '+Math.ceil(t.cost*0.6)+'金',x+16,366,264,55,()=>a.command({type:'upgrade',slot:i}),t.level<2,true);this.button('出售 +'+Math.floor(t.paid*0.5)+'金',x+16,445,264,55,()=>a.command({type:'sell',slot:i}),true,true);}
-    });this.text('面板打开时战斗继续；旧时代防御塔会保留。',184,595,22,C.muted);
+    this.overlay('基地防御','tower');this.close();const a=this.app;
+    p.towers.forEach((t,i)=>{const x=178+i*313,state=a.feedback.state('battle:defense:tower:'+i);this.panel(x,185,296,355,state.alpha>0?C.goldLight:'#f0efdd');this.badge(i>=p.slots?'lock':'tower',x+32,222,19,C.tealLight);this.text('塔位 '+(i+1),x+60,222,26);
+      if(i>=p.slots){this.text('尚未开放',x+16,275,23,C.muted);if(i===p.slots)this.button('开放 '+[0,200,350][i]+' 金',x+16,450,264,55,()=>a.command({type:'unlock'}),true,true,{id:'unlock:'+i,variant:'gold'});}
+      else if(!t){this.text('空塔位',x+16,275,23,C.muted);[0,1].forEach(kind=>this.button(ERAS[p.era].towers[kind]+' '+Math.ceil([180,240][kind]*ERAS[p.era].cost)+'金',x+12,334+kind*81,272,60,()=>a.command({type:'build',slot:i,kind}),true,true,{id:'build:'+i+':'+kind,variant:kind?'outline':'primary'}));}
+      else{this.fitText(ERAS[t.era].towers[t.kind],x+16,275,264,24);this.tag('等级 '+t.level,x+16,309,C.tealLight,C.teal,19);this.button(t.level===2?'已满级':'升级 '+Math.ceil(t.cost*0.6)+'金',x+16,366,264,55,()=>a.command({type:'upgrade',slot:i}),t.level<2,true,{id:'upgrade:'+i,variant:'gold',disabledReason:'防御塔已满级'});this.button('出售 +'+Math.floor(t.paid*0.5)+'金',x+16,445,264,55,()=>a.command({type:'sell',slot:i}),true,true,{id:'sell:'+i,variant:'outline'});}
+    });this.text('面板打开时战斗继续；旧时代防御塔会保留。',184,582,22,C.muted);
   }
-  pause(){const a=this.app;this.overlay('对战已暂停');this.text('双方计时、收入、前摇与弹丸都已停止。',184,213,25,C.muted);this.text('本局每 5 秒和进入后台时自动保存。',184,270,24,C.muted);
-    this.button('继续战斗',184,354,426,64,()=>a.continueBattle());this.button('操作说明',642,354,426,64,()=>{a.modal='help';});this.button('投降',184,469,426,64,()=>{a.modal={confirm:'surrender'};});this.button('保存并返回首页',642,469,426,64,()=>a.saveAndReturnHome());}
+  pause(){const a=this.app;this.overlay('对战已暂停','pause');this.text('双方计时、收入、前摇与弹丸都已停止。',184,213,25,C.muted);this.text('本局每 5 秒和进入后台时自动保存。',184,270,24,C.muted);
+    this.button('继续战斗',184,354,426,64,()=>a.continueBattle(),true,false,{id:'continue',variant:'gold',shape:'cut',icon:'play'});this.button('操作说明',642,354,426,64,()=>{a.modal='help';},true,false,{id:'help',variant:'outline',icon:'book'});this.button('投降',184,469,426,64,()=>{a.modal={confirm:'surrender'};},true,false,{id:'surrender',variant:'danger'});this.button('保存并返回首页',642,469,426,64,()=>a.saveAndReturnHome(),true,false,{id:'save-home',icon:'home'});}
   confirm(){
-    const a=this.app,surrender=a.modal.confirm==='surrender',options=a.modal.options;this.overlay(surrender?'确认投降？':'覆盖未完成的对局？');
+    const a=this.app,surrender=a.modal.confirm==='surrender',options=a.modal.options;this.overlay(surrender?'确认投降？':'覆盖未完成的对局？',surrender?'flag':'clock',surrender?C.red:C.gold);
     this.wrap(surrender?'投降后本局判负，战役不会解锁下一关。':'开始新局会替换当前续局存档。你也可以返回首页继续上次对局。',184,242,850,26,40);
-    this.button('取消',184,450,426,64,()=>{a.modal=null;});this.button(surrender?'确认投降':'开始新局',642,450,426,64,()=>{a.modal=null;if(surrender)a.command({type:'surrender'});else a.startBattle(options);});
+    this.button('取消',184,450,426,64,()=>{a.modal=null;},true,false,{id:'cancel',variant:'outline'});this.button(surrender?'确认投降':'开始新局',642,450,426,64,()=>{a.modal=null;if(surrender)a.command({type:'surrender'});else a.startBattle(options);},true,false,{id:'confirm',variant:surrender?'danger':'gold',shape:'cut'});
   }
-  cancelQueue(){
-    const a=this.app,id=a.modal.cancel,p=a.view.sides[0],index=p.queue.findIndex(q=>q.id===id);this.overlay('取消生产');this.close();
+  cancelQueue(view){
+    const a=this.app,id=a.modal.cancel,p=view.sides[0],index=p.queue.findIndex(q=>q.id===id);this.overlay('取消生产','clock');this.close();
     if(index<0){this.text('该单位已经出场或队列已发生变化。',184,253,25);return;}
     const q=p.queue[index],refund=Math.floor(q.paid*(index===0?0.75:1));this.text(BY_ID[q.typeId].name+' · '+(index===0?'正在生产':'等待生产'),184,237,27);
-    this.text('确认后返还 '+refund+' 金币'+(index===0?'（实付费用的 75%）':'（全额）'),184,312,25);this.text('确认时按当前队列状态核对退款；出生后不能取消。',184,371,22,C.muted);
-    this.button('确认取消',184,475,884,64,()=>{a.modal=null;a.command({type:'cancel',id});});
+    this.tag('返还 '+refund+' 金币',184,289,C.goldLight,C.ink,24,226);this.text(index===0?'正在生产的单位返还实付费用的 75%。':'等待生产的单位全额退款。',184,355,24,C.muted);this.text('确认时按当前队列核对；出生后不能取消。',184,407,22,C.muted);
+    this.button('确认取消',184,475,884,64,()=>{a.modal=null;a.command({type:'cancel',id});},true,false,{id:'confirm-cancel',variant:'gold',shape:'cut'});
   }
   result(result){
-    const a=this.app;this.overlay(result.winner===null?'平局':result.winner===0?'战斗胜利':'战斗失败');this.text(result.reason,184,197,26,C.muted);
-    this.text('对局 '+Math.floor(result.time/60)+'分'+Math.floor(result.time%60)+'秒',184,244,25);
-    result.stats.forEach((s,i)=>this.text((i?'敌方':'我方')+' · 最高 '+ERAS[s.highestEra].name+' · 生产 '+s.produced+' · 击杀 '+s.kills+' · 基地 '+Math.round(s.hp/s.maxHp*100)+'%',184,305+i*54,23));
-    this.button('重试',184,463,270,64,()=>a.retry());this.button('返回首页',798,463,270,64,()=>a.returnHome());
-    const l=LEVEL_BY_ID[result.levelId];if(result.winner===0&&l&&LEVELS[l.index+1])this.button('下一关',491,463,270,64,()=>a.nextLevel());
-    else if(result.winner===0&&l&&l.index===14)this.text('五章战役全部通关！',184,585,26,C.teal);
+    const a=this.app,win=result.winner===0,draw=result.winner===null,tone=draw?C.teal:win?C.gold:C.red,icon=draw?'draw':win?'shield':'close';
+    this.overlay(draw?'平局':win?'战斗胜利':'战斗失败',icon,tone);this.badge(icon,241,219,43,draw?C.tealLight:win?C.goldLight:C.redLight,tone);
+    this.text(result.reason,312,198,27,tone);this.text('对局 '+Math.floor(result.time/60)+'分'+Math.floor(result.time%60)+'秒',312,244,24,C.muted);
+    result.stats.forEach((s,i)=>{const x=184+i*458,color=i?C.red:C.teal;this.panel(x,293,426,145);this.badge(ERA_ICONS[s.highestEra],x+27,324,17,i?C.redLight:C.tealLight,color);this.text((i?'敌方':'我方')+' · '+ERAS[s.highestEra].name,x+54,323,23);this.text('生产 '+s.produced+' · 击杀 '+s.kills,x+20,363,23,C.muted);this.text('基地 '+Math.round(s.hp/s.maxHp*100)+'%',x+20,409,23,color);this.bar(x+145,405,258,8,s.hp/s.maxHp,color);});
+    this.button('重试',184,478,270,64,()=>a.retry(),true,false,{id:'retry',variant:'gold',shape:'cut',icon:'play'});this.button('返回首页',798,478,270,64,()=>a.returnHome(),true,false,{id:'home',variant:'outline',icon:'home'});
+    const l=LEVEL_BY_ID[result.levelId];if(win&&l&&LEVELS[l.index+1])this.button('下一关',491,478,270,64,()=>a.nextLevel(),true,false,{id:'next',icon:'chevron'});
+    else if(win&&l&&l.index===14)this.text('五章战役全部通关！',640,591,28,C.teal,'center');
   }
   help(){
-    this.overlay('如何指挥军队');this.close();
-    ['1  短按卡片生产，长按查看详情；A / B 切换六种兵。','2  队列最多 5 项，人口最多 30；取消前可核对退款。','3  穿甲克重甲，爆破克兵群，攻城武器擅长拆基地。','4  经验达标可进化，旧兵、队列、防御塔和冷却保留。','5  建塔保护基地；技能有 1 秒预警，确认落点后消耗冷却。','6  局部视图可拖动；切后台会暂停，返回需手动继续。','7  战役按目标判定；经典 20 分钟到时比较基地生命比例。','8  在线 PvP 尚未开放，单机进度只保存在本设备。'].forEach((s,i)=>this.text(s,184,192+i*52,23));
+    this.overlay('如何指挥军队','book');this.close();
+    ['短按卡片生产，长按查看详情；A / B 切换六种兵。','队列最多 5 项，人口最多 30；取消前可核对退款。','穿甲克重甲，爆破克兵群，攻城武器擅长拆基地。','经验达标可进化，旧兵、队列、防御塔和冷却保留。','建塔保护基地；技能有 1 秒预警，确认落点后消耗冷却。','局部视图可拖动；切后台会暂停，返回需手动继续。','战役按目标判定；经典 20 分钟到时比较基地生命比例。','在线 PvP 尚未开放，单机进度只保存在本设备。'].forEach((s,i)=>{this.painter.circle(200,193+i*52,14,C.tealLight);this.text(i+1,200,193+i*52,18,C.teal,'center');this.fitText(s,231,193+i*52,860,23);});
   }
 }
 module.exports={Renderer};

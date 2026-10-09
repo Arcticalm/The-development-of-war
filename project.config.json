@@ -1,7 +1,7 @@
 {
   "description": "战争进化史 · 文字单机原型与 PvP 大厅",
   "compileType": "game",
-  "appid": "wx57286ff037b55beb",
+  "appid": "wx47d6bbe9450eef6d",
   "projectname": "The-development-of-war",
   "miniprogramRoot": "./",
   "setting": {
@@ -77,5 +77,6 @@
     "include": []
   },
   "simulatorPluginLibVersion": {},
-  "editorSetting": {}
+  "editorSetting": {},
+  "isGameTourist": false
 }

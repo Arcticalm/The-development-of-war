@@ -1,12 +1,13 @@
 'use strict';
 const {Battle}=require('./battle');
-const {ERAS}=require('./data');
+const {ERAS,BY_ID}=require('./data');
 const {LEVELS,LEVEL_BY_ID}=require('./config/modes');
 const {LocalBattleSession}=require('./sessions/local');
 const {StorageService,KEYS,unlocked,settleProgress}=require('./services/storage');
 const {AudioService}=require('./services/audio');
 const {UnavailablePvpService}=require('./services/pvp');
 const {Renderer}=require('./renderer');
+const {FeedbackController}=require('./ui/feedback');
 const SAVE_KEY=KEYS.snapshot;
 let matchSequence=0;
 /** 应用流程：平台事件 -> 场景/对局会话；不计算战斗伤害。 */
@@ -15,8 +16,9 @@ class GameApp {
     this.wx=platform;this.canvas=platform.createCanvas();this.ctx=this.canvas.getContext('2d');
     this.storage=services.storage||new StorageService(platform);this.settings=this.storage.loadSettings();this.progress=this.storage.loadProgress();
     this.audio=services.audio||new AudioService(platform,this.settings);this.pvp=services.pvp||new UnavailablePvpService();
+    this.feedback=new FeedbackController();this.activeControl=null;this.actionOutcome='tap';this.actionAudio=null;
     this.session=null;this.scene='home';this.page=0;this.modal=null;this.skillMode=false;this.hidden=false;
-    this.toast='';this.toastTime=0;this.difficulty='normal';this.lastTime=0;this.saveClock=0;this.chapter=0;this.codexEra=0;
+    this.toast='';this.toastKind='info';this.toastTime=0;this.difficulty='normal';this.lastTime=0;this.saveClock=0;this.chapter=0;this.codexEra=0;
     this.camera={zoom:1,x:0,y:0};this.pointer=null;this.saved=null;this.saveUnavailable=false;this.invalidSaved=false;this.settledMatch=null;
     const raw=this.storage.read(SAVE_KEY);
     const restored=Battle.restore(raw);
@@ -28,12 +30,15 @@ class GameApp {
     const coords=t=>[t.clientX===undefined?t.x:t.clientX,t.clientY===undefined?t.y:t.clientY];
     platform.onTouchStart(e=>{const t=point(e);if(t){const p=coords(t);if(platform.onTouchEnd)this.touchStart(...p);else this.touch(...p);}});
     if(platform.onTouchMove)platform.onTouchMove(e=>{const t=point(e);if(t)this.touchMove(...coords(t));});
-    if(platform.onTouchEnd)platform.onTouchEnd(e=>{const t=point(e);if(t)this.touchEnd(...coords(t));else this.pointer=null;});
-    if(platform.onTouchCancel)platform.onTouchCancel(()=>{this.pointer=null;});
-    platform.onHide(()=>{this.hidden=true;this.pointer=null;this.audio.setHidden(true);if(this.session&&!this.session.getViewState().result&&this.session.capabilities.canPause){this.session.pause();this.save();}this.lastTime=0;});
+    if(platform.onTouchEnd)platform.onTouchEnd(e=>{const t=point(e);if(t)this.touchEnd(...coords(t));else this.cancelPointer();});
+    if(platform.onTouchCancel)platform.onTouchCancel(()=>this.cancelPointer());
+    platform.onHide(()=>{this.hidden=true;this.cancelPointer();this.audio.setHidden(true);if(this.session&&!this.session.getViewState().result&&this.session.capabilities.canPause){this.session.pause();this.save();}this.lastTime=0;});
     platform.onShow(()=>{this.hidden=false;this.audio.setHidden(false);this.resize();this.lastTime=0;});
-    if(platform.onWindowResize)platform.onWindowResize(()=>{this.pointer=null;this.resize();});
+    if(platform.onWindowResize)platform.onWindowResize(()=>{this.cancelPointer();this.resize();});
   }
+  get modal(){return this._modal;}
+  set modal(value){if(this._modal!==value)this.cancelPointer();this._modal=value;}
+  cancelPointer(){this.pointer=null;if(this.feedback)this.feedback.cancel();}
   // 兼容已有模型测试；界面只通过 view 读取状态。
   get battle(){return this.session?this.session.model:null;}
   get view(){return this.session?this.session.getViewState():null;}
@@ -49,15 +54,15 @@ class GameApp {
     this.scale=Math.min((right-left)/1280,(bottom-top)/720);
     this.offsetX=left+(right-left-1280*this.scale)/2;this.offsetY=top+(bottom-top-720*this.scale)/2;this.dpr=dpr;this.width=w;this.height=h;
   }
-  notify(message){this.toast=message;this.toastTime=3;}
-  navigate(scene){this.scene=scene;this.modal=null;this.skillMode=false;this.pointer=null;}
+  notify(message,kind='info'){this.toast=message;this.toastKind=kind;this.toastTime=kind==='success'?1.6:3;if(this.activeControl&&kind==='error')this.actionOutcome='error';}
+  navigate(scene){this.cancelPointer();this.scene=scene;this.modal=null;this.skillMode=false;}
   requestStartBattle(options={}){
-    if(options.mode==='campaign'&&!unlocked(this.progress,options.levelId)){this.notify('请先通关前一关');return;}
+    if(options.mode==='campaign'&&!unlocked(this.progress,options.levelId)){this.notify('请先通关前一关','error');return;}
     if(this.saved){this.modal={confirm:'overwrite',options};return;}
     this.startBattle(options);
   }
   startBattle(options={}){
-    if(options.mode==='campaign'&&!unlocked(this.progress,options.levelId)){this.notify('请先通关前一关');return;}
+    if(options.mode==='campaign'&&!unlocked(this.progress,options.levelId)){this.notify('请先通关前一关','error');return;}
     if(options.mode==='pvp'){this.navigate('pvp');return;}
     if(this.session)this.session.dispose();
     this.session=new LocalBattleSession({...options,difficulty:options.difficulty||this.difficulty,seed:Date.now()>>>0,matchId:'pve-'+Date.now()+'-'+(++matchSequence)});
@@ -75,12 +80,23 @@ class GameApp {
   }
   clearSave(){if(!this.storage.remove(SAVE_KEY))this.saveUnavailable=true;this.saved=null;}
   continueBattle(){if(this.session){this.session.resume();this.modal=null;this.lastTime=0;}}
-  pauseBattle(){if(this.session&&this.session.capabilities.canPause){this.session.pause();this.skillMode=false;this.save();}}
+  pauseBattle(){if(this.session&&this.session.capabilities.canPause){this.cancelPointer();this.session.pause();this.skillMode=false;this.save();}}
   command(cmd){
     if(!this.session)return;
-    const response=this.session.sendCommand(cmd);
-    if(response.status==='rejected')this.notify(response.message);
-    else if(cmd.type==='evolve'){this.page=0;this.notify('进入'+ERAS[this.view.sides[0].era].name+'，六种兵全部开放');}
+    const before=this.view.sides[0],response=this.session.sendCommand(cmd);
+    if(response.status==='rejected'){this.notify(response.message,'error');if(!this.activeControl)this.audio.play('reject');}
+    else if(response.status==='accepted'){
+      if(this.activeControl)this.actionOutcome='success';
+      const after=this.view.sides[0],messages={train:BY_ID[cmd.id]?BY_ID[cmd.id].name+'已加入队列':'已加入队列',cancel:'生产已取消，返还 '+Math.round(after.gold-before.gold)+' 金币',build:'防御塔已建造',upgrade:'防御塔已升级',sell:'防御塔已出售，返还 '+Math.round(after.gold-before.gold)+' 金币',unlock:'新塔位已开放'};
+      if(messages[cmd.type])this.notify(messages[cmd.type],'success');
+      if(cmd.type==='train'){this.feedback.flash('battle:main:queue:'+after.queue[after.queue.length-1].id);this.feedback.flash('battle:main:card:'+cmd.id);}
+      if(['build','upgrade','sell','unlock','cancel','train'].includes(cmd.type)){
+        this.feedback.flash('battle:main:wallet');if(!this.activeControl)this.audio.play('confirm');
+      }
+      if(['build','upgrade','sell'].includes(cmd.type))this.feedback.flash('battle:defense:tower:'+cmd.slot);
+      if(cmd.type==='evolve'){this.page=0;this.notify('进入'+ERAS[after.era].name+'，六种兵全部开放','success');this.feedback.flash('battle:main:era');}
+      if(['evolve','skill','surrender'].includes(cmd.type)&&this.activeControl)this.actionAudio='none';
+    }
     this.consumeEvents();this.settle();return response;
   }
   consumeEvents(){
@@ -105,28 +121,56 @@ class GameApp {
   queueCancel(id){const p=this.view.sides[0],index=p.queue.findIndex(q=>q.id===id);if(index<0)return;this.modal={cancel:id,refund:Math.floor(p.queue[index].paid*(index===0?0.75:1))};}
   pvpAction(){this.notify(this.pvp.getAvailability().message);}
   logical(px,py){return {x:(px-this.offsetX)/this.scale,y:(py-this.offsetY)/this.scale};}
-  hit(x,y){return this.renderer.buttons.slice().reverse().find(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h);}
+  contains(b,x,y){
+    if(!b||x<b.x||x>b.x+b.w||y<b.y||y>b.y+b.h)return false;
+    const dx=x-b.x,dy=y-b.y,r=Math.min(b.radius===undefined?14:b.radius,b.w/2,b.h/2);
+    if(b.shape==='circle')return Math.hypot(dx-b.w/2,dy-b.h/2)<=Math.min(b.w,b.h)/2;
+    if(b.shape==='flag')return dx<=b.w-r*(1-Math.abs(2*dy/b.h-1));
+    if(b.shape==='cut')return dx+dy>=r&&b.w-dx+dy>=r&&b.w-dx+b.h-dy>=r;
+    const cx=dx<r?r:dx>b.w-r?b.w-r:dx,cy=dy<r?r:dy>b.h-r?b.h-r:dy;
+    return Math.hypot(dx-cx,dy-cy)<=r;
+  }
+  hit(x,y){return this.renderer.buttons.slice().reverse().find(b=>this.contains(b,x,y));}
+  activate(button,x,y){
+    this.activeControl=button;this.actionOutcome='tap';this.actionAudio=null;
+    try{if(button.enabled===false)this.notify(button.disabledReason||'当前操作不可用','error');else button.action();}
+    finally{const kind=this.actionOutcome;this.feedback.release(button.id,x,y,kind);if(this.actionAudio!=='none')this.audio.play(kind==='error'?'reject':kind==='success'?'confirm':'click');this.activeControl=null;this.actionAudio=null;}
+    this.renderer.draw();
+  }
   touch(px,py){
     if(this.hidden)return;const {x,y}=this.logical(px,py);if(x<0||x>1280||y<0||y>720)return;
-    const button=this.hit(x,y);if(button){this.audio.play('click');button.action();return;}
+    this.renderer.draw();const button=this.hit(x,y);if(button){this.activate(button,x,y);return;}
     if(this.skillMode&&!this.paused&&!this.modal&&y>=160&&y<=490&&x>=100&&x<=1180){
       const response=this.command({type:'skill',x:this.renderer.screenXToBattle(x)});
       if(response&&response.status==='accepted')this.skillMode=false;
     }
   }
-  touchStart(px,py){if(this.hidden)return;const {x,y}=this.logical(px,py);this.pointer={px,py,lastX:px,elapsed:0,button:this.hit(x,y),drag:false,long:false,battlefield:this.scene==='battle'&&!this.modal&&!this.paused&&y>=160&&y<=490};}
+  touchStart(px,py){
+    if(this.hidden)return;this.cancelPointer();this.renderer.draw();const {x,y}=this.logical(px,py),button=this.hit(x,y);
+    this.pointer={px,py,lastX:px,elapsed:0,controlId:button?button.id:null,scope:this.renderer.scope(),drag:false,cancelled:false,long:false,battlefield:this.scene==='battle'&&!this.modal&&!this.paused&&y>=160&&y<=490};
+    if(button)this.feedback.press(button.id);
+  }
   touchMove(px,py){
     const p=this.pointer;if(!p)return;
-    if(Math.hypot(px-p.px,py-p.py)>8){p.drag=true;
-      if(!p.button&&p.battlefield&&this.camera.zoom>1){this.camera.x+=(px-p.lastX)/this.scale;const bound=540*(this.camera.zoom-1);this.camera.x=Math.max(-bound,Math.min(bound,this.camera.x));}
+    const point=this.logical(px,py),button=this.renderer.buttons.find(b=>b.id===p.controlId);
+    if(p.controlId&&!this.contains(button,point.x,point.y)){p.cancelled=true;this.feedback.cancel();}
+    if(Math.hypot(px-p.px,py-p.py)>8){p.drag=true;this.feedback.cancel();
+      if(!p.controlId&&p.battlefield&&this.camera.zoom>1){this.camera.x+=(px-p.lastX)/this.scale;const bound=540*(this.camera.zoom-1);this.camera.x=Math.max(-bound,Math.min(bound,this.camera.x));}
     }p.lastX=px;
   }
-  touchEnd(px,py){const p=this.pointer;this.pointer=null;if(p&&!p.drag&&!p.long&&Math.hypot(px-p.px,py-p.py)<=8)this.touch(px,py);}
+  touchEnd(px,py){
+    const p=this.pointer;this.cancelPointer();if(!p||p.drag||p.cancelled||p.long||this.hidden||Math.hypot(px-p.px,py-p.py)>8)return;
+    this.renderer.draw();if(p.scope!==this.renderer.scope())return;const {x,y}=this.logical(px,py),button=this.hit(x,y);
+    if(p.controlId){if(button&&button.id===p.controlId)this.activate(button,x,y);}
+    else if(!button&&p.battlefield)this.touch(px,py);
+  }
   frame(timestamp){
     const now=Number.isFinite(timestamp)?timestamp:Date.now(),elapsed=this.lastTime?Math.max(0,Math.min((now-this.lastTime)/1000,0.25)):0;this.lastTime=now;
     if(!this.hidden){
       this.toastTime=Math.max(0,this.toastTime-elapsed);
-      if(this.pointer&&!this.pointer.drag&&!this.pointer.long){this.pointer.elapsed+=elapsed;if(this.pointer.elapsed>=0.5&&this.pointer.button&&this.pointer.button.longAction){this.pointer.long=true;this.pointer.button.longAction();}}
+      this.feedback.update(elapsed);
+      if(this.pointer&&this.pointer.scope!==this.renderer.scope())this.cancelPointer();
+      if(this.pointer&&!this.pointer.drag&&!this.pointer.cancelled&&!this.pointer.long){const p=this.pointer;p.elapsed+=elapsed;const button=this.renderer.buttons.find(b=>b.id===p.controlId);if(p.elapsed>=0.5&&button&&button.longAction){p.long=true;this.feedback.cancel();this.audio.play('click');button.longAction();}}
       if(this.scene==='battle'&&this.session){
         this.session.update(elapsed);this.consumeEvents();this.settle();
         if(!this.paused&&!this.view.result){this.saveClock+=elapsed;if(this.saveClock>=5){this.save();this.saveClock=0;}}

@@ -1,902 +1,151 @@
-# 《战争进化史》微信小游戏——兵种美术风格设计规范
+# 《战争进化史》美术规范与绘图提示词
 
-> 文档用途：用于微信小游戏的角色原画、Canva 图片制作、Sprite 制作、骨骼动画及 UI 图标设计。  
-> 玩法依据：[玩法与游玩流程](gameplay.md)；交付顺序：[设计流程](design-process.md)。更新日期：2026-09-28。  
-> 本版目标：五个时代、每时代六种兵，共 30 种单位。2026-10-07 执行调整：当前游戏全用文字角色，先验证单机功能；已有 Canva 素材保留，正式造型与动画后续制作。本文不代表正式素材已经完成。
->
-> 设计原则：保留“从原始时代不断进化到未来科技时代”的核心视觉体验，但兵种造型、服装、武器、配色、剪影和动画均采用原创设计，避免直接复制原作角色素材。
+> 更新：2026-10-09；美术规范版本：`aow1-reference-v1`。当前交付为**提示词已准备，图片未生成**。游戏继续使用文字角色，本轮保留现有指挥台 UI、音效、点击反馈和全部玩法。
 
----
+## 1. 参考与改动原则
 
-## 1. 整体美术方向
+主要参考为用户指定的[初代《战争进化史》中文无敌版](https://www.4399.com/flash/86686_2.htm)，[游戏信息页](https://www.4399.com/flash/86686.htm)可用于确认版本。辅助核对[2007 年实机画面](https://gigazine.net/gsc_news/en/20071112_age_of_war/)中的原始、现代与未来阶段：[原始战场](https://i.gzn.jp/img/2007/11/12/age_of_war/aow004.png)、[现代战场](https://i.gzn.jp/img/2007/11/12/age_of_war/aow007.png)、[未来战场](https://i.gzn.jp/img/2007/11/12/age_of_war/aow009.png)。查阅日期：2026-10-09。
 
-### 1.1 游戏视觉定位
+尽量保留初代的比例、线条、色块、剪影、低视点和场景观感，按现有兵种的装备与职责做必要适配。这里描述的是对已查看画面的视觉归纳，不是原作者提供的制作参数。30 个兵种属于本项目配置，不宣称它们都出现在参考游戏中。
 
-游戏采用 **2D 横版卡通战争风格**。
+角色名称、ID、时代及职责以 [src/data.js](../src/data.js) 为准。猛犸骑手仍骑猛犸，投石猎手仍使用投石武器；古典文明的名称保留，画面接近初代冷兵器阶段。新增支援兵、机械兵与装甲兵使用同一造型语言，不另开一套画风。
 
-推荐关键词：
+## 2. 统一视觉要求
 
-- 2D 横版侧视
-- 卡通战争
-- Q版但不过度幼龄化
-- 清晰粗轮廓
-- 低细节、高辨识度
-- 夸张武器比例
-- 不同文明时代具有明显视觉跨度
-- 适合手机小屏幕显示
-- 适合 Sprite / Spine 2D 动画
-
-角色整体比例建议采用 **2.5～3.5 头身**。
-
-普通士兵不能设计得过于写实，应强化头部、武器、肩部和手臂的轮廓，使玩家在手机屏幕上缩小到约 80～140 px 高时仍能快速识别兵种。
-
----
-
-## 2. 统一兵种设计规则
-
-每个时代包含六种兵。保留原有近战、远程、重型三种基础视觉轮廓，并增加反制、攻城和支援单位；这些是可交叉的识别维度，不要求六兵各占一个互斥类型。
-
-| 类型 | 定位 | 视觉特征 |
-|---|---|---|
-| 近战兵 | 前排、抗伤、近距离攻击 | 身体较宽，武器粗大 |
-| 远程兵 | 后排输出 | 身材较瘦，远程武器轮廓明显 |
-| 重型兵 | 高血量/高伤害/高费用 | 体型较大，装备最复杂 |
-| 反制兵 | 对重甲或特殊目标有效 | 长矛、穿甲枪管或显眼弹头，突出专用武器 |
-| 攻城兵 | 压制建筑，需要掩护 | 宽底盘、支架、大型弹药，突出展开或装填动作 |
-| 支援兵 | 治疗、维修或提供光环 | 鼓、旗、药包、工具臂，避免与主战武器混淆 |
-
-这样即使玩家第一次进入某个时代，也可以仅通过角色轮廓判断其基本用途。
-
-### 2.1 体型层级
-
-建议标准：
-
-- 远程兵：100% 基准高度，体型偏瘦。
-- 近战兵：105%～110%，肩部较宽。
-- 重型兵：120%～140%，明显比普通单位庞大。
-
-### 2.2 阵营区分
-
-同一兵种需要支持玩家与敌人两个阵营。
-
-不建议制作两套完全不同的角色，而是通过以下区域改变阵营颜色：
-
-- 头巾
-- 肩甲
-- 腰带
-- 盾牌纹章
-- 武器装饰
-- 能量灯
-
-玩家阵营可使用冷色识别色，敌方阵营使用暖色识别色，但角色主体材质保持一致。PvP 中从各自视角显示己方冷色、敌方暖色，阵营材质不改变服务端归属。另配盾形／菱形徽记或血条标记，保证不依赖颜色也能识别。
-
----
-
-## 3. 第一时代：原始时代
-
-### 3.1 时代视觉关键词
-
-**石器、兽皮、骨头、木材、绳索、粗糙手工武器、部落图腾。**
-
-整体视觉应给人一种原始、粗犷、力量感强的感觉。
-
-服装主要使用：
-
-- 兽皮裙
-- 皮革绑带
-- 骨制饰品
-- 草绳
-- 简单护腕
-
-避免出现完整金属制品。
-
----
-
-### 3.2 石棒战士——近战兵
-
-#### 定位
-
-第一时代最基础的前排单位。
-
-#### 外观
-
-角色体格壮实，赤裸上身，穿不规则兽皮裙，赤脚或使用简单皮革绑腿。
-
-头发蓬乱，可以设计成向后炸开的轮廓，使移动时具有明显动态感。
-
-#### 武器
-
-双手或单手持有一根巨大的石棒。
-
-石棒由：
-
-- 木柄
-- 粗糙石块
-- 草绳捆绑
-
-组成。
-
-石块应明显大于现实比例，以提高视觉辨识度。
-
-#### 动作风格
-
-攻击动作强调蓄力：
-
-举棒 → 身体后仰 → 向前猛砸 → 短暂硬直。
-
-击中敌人时可以产生小型灰尘和碎石特效。
-
-#### 性格表现
-
-莽撞、勇猛、动作幅度大。
-
----
-
-### 3.3 投石猎手——远程兵
-
-#### 定位
-
-原始时代后排远程单位。
-
-#### 外观
-
-体型比石棒战士瘦小，强调灵活感。
-
-肩部背一个兽皮石袋，袋中露出几块圆形石头。
-
-#### 武器
-
-使用投石索或手持石块。
-
-推荐使用 **投石索**，因为角色剪影与近战单位区别更加明显。
-
-#### 攻击动作
-
-取石 → 投石索旋转 → 身体后倾 → 向前投掷。
-
-石块飞行采用明显抛物线。
-
-#### 特效
-
-石块命中地面产生：
-
-- 小型尘土
-- 碎石颗粒
-
----
-
-### 3.4 猛犸骑手——重型兵
-
-#### 定位
-
-原始时代高级单位。
-
-#### 外观
-
-角色骑乘一只小型卡通猛犸象。
-
-猛犸象应具有：
-
-- 巨大弯曲象牙
-- 厚重毛发
-- 小眼睛
-- 粗壮四肢
-
-骑手坐在简单木制鞍座上，手持骨矛或石矛。
-
-#### 视觉重点
-
-猛犸象的体积至少达到普通士兵的 1.5 倍，使玩家一眼判断这是重型单位。
-
-#### 攻击
-
-主要攻击方式为猛犸象向前顶撞。
-
-攻击瞬间前腿发力，象牙向前，产生明显冲击感。
-
----
-
-### 3.5 骨矛猎手——反重甲兵（新增）
-
-- **剪影与装备**：瘦高体型，背负两根斜置骨矛，矛尖大而尖锐；兽皮绑带与骨甲，避免完整金属铠甲。
-- **动作**：抽矛、后拉、前掷、取下一矛；骨矛命中重甲时显示集中冲击线，不能画成范围爆炸。
-- **辨识重点**：武器细长，区别于石棒战士的粗短钝器；投掷距离感介于近战和投石之间。
-
-### 3.6 火罐投手——群攻与攻城兵（新增）
-
-- **剪影与装备**：宽肩兽皮斗篷，腰侧悬挂圆形陶罐，罐口有短火苗；手持木制引火棒。
-- **动作**：取罐、点燃、双手抛出、等待；命中出现小范围火焰与碎陶片，不留下永久燃烧地形。
-- **辨识重点**：圆罐、火光和较慢的大幅抛掷动作，与投石猎手的投石索区别明确。
-
-### 3.7 图腾鼓手——攻速支援兵（新增）
-
-- **剪影与装备**：胸前大鼓、背后竖向木图腾，鼓面保留可换阵营色区域；木槌用于击鼓。
-- **动作**：行走、站定击鼓、受击、倒下；支援循环用低强度节奏环表达，不能表现为对敌敲击。
-- **辨识重点**：无攻击弹丸；光环来源死亡后视觉立即消退，避免暗示效果仍存在。
-
----
-
-## 4. 第二时代：古典文明时代
-
-### 4.1 时代视觉关键词
-
-**青铜、铁器、盾牌、长矛、弓箭、皮革铠甲、古典军团。**
-
-从原始时代升级后，需要让玩家立刻感受到文明和军事组织的发展。
-
-角色服装开始统一，装备出现规则几何形状。
-
----
-
-### 4.2 剑盾士兵——近战兵
-
-#### 外观
-
-头戴简化金属头盔，身穿皮革或青铜胸甲。
-
-左手圆盾，右手短剑。
-
-#### 轮廓
-
-盾牌是最重要的识别元素，应占角色身体约 30%～40% 的面积。
-
-#### 动作
-
-移动时盾牌保持在身体前方。
-
-攻击：
-
-盾牌收回 → 身体向前 → 短剑刺击。
-
-受击时可使用盾牌产生轻微格挡动作。
-
----
-
-### 4.3 长弓手——远程兵
-
-#### 外观
-
-轻甲、披肩、皮革护腕。
-
-背后带明显箭筒。
-
-#### 武器
-
-长弓高度接近角色身体高度。
-
-这是角色最重要的剪影特征。
-
-#### 攻击动作
-
-抽箭 → 搭箭 → 拉弓 → 停顿瞄准 → 放箭。
-
-箭矢飞行速度明显快于第一时代的石块。
-
----
-
-### 4.4 重甲枪兵——重型兵
-
-#### 外观
-
-全身装备较厚金属甲，使用大型长矛与塔盾。
-
-肩甲和头盔体积明显增大。
-
-#### 视觉特征
-
-整个角色接近一个“移动堡垒”。
-
-颜色以：
-
-- 铁灰
-- 铜色
-- 深皮革色
-
-为主体。
-
-#### 攻击
-
-长矛向前突刺，攻击距离明显超过剑盾兵。
-
----
-
-### 4.5 弩车手——攻城兵（新增）
-
-- **剪影与装备**：低矮双轮弩车、宽横弓臂与长重矢，操作手站在后方；车身为主要识别物。
-- **动作**：推车、停稳、绞盘上弦、装矢、发射回弹；角色与弩车按一个单位制作。
-- **辨识重点**：尺寸大于长弓手，射速慢；按机械目标制作受击与损坏反馈。
-
-### 4.6 战车突袭兵——快速突击兵（新增）
-
-- **剪影与装备**：双轮轻战车、单匹卡通战马、半高前护板，骑手持短矛；整体低长，不与重甲枪兵混淆。
-- **动作**：奔跑轮转、接敌首击冲撞、普通短刺、战车损坏；首击特效只播放一次。
-- **辨识重点**：不画跳跃越过敌军的动作；马、车和士兵合为一套战斗实体。
-
-### 4.7 战地医师——单体治疗兵（新增）
-
-- **剪影与装备**：布袍、斜挎药箱、卷状绷带，原创叶形医疗徽记；双手无战斗武器。
-- **动作**：行走、取药、伸手包扎／施治、收手；目标处出现简短浅绿色恢复粒子。
-- **辨识重点**：只表现单一友军治疗，不用大范围光环；治疗目标失效时收手并重新寻找。
-
----
-
-## 5. 第三时代：火药时代
-
-### 5.1 时代视觉关键词
-
-**火枪、火药、军服、钢铁、机械结构、烟雾。**
-
-时代进化后的最大变化是武器从冷兵器进入火器阶段。
-
----
-
-### 5.2 刺刀步兵——近战兵
-
-#### 外观
-
-穿简化军服、长靴和军帽。
-
-武器是一把安装刺刀的早期步枪。
-
-#### 战斗风格
-
-虽然持枪，但定位偏中近距离。
-
-攻击可以设计为：
-
-刺刀突刺 → 后退恢复。
-
-首版战斗使用刺刀近战，不产生远程射击伤害；持枪外形不代表具备火枪手的射程。
-
----
-
-### 5.3 火枪手——远程兵
-
-#### 外观
-
-身材正常，背有弹药包和火药袋。
-
-长枪枪管较长。
-
-#### 攻击动作
-
-举枪 → 瞄准 → 枪口闪光 → 后坐力 → 白烟。
-
-#### 特效
-
-必须突出火药时代特征：
-
-- 黄色枪口火焰
-- 灰白色烟雾
-- 少量火星
-
----
-
-### 5.4 重炮兵——重型兵
-
-#### 外观
-
-由士兵推动或操作一门小型轮式火炮。
-
-角色本身不是视觉主体，**火炮才是主体**。
-
-#### 火炮设计
-
-- 粗短炮管
-- 木制轮子
-- 金属箍
-- 火药箱
-
-#### 攻击动作
-
-装填 → 点火 → 炮身后坐 → 大量烟雾。
-
-炮弹飞行可以带轻微黑烟轨迹。
-
----
-
-### 5.5 掷弹兵——反兵群单位（新增）
-
-- **剪影与装备**：短军服、大号弹药腰包、球形带引线炸弹，轻装体型，避免像重炮兵一样推炮。
-- **动作**：取弹、点火、肩上抛掷、再装填；爆炸为短促圆形烟团与火花。
-- **辨识重点**：中短程投掷，手臂轨迹明显，不画成远程枪击。
-
-### 5.6 穿甲枪手——反重甲兵（新增）
-
-- **剪影与装备**：细长加厚枪管、肩垫、单枚大口径弹药袋，与火枪手相比突出武器重量而非全身重甲。
-- **动作**：稳肩瞄准、单发强后坐、逐枚装填；命中重甲显示小而集中的穿透火花。
-- **辨识重点**：长停顿与单发节奏，不表现为连射或范围爆炸。
-
-### 5.7 军旗鼓手——移动支援兵（新增）
-
-- **剪影与装备**：高于头顶的分叉军旗、腰鼓、统一军服，旗面提供阵营识别。
-- **动作**：行军击鼓、停步挥旗、受击与倒旗；足下短线表现移动加速。
-- **辨识重点**：移动辅助特效区别于图腾鼓手的攻速节奏环；停步后不暗示火力加成。
-
----
-
-## 6. 第四时代：现代战争时代
-
-### 6.1 时代视觉关键词
-
-**现代枪械、防弹装备、自动武器、重机枪、军用机械。**
-
-整体造型开始更加规整和工业化。
-
-为了保持卡通风格，不建议完全照搬现实军队制服或现实国家标志，应使用虚构军队设计。
-
----
-
-### 6.2 突击兵——近/中距离兵
-
-#### 外观
-
-- 简化战术头盔
-- 护目镜
-- 防护背心
-- 护膝
-- 战术靴
-
-避免使用现实国家军徽。
-
-#### 武器
-
-使用原创轮廓的卡通突击步枪。
-
-枪械尺寸可以比现实稍大。
-
-#### 动作
-
-移动时枪口朝前。
-
-攻击时短点射，身体产生轻微后坐。
-
----
-
-### 6.3 精确射手——远程兵
-
-#### 外观
-
-体型较瘦，装备较轻。
-
-头部可加入单眼护目镜或战术目镜。
-
-#### 武器
-
-超长枪管的原创精确射击步枪。
-
-枪管长度是最主要识别特征。
-
-#### 动作
-
-停步 → 半蹲 → 瞄准 → 射击 → 后坐。
-
-攻击频率低，但动画应表现出明显威力。
-
----
-
-### 6.4 重装机枪兵——重型兵
-
-#### 外观
-
-体型巨大，身穿厚重防护装备。
-
-背部携带大型弹药箱。
-
-弹链从背包连接到机枪。
-
-#### 武器
-
-大型旋转机枪或原创重机枪。
-
-#### 动作
-
-开火前枪管预转动。
-
-持续射击时：
-
-- 枪口连续闪光
-- 弹壳掉落
-- 角色身体轻微震动
-
-具有极强视觉压迫感。
-
----
-
-### 6.5 火箭筒兵——反装甲兵（新增）
-
-- **剪影与装备**：扛肩短粗发射筒、背包外露一枚夸张弹头，护目镜与轻防护服；使用虚构装备轮廓。
-- **动作**：站定瞄准、发射、肩部后收、换弹；火箭带短烟尾，命中特效集中。
-- **辨识重点**：单体反装甲火箭不制作覆盖大量目标的爆炸；装填时明显不能开火。
-
-### 6.6 履带突击车——装甲攻城兵（新增）
-
-- **剪影与装备**：宽矮履带底盘、短粗炮管、斜面前装甲，炮塔侧面留阵营色板。
-- **动作**：履带循环、急停、近距离炮击、炮身回弹、失能冒烟；不额外生成可独立作战的乘员。
-- **辨识重点**：强调近线攻坚和重量感，区别于远程重炮；维修反馈使用机械火花。
-
-### 6.7 战地医疗兵——范围治疗兵（新增）
-
-- **剪影与装备**：轻型战术服、方形医疗背包、原创叶形医疗标记，与古典医师保持职能呼应但材质更工业化。
-- **动作**：打开急救箱、分发治疗包、短暂停顿后收回；最多三名目标分别显示恢复粒子。
-- **辨识重点**：治疗范围清晰但特效不盖住前排；车辆身上不能出现有效医疗反馈。
-
----
-
-## 7. 第五时代：未来科技时代
-
-### 7.1 时代视觉关键词
-
-**动力装甲、能量武器、机械外骨骼、无人技术、悬浮装置、发光能源核心。**
-
-这是整局游戏视觉表现最强的阶段。
-
-升级到未来科技时代后，应与第一时代形成极端反差。
-
----
-
-### 7.2 能量剑士——近战兵
-
-#### 外观
-
-穿轻型动力装甲。
-
-装甲不要覆盖整个身体，保留清晰人体结构。
-
-关键位置加入发光结构：
-
-- 胸口能源核心
-- 肩部灯条
-- 手腕装置
-
-#### 武器
-
-大型能量刃。
-
-剑柄为机械结构，剑身由半透明能量构成。
-
-#### 动作
-
-移动速度快。
-
-攻击采用：
-
-冲刺 → 横向能量斩击 → 残影消失。
-
----
-
-### 7.3 等离子射手——远程兵
-
-#### 外观
-
-轻型科技装甲，头部使用全覆盖式战术面罩。
-
-面罩拥有发光视觉传感器。
-
-#### 武器
-
-大型未来能量步枪。
-
-枪身中间具有明显的能量核心。
-
-#### 攻击
-
-蓄能 → 枪身亮度增加 → 发射能量弹。
-
-弹丸不是普通子弹，而是具有拖尾的发光能量体。
-
----
-
-### 7.4 动力装甲兵——重型兵
-
-#### 外观
-
-第五时代的重装前排单位，突出承伤与自身护盾；攻城和反重甲由其他专业兵种承担。
-
-角色穿戴完整动力装甲，体积约普通士兵的 1.4～1.6 倍。
-
-#### 轮廓
-
-- 巨大肩甲
-- 粗壮机械腿
-- 背部动力模块
-- 胸口大型能源核心
-- 双臂重型武器
-
-#### 武器
-
-首版确定为：
-
-右臂：重型等离子炮。
-
-左臂：能量护盾发生器。护盾破裂后熄灭，不表现为持续刷新。
-
-#### 动作
-
-移动较慢，每一步产生明显重量感。
-
-攻击时能源核心亮起，武器短暂蓄能后释放大型能量炮。
-
----
-
-### 7.5 磁轨炮手——反重甲兵（新增）
-
-- **剪影与装备**：窄身动力服、双轨长炮、沿枪管排列的发光线圈；武器长度大于等离子射手。
-- **动作**：架枪、线圈逐段蓄能、直线射击、散热；命中连线最多连接两个敌兵。
-- **辨识重点**：细而直的射线区别于圆形等离子弹，不画成扫射整条战场的光束。
-
-### 7.6 攻城机甲——机械攻城兵（新增）
-
-- **剪影与装备**：宽大双足机械底盘、前置攻城炮、折叠稳定支架，无人形驾驶员外露；主体比普通兵大。
-- **动作**：重步移动、展开支架、蓄力开炮、收架再移动、核心熄灭；展开是明确的攻击前摇。
-- **辨识重点**：与动力装甲兵的持盾人形区别明显；地面行走，不制作飞行状态。
-
-### 7.7 维修机兵——机械支援兵（新增）
-
-- **剪影与装备**：矮小双足机器人、背部工具箱、两根可伸缩维修臂，扳手形工具端；不使用悬浮机体。
-- **动作**：短步移动、锁定友军、伸臂维修、收臂；工具与目标之间出现短距离细线及微小火花。
-- **辨识重点**：维修线只连接一个合法友军，不连接敌人、基地或塔；不画出护盾再生。
-
----
-
-## 8. 五个时代的视觉进化关系
-
-游戏的美术重点不是单独某一个角色，而是让玩家感受到明显的“文明升级”。
-
-建议按照以下视觉路线设计：
-
-```text
-原始时代
-石头 / 木材 / 兽皮
-        ↓
-古典文明时代
-青铜 / 铁器 / 盾牌 / 军团
-        ↓
-火药时代
-火枪 / 火炮 / 军服
-        ↓
-现代战争时代
-自动武器 / 战术装备 / 工业机械
-        ↓
-未来科技时代
-动力装甲 / 能量武器 / 科技光效
-```
-
-随着时代升级：
-
-**材质越来越精密、武器越来越复杂、角色轮廓越来越机械化、攻击特效越来越强。**
-
----
-
-## 9. Sprite 动画制作规范
-
-每个兵种至少制作以下动画；后续 Canva 立绘是造型参考，不等同于已完成这些游戏动画：
-
-| 动画 | 建议帧数 |
-|---|---:|
-| Idle 待机 | 4～8 帧 |
-| Walk 行走 | 6～10 帧 |
-| Attack 攻击 / Support 支援 | 6～12 帧 |
-| Hurt 受击 | 2～4 帧 |
-| Death 死亡 | 6～10 帧 |
-
-如果使用 Spine，则建议拆分：
-
-- Head
-- Body
-- UpperArm_L/R
-- LowerArm_L/R
-- Hand_L/R
-- UpperLeg_L/R
-- LowerLeg_L/R
-- Weapon
-- Shield
-- Backpack
-- Special Equipment
-
-大型单位根据需要增加机械关节和坐骑节点。支援兵使用 Support 代替伤害攻击；重机枪补充预热，战车与能量剑士补充首击，攻城机甲补充展开，动力装甲兵补充护盾破裂。效果生效时点与前摇由玩法配置驱动，不能因动画帧率改变伤害次数。
-
----
-
-## 10. 角色朝向
-
-所有基础角色原画统一采用：
-
-**面向右侧的 90° 或约 3/4 侧视角。**
-
-玩家单位默认向右移动。
-
-敌方单位可以通过水平翻转 Sprite，使其向左移动。
-
-这样可以减少约一半的美术资源量。
-
-文字、徽章等不可直接镜像的元素应避免绘制在角色主体上。
-
----
-
-## 11. AI 生图统一提示词模板
-
-如果使用 AI 生成角色概念图，可以采用以下基础结构：
-
-```text
-2D side-scrolling cartoon game character,
-full body side view,
-facing right,
-3-head-tall stylized proportions,
-strong readable silhouette,
-clean bold outlines,
-mobile game art style,
-simple shapes,
-layered game sprite design,
-plain transparent-style background,
-no text,
-no logo,
-[时代特征],
-[兵种服装],
-[武器描述],
-[角色体型]
-```
-
-例如石棒战士：
-
-```text
-2D side-scrolling cartoon game character,
-primitive stone age warrior,
-full body side view facing right,
-strong muscular body,
-3-head-tall stylized proportions,
-messy hair,
-animal fur clothing,
-bone accessories,
-holding an oversized stone club tied with rope,
-strong readable silhouette,
-clean bold outlines,
-mobile strategy game art,
-simple shapes,
-no text,
-no logo
-```
-
-> AI 生成图建议只用于概念设计。正式游戏素材应统一重绘、拆层并制作动画，避免不同兵种之间出现画风、线宽、光照和人体比例不一致的问题。
-
----
-
-## 12. UI 兵种头像规范
-
-出兵按钮需要为每个兵种制作独立头像。
-
-头像建议：
-
-- 正方形 1:1
-- 角色上半身
-- 武器必须进入画面
-- 背景使用对应时代纹理
-- 不直接在图片中绘制金币数字
-
-按钮由程序层显示：
-
-```text
-┌─────────┐
-│ 兵种头像 │
-│          │
-├─────────┤
-│ 🪙 100   │
-└─────────┘
-```
-
-兵种费用、人口、冷却遮罩和不可用原因均由 UI 程序实现，避免写死在美术素材中。每时代六张头像分 A、B 两组三张：A 组为原有三兵，B 组为新增三兵；同组边框保持一致，不把未翻到的三兵表现成未解锁。横屏战斗页须避开小游戏右上角胶囊与设备安全区域。
-
----
-
-## 13. 特效风格
-
-不同文明阶段的攻击特效也需要体现进化。
-
-| 时代 | 主要特效 |
+| 项目 | 要求 |
 |---|---|
-| 原始 | 灰尘、石屑、冲击线 |
-| 古典 | 金属火花、箭矢轨迹 |
-| 火药 | 火焰、白烟、爆炸 |
-| 现代 | 枪口焰、弹壳、爆炸烟尘 |
-| 未来 | 能量光、粒子、残影、护盾波纹 |
+| 视角 | 二维横向战场；角色全身侧视朝右，脚底共用水平基线；敌军后续通过表现层镜像 |
+| 比例 | 普通人形偏瘦长，头部与手掌克制，四肢简化，关节清晰；以参考画面的轮廓为锚，不规定夸张的固定头身比 |
+| 重型单位 | 靠装备、坐骑或机械体块增加宽度和重量；里面的人物仍沿用同一基础比例 |
+| 线条 | 清楚的黑色外轮廓和少量内部线，接近早期 Flash 手绘质感；轮廓不压过细长手脚 |
+| 着色 | 大块平涂本色，必要时增加一块阴影；只保留辨认材料与动作所需的细节 |
+| 表情 | 简单眼、鼻或头盔开口，侧脸方向明确；不依靠复杂表情和面部刻画识别兵种 |
+| 装备 | 一眼辨认武器类别与时代；布、木、石、金属用简单色块区分 |
+| 阵营 | 本色为主；小块布条、盾面或装甲标记可预留玩家深绿／敌军红褐区域，服装不整体染色；不强制每兵佩戴同款臂带 |
+| 交付构图 | 静态角色每图一个完整单位，透明背景；脚、长武器、坐骑和器械全部可见，四周留空；骑手与坐骑、炮手与器械算一个组合单位 |
 
-特效同样采用卡通化设计，不追求写实爆炸。
+不采用三头身大头、粗壮大手、精致海报立绘、现代手游装饰密度、写实材质、三维光照和大面积辉光。角色图不包含 UI、名字、边框、场景、第二个独立单位或多动作拼图。黑白棋盘格不是透明背景。
 
----
+### 时代配色与轮廓
 
-## 14. 首版 30 兵种与素材矩阵
-
-原有 15 个角色保留，新增加 15 个角色。完整首版需要 **30 套主体角色资源和 30 张头像**，PvP 与 PvE 共用同一套造型及阵营色规则。
-
-| 时代目录 | A 组既有三兵 | B 组新增三兵 | 数量 |
-|---|---|---|---:|
-| age1 原始时代 | 石棒战士、投石猎手、猛犸骑手 | 骨矛猎手、火罐投手、图腾鼓手 | 6 |
-| age2 古典文明时代 | 剑盾士兵、长弓手、重甲枪兵 | 弩车手、战车突袭兵、战地医师 | 6 |
-| age3 火药时代 | 刺刀步兵、火枪手、重炮兵 | 掷弹兵、穿甲枪手、军旗鼓手 | 6 |
-| age4 现代战争时代 | 突击兵、精确射手、重装机枪兵 | 火箭筒兵、履带突击车、战地医疗兵 | 6 |
-| age5 未来科技时代 | 能量剑士、等离子射手、动力装甲兵 | 磁轨炮手、攻城机甲、维修机兵 | 6 |
-
-制作顺序为原始时代六兵风格样板 → 其余四时代各六兵 → 全 30 兵缩略图对照 → 透明素材与头像 → 游戏动画。所有角色在 80～140 px 显示高度下检查轮廓和武器识别；支援与攻城不能仅靠名字辨认。
-
-### 14.1 Canva 绘制与图片生成流程
-
-后续使用 **Canva** 制作各兵种形象并生成图片。使用第 3～7 节作为造型要求，以第 11 节的统一风格描述为基础，逐个兵种制作独立图片；不把六兵拼图作为六张独立素材交付。
-
-1. 从石棒战士确定线宽、头身比、色板和侧视角，完成原始时代六兵作为内部风格样板；依照规范检查后继续其余时代，无需每个角色另开审批流程。
-2. 每个兵种以稳定单位 ID 创建素材记录，写清时代、定位、剪影、武器、阵营色区域与禁用元素。后续兵种优先参考已生成的样板，保持同一套风格。
-3. 在 Canva 中生成全身朝右概念图，再制作透明背景立绘与方形头像。图片生成返回的媒体和可编辑设计并非同一对象；有哪一种就记录哪一种，不虚构可编辑设计链接。
-4. 逐张检查武器、手脚、坐骑或机械结构、朝向和裁切。背景若仍为纯色或棋盘格图案，不视为透明；使用去背景步骤并验证实际 alpha 通道。
-5. 将可下载的原始生成图保存为概念图，合格透明图与头像保存到本地对应单位文件夹。若暂时只获得预览或 Canva 链接，素材状态保留“待下载”，不能标为已归档。
-6. 记录素材来源、提示词、Canva 媒体／设计链接、生成日期、尺寸与版本；完成全 30 个单位清点后，再进入动画拆分与小游戏性能优化。
-
-默认先交付每兵种一张概念图、一张透明立绘和一张头像，共 90 个 PNG 文件；概念图与透明立绘是不同用途的导出，不能把它们误计为 60 种兵。游戏动画属于后续独立产出，不以静态图片代替。
-
-### 14.2 图片规格与状态
-
-| 用途 | 目标规格 | 要求 |
+| 时代 | 本色与材料 | 识别轮廓 |
 |---|---|---|
-| concept 概念图 | 1024 × 1024 PNG | 单角色全身、朝右、简洁背景，完整保留武器与坐骑 |
-| portrait 透明立绘 | 1024 × 1024 RGBA PNG | 真透明，脚底基线约在画布高度 88%，主体留边，不把宽体单位横向压瘦 |
-| icon 兵种头像 | 256 × 256 RGBA PNG | 上半身及关键武器清晰，无费用、文字、Logo 和状态遮罩 |
-| 游戏动画 | 后续按运行时预算确定图集尺寸 | 先完成拆层与动作，再导出纹理图集；不直接把全部 1024 图用于战斗 |
+| 原始时代 | 浅土色皮肤、褐色毛皮与木柄、灰石、骨白 | 简单裸露四肢、皮裙、石器与骨矛；猛犸为低细节褐色大体块 |
+| 古典文明时代 | 土褐布料、木色、铁灰、少量暗红或深绿 | 简单盾牌、弓、枪、头盔和锁甲块面；避免华丽宫廷与繁复纹样 |
+| 火药时代 | 褐灰布料、暗色帽靴、木托、黑灰炮管 | 直立火枪轮廓、刺刀、木轮炮架、军旗和小鼓 |
+| 现代战争时代 | 橄榄绿、卡其、暗灰钢铁 | 小钢盔、枪托、背包、机枪与低矮履带车辆 |
+| 未来科技时代 | 深灰装甲、浅灰白建筑、少量红／青能量色 | 简单分块装甲、明确炮口与关节、克制的灯条；避免复杂机甲装饰 |
 
-Canva 实际生成尺寸可能不同，原始文件先保留，在导出或排版阶段整理到目标尺寸；不要拉伸变形。生成服务的预览不是最终生产资产；必须落盘并验证尺寸、格式与透明度。
+## 3. 可直接使用的角色提示词
 
-每个单位记录状态：待制作 → 已生成 → 待下载 → 已归档 → 已校验。未下载或未校验的条目不计入可接入小游戏的素材数量。
+完整 30 兵清单在 [generation-plan.json](../assets/units/generation-plan.json)。每个 `prompt` 可单独复制使用，已包含统一风格、具体装备、身份和构图；`negative_prompt` 单独作为负面约束。不要再叠加其他旧风格模板。
 
----
-
-## 15. 本地目录与资源命名
-
-单位 ID 与 [玩法兵种矩阵](gameplay.md) 完全一致，例如 `age1_melee` 对应石棒战士，`age1_spear` 对应骨矛猎手。保留原有 `unit_ageN_melee/range/heavy` 资源前缀，新兵种使用其稳定 ID 扩展，不依赖中文名称查找文件。
+### 中文模板
 
 ```text
-assets/units/
-├─ manifest.csv                       # 全 30 单位素材清单，图片阶段创建
-├─ age1/
-│  ├─ age1_melee/
-│  │  ├─ unit_age1_melee_concept_v01.png
-│  │  ├─ unit_age1_melee_portrait_v01.png
-│  │  ├─ icon_unit_age1_melee_v01.png
-│  │  └─ source.md                    # 提示词、来源、Canva 链接、制作记录
-│  ├─ age1_range/
-│  ├─ age1_heavy/
-│  ├─ age1_spear/
-│  ├─ age1_fire/
-│  └─ age1_support/
-├─ age2/                              # 每时代下按六个单位 ID 建目录
-├─ age3/
-├─ age4/
-└─ age5/
+为二维横向战争游戏绘制一个完整单位：[单位名称、时代、职责、装备]。
+美术紧贴参考图中的初代《战争进化史》：早期 Flash 手绘质感，清楚的黑色线条，简化而偏瘦长的人物比例，细长四肢，克制的头与手，平涂本色和少量硬边阴影，武器与动作剪影清楚。
+只为本单位的装备与职责做必要调整，保持参考的轮廓、线条、配色和细节密度。重型装备或坐骑增加体块，人物比例仍与其他兵种一致。
+全身侧视朝右，处于自然待机姿势；完整展示武器、脚部、坐骑或器械。骑手与坐骑、炮手与器械视为一个组合单位。每图仅一个单位，透明背景，四周留空，无场景、无文字、无 UI、无边框。
 ```
 
-- 仓库内本地文件是图片归档交付物；Canva 在线文件夹可采用“战争进化史 / 时代 / 单位”的同构组织，在线链接不替代本地 PNG。
-- `manifest.csv` 每个兵种一行，记录单位 ID、中文名、时代、概念图／立绘／头像相对路径、Canva 媒体或设计链接、版本、尺寸、透明度检查结果和状态。远程临时下载链接不作为持久资源路径。
-- 原始生成文件保留；修订使用 `v02` 等新版本，不覆盖已选用版本。`source.md` 说明当前采用版本及未完成项。
-- 动画沿用 `unit_age1_melee_idle/walk/attack/hurt/death` 前缀；支援动画为 `unit_age1_support_support`。运行时资源键与具体图集文件的映射由配置保存。
-- 特效示例：`fx_age1_melee_hit`、`fx_age3_musket_fire`、`fx_age5_plasma_hit`；不将临时 Canva 链接写进战斗配置。
-- 当前阶段只定义目录与规格；图片阶段再创建真实目录和清单，避免空目录或占位文件被误认为已完成素材。
-
----
-
-## 16. 最终美术目标
-
-整个游戏需要让玩家仅看战场画面就能理解三件事情：
-
-1. **现在处于哪个文明时代。**
-2. **每个单位主要承担承伤、输出、反制、攻城还是支援，以及它属于哪一方。**
-3. **时代升级之后，军队确实产生了明显的技术进化。**
-
-因此设计优先级应为：
+### English template
 
 ```text
-兵种辨识度
-    >
-时代辨识度
-    >
-动作反馈
-    >
-局部细节
+Draw ONE complete unit for a 2D side-view war game: [unit, era, role, equipment].
+Stay very close to the supplied screenshots of the FIRST Age of War Flash game: simple early-Flash hand-drawn art, clear black contours, slim simplified human proportions, restrained heads and hands, narrow articulated limbs, flat local-color fills, and only a few hard-edged shadow patches. Keep the reference silhouettes, line weight, palette, and sparse detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without changing the underlying human proportions.
+Full body in a clean side view facing RIGHT, in a natural ready pose. Keep every foot, weapon tip, mount, wheel, and machine inside the image with clear margins. A rider with a mount or an operator with artillery is ONE composite unit. Transparent background. No scenery, text, UI, frame, or additional independent unit. Generate one static pose, not a pose sheet.
 ```
 
-对于微信小游戏，角色最终显示尺寸较小，因此不要将制作时间过多投入到玩家实际无法看到的服装纹理和微小零件中，应优先强化 **剪影、武器、体型、动作和时代标志性元素**。
+### 负面模板
+
+```text
+chibi, three-head-tall proportions, oversized head or hands, bodybuilder anatomy, polished mobile-game splash art, ornate costume redesign, anime portrait, photorealism, 3D render, complex texture, dramatic lighting, excessive glow, isometric view, front-facing portrait, cropped feet or weapons, extra limbs, extra independent soldiers, static-pose collage, text, UI, logo, watermark, border, scenery, opaque or checkerboard background
+```
+
+使用支持参考图片的绘图工具时，附上同一套初代实机画面；网址与文字描述不能代替工具实际读取图片。静态图先检查画风、比例与小尺寸剪影，再进入动作制作。本轮不调用绘图服务，工具选择不绑定供应商。
+
+## 4. 动作提示词与后续制作
+
+清单的 `animation_prompts` 按动作提供中文说明、英文完整提示词、帧数和是否循环。它们是后续制作要求，尚无对应帧图。动作图与单姿势立绘分别生成；每张动作条只表现一种动作，不混入其他角色或不同动作。
+
+| 动作 | 默认帧数 | 节奏与要求 |
+|---|---|---|
+| `idle` 待机 | 6，循环 | 小幅呼吸、重心变化和装备轻动；最后一帧接回首帧，不整人缩放 |
+| `move` 移动 | 8，循环 | 接地、承重、蹬地、摆腿；持械手保持合理，坐骑与骑手、轮履与炮架分别运动 |
+| `attack` 攻击／主动支援 | 8，不循环 | 预备 → 发力／施放 → 收势 → 待机；鼓手、医师和维修机兵使用支援动作，不虚构直接伤害 |
+| `hurt` 受击 | 4，不循环 | 局部后仰或装备震动，然后恢复重心；不更换装备、不向画面外移动 |
+| `death` 死亡 | 6，不循环 | 人物失衡倒地，坐骑伏倒，机械停转塌落；不突然消失，结束姿势稳定 |
+| 附加动作 | 每项 8，不循环 | 火器装填、长弓搭箭、投石取石、鼓舞、治疗、维修、车辆炮击等，按单位职责描述 |
+
+动作条使用同样大小的格子、同一镜头和一致比例，格子无可见边框；脚底或机械落地线固定，保留合理的动作空间。躯干、四肢和武器应有相对运动，不能只平移、旋转或缩放整张立绘。输出投射物、尘土和命中特效时另做独立素材，角色动作条内不加入敌方目标。
+
+攻击帧的视觉释放点后续对齐战斗事件；动作长度和播放速度不决定伤害、治疗或攻速。真正接入时由角色表现模块只读对局状态，暂停遵守会话逻辑，保持文字回退。当前通用动作逻辑仍保留，未在本轮接入新图片。
+
+## 5. 基地与防御塔提示词
+
+每行是可独立使用的英文提示词。所有建筑沿用角色的黑线、平涂、稀疏细节和时代本色。基地面向右侧战场，最多保留参考画面那种轻微侧面体积；防御塔单独出图，不把整座基地带进塔图。
+
+### 五时代基地
+
+| 时代／资源键 | 完整提示词 |
+|---|---|
+| 原始 `base_age1` | Draw one prehistoric base very close to the FIRST Age of War Flash game's rocky cave silhouette: a broad irregular gray rock shelter, dark cave entrance opening toward the RIGHT, and a small rough wooden platform for a tower above it. Early-Flash hand-drawn 2D side-view game art, clear black contours, flat gray and earthy brown fills, only a few hard-edged shadows, sparse cracks. Whole base visible on a horizontal ground line, transparent background, clear margins, no attached weapon, units, scenery, text, UI, or ornate redesign. |
+| 古典 `base_age2` | Draw one cold-weapon-era base close to the FIRST Age of War Flash game's simple stone castle silhouette: a compact gray stone gate, squat battlements, a dark opening toward the RIGHT, and plain flat tower platforms. Keep the reference's simple massing, slight side depth, clear black contours, flat stone colors and sparse hard-edged shadows. Full 2D building visible on a horizontal ground line, transparent background, clear margins, no attached weapons, troops, grand palace ornament, scenery, text, or UI. |
+| 火药 `base_age3` | Draw one gunpowder-era fort base using the FIRST Age of War Flash game's simple fortress scale and silhouette: squat pale-gray masonry, a dark gate opening toward the RIGHT, modest parapet and plain gun platforms, minimal wooden reinforcement. Early-Flash hand-drawn 2D art, black contours, flat gray and brown colors, sparse hard-edged shadows, very little surface detail. Whole building visible on a horizontal ground line, transparent background, no mounted gun, soldiers, flags with lettering, scenery, UI, or elaborate new architecture. |
+| 现代 `base_age4` | Draw one modern base close to the FIRST Age of War Flash game's low olive-green military shelter: a dark RIGHT-facing entrance, simple sloping bunker plates with a few gray support ribs, and a plain raised rectangular tower platform. Keep its modest geometry and slight side depth. Early-Flash hand-drawn 2D art, black contours, flat olive and steel-gray fills, sparse hard-edged shadows. Full building visible on a ground line, transparent background, no attached guns, troops, photoreal textures, scenery, text, or UI. |
+| 未来 `base_age5` | Draw one futuristic base close to the FIRST Age of War Flash game's off-white curved technological shelter: a low curved segmented shell, dark RIGHT-facing entry, and one slim simple upper mounting structure. Keep the reference massing and sparse panel seams; small dark-gray fittings and restrained red or cyan indicators only. Early-Flash hand-drawn 2D art, clean black contours, flat ivory and gray fills, a few hard-edged shadows. Whole base visible on a ground line, transparent background, no mounted weapon, characters, excessive glow, sci-fi city, text, or UI. |
+
+### 十种防御塔
+
+| 时代／名称／资源键 | 完整提示词 |
+|---|---|
+| 原始／骨矛塔／`tower_age1_0` | Draw one primitive bone-spear turret facing RIGHT, a compact wooden pivot cradle holding a long bone-tipped spear launcher, visible simple rope lashings. Match the FIRST Age of War Flash art: hand-drawn 2D side view, clear black contours, flat wood-brown, bone-white and stone-gray colors, minimal hard-edged shading and sparse detail. Transparent background, full turret and mounting foot visible, clear margins, no base building, operator, text, UI, or ornate redesign. |
+| 原始／投石塔／`tower_age1_1` | Draw one primitive stone-throwing turret facing RIGHT, a short wooden throwing arm, small rope sling and stone held ready above a compact pivot stand. Match the FIRST Age of War Flash art: simple hand-drawn 2D side view, clear black contours, flat brown and gray fills, sparse hard-edged shadows. Transparent background, entire arm, sling and stand visible with margins, no cave, operator, flying barrage, scenery, text, or UI. |
+| 古典／重弩塔／`tower_age2_0` | Draw one heavy crossbow turret facing RIGHT on a plain compact swivel mount, readable bow arms and loaded wooden bolt, restrained iron fittings. Stay close to the FIRST Age of War Flash game's plain cold-weapon machinery, clear black contours, flat brown wood and iron-gray fills, sparse shadow patches. Complete 2D side-view turret on transparent background, clear margins, no castle, extra soldiers, elaborate carving, text, or UI. |
+| 古典／火油塔／`tower_age2_1` | Draw one fire-oil turret facing RIGHT, a simple dark iron oil pot with a short pouring spout on a compact wooden pivot stand, a small contained orange flame only. FIRST Age of War early-Flash hand-drawn 2D side-view style, clear black contours, flat brown and dark gray colors, few hard-edged shadows. Whole turret on transparent background, clear margins, no castle, operator, giant fire plume, text, or UI. |
+| 火药／连发枪塔／`tower_age3_0` | Draw one gunpowder repeating-gun turret facing RIGHT, a small cluster of straight dark barrels on a plain wood-and-iron swivel cradle; keep the silhouette simple and compact. FIRST Age of War early-Flash 2D side-view art, black contours, flat wood brown and gunmetal gray, sparse hard-edged shading. Transparent background, full barrels and mount inside margins, no fort, operator, modern electronics, scenery, text, or UI. |
+| 火药／榴弹塔／`tower_age3_1` | Draw one gunpowder grenade turret facing RIGHT, a short thick iron mortar barrel angled slightly upward on a simple wood-and-iron mount. FIRST Age of War early-Flash hand-drawn 2D art, clear black contours, flat gray and brown colors, sparse hard-edged shadows, no elaborate texture. Transparent background, whole turret and pivot stand visible with margins, no fort, soldiers, explosion, lettering, or UI. |
+| 现代／反装甲导弹塔／`tower_age4_0` | Draw one modern anti-armor missile turret facing RIGHT, two simple olive-green launcher tubes on a compact dark-gray rotating stand. Keep the FIRST Age of War Flash game's restrained military shapes and detail, clear black contours, flat olive and gray colors, minimal hard-edged shadows. Full 2D side-view turret, transparent background, clear margins, no bunker, soldiers, targeting screen, smoke, text, or UI. |
+| 现代／机枪阵列／`tower_age4_1` | Draw one modern machine-gun array facing RIGHT, two readable dark barrels and a plain olive box on a small steel swivel stand. Stay very close to the FIRST Age of War Flash game's simple military sprite art: 2D side view, clear black contours, flat olive and gunmetal colors, few shadow patches. Transparent background, entire gun and mounting foot visible, clear margins, no bunker, operator, ammunition barrage, text, or UI. |
+| 未来／磁轨塔／`tower_age5_0` | Draw one futuristic railgun turret facing RIGHT, two straight parallel dark-gray rails, a plain light-gray swivel housing, and one small cyan indicator. Keep the FIRST Age of War Flash game's simple future machinery, black contours, flat local colors and sparse hard-edged shadows. Full 2D side-view turret on transparent background, clear margins, no future base, characters, elaborate circuitry, glowing aura, text, or UI. |
+| 未来／等离子塔／`tower_age5_1` | Draw one futuristic plasma turret facing RIGHT, a short round dark-gray barrel in a simple off-white mounting shell, one small red-orange emitter visible at the muzzle. Match the FIRST Age of War Flash game's restrained future shapes: 2D side view, black contours, flat ivory, gray and small energy-color fills, sparse shadows. Transparent background, whole turret visible with margins, no base, troops, massive beam, ornate panels, text, or UI. |
+
+## 6. 共享战场与特效提示词
+
+### 共享背景 `battlefield_shared`
+
+```text
+Draw a wide horizontal battlefield background staying very close to the FIRST Age of War Flash game's outdoor battlefield. Use a large open bright-blue sky, low layered green bushes, a few simple broadleaf trees and pointed conifers, and a flat earthy-brown ground strip with sparse small stones and grass tufts. Early-Flash hand-drawn 2D art, clear black tree and ground contours, flat color masses, minimal hard-edged shadows and only a subtle sky color shift. Keep the fighting ground straight and clear, the horizon low, and ample uncluttered sky for the existing interface. Use the same plain outdoor environment across all five eras. No characters, bases, weapons, mountains dominating the view, cinematic lighting, text, UI, frames, or isometric perspective. Opaque background artwork.
+```
+
+角色、建筑和技能另层绘制，背景不烘焙血条、按钮、角色、基地或时代变化。后续简化背景仍受现有设置控制。
+
+### 五种时代技能
+
+| 技能／资源键 | 完整提示词 |
+|---|---|
+| 落石冲击／`skill_age1` | Draw a compact sequence of falling stone impacts for a 2D side-view war game, close to the FIRST Age of War Flash effect language: a few irregular gray stones descend, followed by small tan dust puffs and scattered stone chips at a horizontal ground line. Clear black contours, flat colors, minimal hard-edged shading, no cinematic particles. One effect sequence on transparent background, consistent ground anchor, no units, sky, buildings, text, UI, or screen-filling cloud. |
+| 箭雨覆盖／`skill_age2` | Draw a compact side-view arrow-rain effect sequence matching the FIRST Age of War early-Flash art: a small group of plain brown arrows with gray tips drops diagonally toward a horizontal ground line, followed by brief small dust ticks. Clear black contours, flat colors, sparse detail. Transparent background, consistent ground anchor, no archers, castle, battlefield, text, UI, ornate arrows, or huge magical glow. |
+| 炮火轰击／`skill_age3` | Draw a compact cannon bombardment effect sequence in FIRST Age of War early-Flash 2D side-view style: a few dark round shells arrive, a short flat orange impact burst appears, then small gray smoke and tan dust shapes dissipate. Clear black contours and sparse flat color masses, consistent ground anchor, transparent background. No cannon crew, buildings, scenery, text, UI, photoreal fire, or screen-filling explosion. |
+| 定点空袭／`skill_age4` | Draw a compact modern airstrike impact sequence in FIRST Age of War early-Flash 2D side-view style: a few simple dark olive bombs descend, brief orange-yellow impact shapes flare at a horizontal ground line, then restrained gray smoke dissipates. Clear black contours, flat colors and little shading, transparent background, consistent anchor. No aircraft or troops as independent characters, buildings, scenery, text, UI, cinematic light rays, or giant fireball. |
+| 电磁震荡／`skill_age5` | Draw a compact futuristic electromagnetic pulse effect sequence close to the FIRST Age of War Flash game's restrained energy graphics: a short cyan-white pulse band expands near a horizontal ground line, two or three angular blue sparks appear, then the shapes fade. Simple black contours where readable, flat color shapes and minimal glow, transparent background, consistent anchor. No characters, future base, scenery, text, UI, dense particles, lens flare, or screen-filling aura. |
+
+### 基础命中特效
+
+| 类型／资源键 | 完整提示词 |
+|---|---|
+| 石土命中／`hit_dust` | Draw one small stone-and-dirt impact sequence for the FIRST Age of War early-Flash 2D side-view art style: a brief tan dust puff, two or three gray stone chips, then disappearance. Black contour accents, flat colors, sparse simple shapes. Transparent background, fixed impact anchor, no character, weapon, scenery, text, UI, or cinematic cloud. |
+| 金属命中／`hit_metal` | Draw one small metal-hit sequence matching FIRST Age of War early-Flash 2D sprite effects: three short yellow-orange sparks flick out from one point and quickly disappear, with simple black contour accents and flat color shapes. Transparent background, fixed impact anchor, no armor wearer, weapon, scenery, text, UI, realistic debris, or large glow. |
+| 火药命中／`hit_explosion` | Draw one small projectile-explosion sequence matching FIRST Age of War early-Flash 2D art: a compact orange-yellow burst, a small gray smoke puff, then fade-out. Flat color masses with clear black contour accents and minimal shading. Transparent background, fixed impact anchor, no soldier, shell launcher, scenery, text, UI, cinematic lighting, or giant fireball. |
+| 能量命中／`hit_energy` | Draw one small energy-hit sequence close to FIRST Age of War early-Flash future sprite art: a short cyan or red angular flash at one point, a few simple shards, then disappearance. Flat color shapes, restrained brightness, transparent background, fixed impact anchor. No character, scenery, text, UI, complex electrical web, lens flare, or screen-filling aura. |
+
+## 7. 清单、状态与接入边界
+
+`assets/units/` 当前只保留 [素材说明](../assets/units/README.md) 和 [30 兵提示词清单](../assets/units/generation-plan.json)。旧角色图片、来源记录、预览页、任务记录和旧绘图样本已清理。新清单不包含历史媒体链接、任务编号或已生成文件路径。
+
+清单保持 JSON 数组结构，每项包含 `unit_id`、`name`、`age`、`role`、`style_version`、`reference_urls`、`description_zh`、`prompt`、`negative_prompt`、`animation_prompts` 和 `status`。`animation_prompts` 中每个动作包含 `description_zh`、`frames`、`loop`、`prompt`；英文动作提示词包含单位装备与风格，可单独复制使用。五个基础动作键为 `idle`、`move`、`attack`、`hurt`、`death`，附加动作按需要补充。
+
+当前全部状态为 `提示词已准备，图片未生成`。提示词完成、静态图片生成、透明图验收、动作帧验收和运行时接入是不同阶段，不能相互代替。后续生成后再记录实际工具、日期、尺寸、文件路径、版本和透明度，只有落盘并审核通过的图片才计入素材完成数量。
+
+正式图片及动画接入点仍为角色表现模块；资源按单位 ID 查找，不写入战斗数值、快照或 PvP 协议。打包忽略设置本轮保持原样，待正式资源接入时再调整。现有指挥台 UI 的米色、深绿与金色是界面规范，本次角色与场景风格替换不修改这些控件。

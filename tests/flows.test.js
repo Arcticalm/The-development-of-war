@@ -48,7 +48,7 @@ test('all screens, every unit detail and crowded text render without image loadi
   const before=a.battle.snapshot();a.renderer.draw();assert.deepEqual(a.battle.snapshot(),before);assert.ok(a.wx.texts.includes('我·石棒×30'));assert.ok(a.wx.texts.includes('敌·石棒×30'));
 });
 test('text presenter collision placement does not overlap labels for mixed armies',()=>{
-  const labels=[],r={colors:{panel:'p',red:'r',teal:'t',muted:'m'},line(){},bar(){},rect(x,y,w,h){labels.push({x,y,w,h});},text(){}};
+  const labels=[],r={line(){},unitLabel(x,y,w){labels.push({x,y:y-14,w,h:27});}};
   const units=Array.from({length:60},(_,i)=>({id:i,typeId:UNITS[i%30].id,side:i<30?0:1,x:500,hp:UNITS[i%30].hp,shield:0,status:'攻击'}));new TextUnitPresenter().draw(r,units);
   for(let i=0;i<labels.length;i++)for(let j=i+1;j<labels.length;j++){const a=labels[i],b=labels[j];assert.ok(!(a.y===b.y&&a.x<b.x+b.w&&a.x+a.w>b.x));}
 });

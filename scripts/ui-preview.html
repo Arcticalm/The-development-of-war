@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>战争进化史 · Canvas UI 检查</title>
+<style>
+body{margin:0;background:#102a23;color:#efe6d2;font:16px system-ui}header{display:flex;gap:12px;align-items:center;padding:12px 20px;flex-wrap:wrap}select,button{font:inherit;padding:7px 12px;border-radius:12px;border:1px solid #758a68;background:#efe6d2;color:#263e35}canvas{display:block;width:min(100%,1280px);height:auto;margin:auto;touch-action:none}p{padding:0 20px;color:#b7c7b7}#error{color:#f1ad96;white-space:pre-wrap}
+</style>
+<header><strong>Canvas 布局检查</strong><select id="scenario" aria-label="检查场景"></select><select id="device" aria-label="设备"><option value="wide">1280 × 720</option><option value="phone">844 × 390 · 微信安全区</option></select><button id="animate">播放反馈</button><button id="download">保存 PNG</button></header>
+<canvas id="game"></canvas><p>使用项目的实际 GameApp 与 Renderer；独立测试存储。点击画布可操作，长按卡片查看详情。</p><p id="error"></p>
+<script src="ui-preview.bundle.js"></script>
+<script>
+'use strict';
+const cache={};
+function load(id){if(cache[id])return cache[id].exports;const module={exports:{}};cache[id]=module;window.previewModules[id](name=>{const parts=id.split('/');parts.pop();for(const p of name.split('/')){if(p==='..')parts.pop();else if(p!=='.')parts.push(p);}return load(parts.join('/')+'.js');},module,module.exports);return module.exports;}
+const {GameApp}=load('src/app.js'),{UNITS}=load('src/data.js'),{LEVELS}=load('src/config/modes.js');
+const canvas=document.querySelector('#game'),scenarios=['首页','战役路线','关卡详情','图鉴','兵种详情','设置','PvP','战场','密集战场','未来战场','防御塔','暂停','操作说明','覆盖确认','投降确认','取消生产','胜利','失败','平局','按下状态','拒绝反馈','队列成功'];
+const select=document.querySelector('#scenario'),device=document.querySelector('#device');
+scenarios.forEach((name,i)=>select.add(new Option(name,i)));
+let app,handlers,live=false,last=0;
+window.requestAnimationFrame=()=>0;
+function fixture(){
+  handlers={};const storage={},phone=device.value==='phone',width=phone?844:1280,height=phone?390:720;
+  const wx={createCanvas:()=>canvas,getWindowInfo:()=>({windowWidth:width,windowHeight:height,pixelRatio:2,safeArea:{left:phone?47:0,right:phone?797:width,top:0,bottom:phone?369:height}}),getMenuButtonBoundingClientRect:()=>({bottom:phone?34:0}),onTouchStart:f=>handlers.start=f,onTouchMove:f=>handlers.move=f,onTouchEnd:f=>handlers.end=f,onTouchCancel:f=>handlers.cancel=f,onHide:f=>handlers.hide=f,onShow:f=>handlers.show=f,getStorageSync:k=>storage[k],setStorageSync:(k,v)=>{storage[k]=structuredClone(v);},removeStorageSync:k=>{delete storage[k];},createInnerAudioContext:()=>({play(){},stop(){},onError(){}})};
+  app=new GameApp(wx);const name=scenarios[Number(select.value)];
+  if(name==='战役路线'||name==='关卡详情'){app.navigate('campaign');app.progress.records={'1-1':{cleared:true,bestHp:.72,bestTime:126}};if(name==='关卡详情')app.modal={levelId:'1-2'};}
+  else if(name==='图鉴'||name==='兵种详情'){app.navigate('codex');app.codexEra=4;if(name==='兵种详情')app.modal={unit:UNITS[28].id};}
+  else if(name==='设置')app.navigate('settings');else if(name==='PvP')app.navigate('pvp');
+  else if(name!=='首页'){
+    app.startBattle();app.battle.sides[0].gold=1280;app.battle.sides[0].cooldown=0;
+    if(['密集战场','战场','未来战场'].includes(name)){
+      const era=name==='未来战场'?4:0;app.battle.sides.forEach(s=>{s.era=era;});
+      const count=name==='密集战场'?30:5;
+      for(let side=0;side<2;side++)for(let i=0;i<count;i++){const d=UNITS[era*6+(i%6)],u=app.battle.spawn(side,d.id);u.x=count===30?500:side?770-i*40:180+i*45;u.status=i%2?'攻击':'行进';}
+    }
+    if(name==='防御塔'){app.command({type:'build',slot:0,kind:0});app.modal='defense';}
+    if(name==='暂停')app.pauseBattle();if(name==='操作说明')app.modal='help';
+    if(name==='覆盖确认')app.modal={confirm:'overwrite',options:{}};if(name==='投降确认')app.modal={confirm:'surrender'};
+    if(name==='取消生产'){app.command({type:'train',id:UNITS[0].id});app.queueCancel(app.view.sides[0].queue[0].id);}
+    if(['胜利','失败','平局'].includes(name)){app.battle.time=286;app.battle.sides[0].produced=27;app.battle.sides[1].kills=13;app.battle.finish(name==='平局'?null:name==='胜利'?0:1,name==='平局'?'双方基地同时摧毁':'基地被摧毁');}
+    if(name==='拒绝反馈'){app.battle.sides[0].gold=0;app.renderer.draw();const b=app.renderer.buttons.find(b=>b.id.endsWith(':train:'+UNITS[0].id));app.activate(b,b.x+b.w/2,b.y+b.h/2);app.feedback.update(.09);}
+    if(name==='队列成功'){app.command({type:'train',id:UNITS[0].id});app.feedback.update(.09);}
+    if(name==='按下状态'){app.renderer.draw();const b=app.renderer.buttons.find(b=>b.id.endsWith(':train:'+UNITS[0].id));app.feedback.press(b.id);}
+  }
+  app.renderer.draw();canvas.style.maxWidth=width+'px';document.querySelector('#error').textContent='';
+}
+function send(name,e){const box=canvas.getBoundingClientRect(),t={clientX:(e.clientX-box.left)*app.width/box.width,clientY:(e.clientY-box.top)*app.height/box.height};handlers[name]({changedTouches:[t],touches:name==='end'?[]:[t]});app.renderer.draw();}
+canvas.addEventListener('pointerdown',e=>{canvas.setPointerCapture(e.pointerId);live=true;send('start',e);});canvas.addEventListener('pointermove',e=>{if(e.buttons)send('move',e);});canvas.addEventListener('pointerup',e=>send('end',e));canvas.addEventListener('pointercancel',()=>handlers.cancel());
+select.onchange=()=>{live=false;fixture();};device.onchange=()=>{live=false;fixture();};document.querySelector('#animate').onclick=()=>{live=!live;};document.querySelector('#download').onclick=()=>{const a=document.createElement('a');a.download='ui-'+select.value+'-'+device.value+'.png';a.href=canvas.toDataURL();a.click();};
+window.addEventListener('error',e=>{document.querySelector('#error').textContent=e.message;});
+setInterval(()=>{if(live){app.frame(performance.now());}},16);fixture();
+</script>
+</html>

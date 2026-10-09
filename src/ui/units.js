@@ -11,7 +11,7 @@ class TextUnitPresenter {
     const occupied=Array.from({length:7},()=>[]);
     [...groups.values()].map(g=>({...g,x:g.x/g.count})).sort((a,b)=>a.x-b.x||a.side-b.side).forEach(g=>{
       const d=BY_ID[g.typeId],anchor=100+g.x*1.08,label=(g.side?'敌·':'我·')+d.shortName+(g.count>1?'×'+g.count:'')+(units.length<=10?' · '+g.status:'');
-      const w=Math.max(80,label.length*17+12);let chosen=null;
+      const w=Math.max(92,(r.measure?r.measure(label,19):label.length*17)+38);let chosen=null;
       for(let lane=0;lane<7;lane++)for(let offset=0;offset<=1100;offset+=w+8){
         for(const sign of offset===0?[1]:[-1,1]){
           const x=Math.max(16,Math.min(1264-w,anchor-w/2+offset*sign));
@@ -20,9 +20,8 @@ class TextUnitPresenter {
         }
       }
       if(!chosen)chosen={x:Math.max(16,Math.min(1264-w,anchor-w/2)),lane:6};
-      const x=chosen.x,y=224+chosen.lane*32,C=r.colors,color=g.side?C.red:C.teal;occupied[chosen.lane].push({start:x,end:x+w});
-      r.line(anchor,460,x+w/2,y+20,'rgba(40,58,54,0.16)',1);r.rect(x,y-14,w,27,C.panel);r.text(label,x+w/2,y,20,color,'center');r.bar(x,y+15,w,3,g.hp/(d.hp*g.count),color);
-      if(g.shield>0)r.bar(x,y+20,w,2,g.shield/(d.hp*0.2*g.count),'#4b96b5');
+      const x=chosen.x,y=224+chosen.lane*32;occupied[chosen.lane].push({start:x,end:x+w});
+      r.line(anchor,460,x+w/2,y+20,'rgba(40,58,54,0.16)',1);r.unitLabel(x,y,w,label,g.side,g.hp/(d.hp*g.count),g.shield/(d.hp*0.2*g.count));
     });
   }
 }

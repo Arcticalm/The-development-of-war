@@ -1,8 +1,8 @@
 # 文字单机原型架构
 
-更新：2026-10-07；配置版本：`text-prototype-0.2`。
+更新：2026-10-09；配置版本：`text-prototype-0.2`。已完成 UI 与触控反馈改版，本轮重写美术提示词并清理旧素材，沿用战斗规则和存储版本。
 
-当前执行顺序为文字角色 → 完整单机玩法 → 后续联网和正式美术。PvP 大厅可以进入，实际联网服务尚未接入。既有图片与动画代码保留，但当前运行路径不引用 `art-map.js` 或 `animation.js`。
+当前执行顺序为文字角色 → 完整单机玩法 → 后续联网和正式美术。PvP 大厅可以进入，实际联网服务尚未接入。旧角色图片、生成记录、图片映射及其专用脚本已清理；通用 `animation.js` 与对应测试保留，当前运行路径仍使用文字角色，不引用该动作模块。新规范与 30 兵提示词见 [美术规范](art.md)，提示词不参与运行时加载。
 
 ## 模块与数据流
 
@@ -18,6 +18,9 @@ flowchart LR
     Session --> View[复制后的 ViewState]
     View --> Renderer[Renderer 页面与弹层]
     Renderer --> Presenter[TextUnitPresenter]
+    Renderer --> Components[UIComponents / UIPainter / Theme]
+    App --> Feedback[FeedbackController UI 时钟]
+    Feedback --> Renderer
     App --> Storage[StorageService]
     App --> Audio[AudioService]
     App --> Pvp[PvpService 预留入口]
@@ -34,6 +37,9 @@ flowchart LR
 | `sessions/local.js` | 暂停、步长积累、指令应答与去重、事件缓冲和视图复制 |
 | `app.js` | 当前场景、弹层、镜头、手势、设置、通关进度和服务实例 |
 | `renderer.js`、`ui/screens.js` | 首页、战役、图鉴、设置、PvP 大厅、战场与通用弹层 |
+| `ui/theme.js`、`ui/primitives.js` | 统一色彩、动效时长、Canvas 原生形状和图标 |
+| `ui/components.js` | 文本排版、卡片、徽章、按钮、控件注册、形状裁剪和反馈绘制 |
+| `ui/feedback.js` | 按压、回弹、波纹、成功／拒绝高亮；最多保留 12 项短暂效果 |
 | `ui/units.js` | 短名、阵营、血量、状态、密集单位分组和标签避让 |
 | `services/storage.js` | 读写失败处理、数据校验、顺序解锁和结算去重 |
 | `services/audio.js` | 本地短音效、音量、关闭与后台停止 |
@@ -79,8 +85,20 @@ flowchart LR
 
 微信同步存储失败不终止对局；本次内存成绩与设置继续有效。跨设备同步、账号进度和服务器持久化属于后续联网工作。
 
+## UI 控件与反馈
+
+控件每帧重新描述，但使用 `场景:弹层:语义 ID`（例如 `battle:main:train:age1_melee`、`battle:main:queue:实体 ID`）关联按压状态。描述包含边界、形状、圆角、启用状态、不可用原因、短按和可选长按动作；命中范围按圆形、圆角、切角或旗帜轮廓判断，绘制缩放不改变操作位置。
+
+按下只记录控件 ID，立即变亮并缩至 97%。移动超过 8 个平台逻辑像素、移出控件、触摸取消、场景／弹层变化、调整窗口或切后台都会取消；移出后再移回也不会执行。释放时重新绘制并检查当前层、控件 ID 和启用状态，防止金币变化、队列出场或兵组翻页导致误操作。长按卡片 500 毫秒打开详情，释放不再生产；没有按中控件的战场拖动只移动视角。
+
+有效短按只执行一次，再按执行结果播放 click／confirm／reject 或已有技能、进化、结算音效。生产、退款、建塔、升级、出售和进化提示来自合法指令应答，失败不扣费。队列高亮关联实体 ID；金币与时代提示由应用传递给绘图层。所有音效沿用已有设置和播放节流，不调用震动 API。
+
+`FeedbackController` 接收应用帧时间，与 `LocalBattleSession` 的逻辑时钟分离；暂停时回弹和波纹继续，后台不更新。回弹约 120 毫秒、波纹约 300 毫秒、成功／拒绝强调约 550 毫秒，完成后清除。这些临时状态不进入存档。绘图层继续只读战斗视图，不改变战斗数值或实体位置。
+
 ## 后续接入
 
 `UnavailablePvpService` 保留 `ensureSession`、`matchmake`、`cancelMatchmaking`、`createRoom`、`joinRoom`、`leaveRoom`、`setReady`、`connectMatch`、`reconnect`。当前每项返回明确的 `PVP_UNAVAILABLE`，大厅操作仅显示说明。`LocalBattleSession` 拒绝启动 PvP，防止入口意外运行本地 AI。真实实现应返回远端会话，由服务端维护资源、时钟、合法指令与唯一结算，再补齐搜索、房间和重连场景。
 
 正式美术接入点是 `ui/units.js` 的角色表现模块，可替换为图片或动画表现；继续使用单位 ID、状态和攻击／治疗／死亡事件。保留文字回退显示，动画时钟受会话暂停控制，动画帧率不决定伤害。恢复图集后再调整打包忽略项，无需改写经济、战役或存档流程。
+
+美术清单保持 JSON 数组结构，按 `unit_id` 对齐 `src/data.js`，包含时代、名称、职责、风格版本、参考链接、绘图／负面／动作提示词与准备状态。`animation_prompts` 的基础键为 `idle`、`move`、`attack`、`hurt`、`death`，每项提供中文说明、帧数、循环标记与完整英文提示词。它描述后续制作，不产生战斗事件，也不表示帧图已存在；全部状态当前为“提示词已准备，图片未生成”。

@@ -1,38 +1,16 @@
-# 战争进化史兵种预览素材
+# 30 兵美术提示词清单
 
-本批由 Canva 生成。用户已确认使用预览图保存，因此保留返回的 200 × 200 实际尺寸，不作为 1024 像素正式游戏素材验收。
+更新：2026-10-09；规范版本：`aow1-reference-v1`。当前状态：**提示词已准备，图片未生成**。游戏继续使用文字角色，本轮保留现有 UI、音效和玩法。
 
-- 打开 `index.html` 浏览全部兵种及当前状态。
-- `manifest.csv` 为本地文件、来源链接和尺寸清单。
-- `generation-plan.json` 保存提示词与任务编号，支持继续生成。
-- 各兵种目录的 `source.md` 记录实际来源和提示词。
+参考为[初代《战争进化史》](https://www.4399.com/flash/86686_2.htm)：保持瘦长而简化的人物比例、黑色线条、平涂色块、少量阴影与二维侧视，只为现有兵种装备和职责做必要适配。完整来源、中英文模板、五时代基地、十塔、共享背景与特效见 [美术规范](../../introduction/art.md)。
 
-## 已生成的 Canva 原图链接
+- [generation-plan.json](generation-plan.json) 为五时代各六兵的 JSON 数组，ID、名称、时代和职责与代码一致。
+- `description_zh` 说明装备和轮廓，`prompt` 为可直接复制的完整英文静态绘图提示词；默认全身侧视朝右、单单位、透明背景。
+- `negative_prompt` 排除夸张大头、粗壮大手、复杂立绘、裁切、额外角色和不透明背景。
+- `animation_prompts` 至少包含 `idle`、`move`、`attack`、`hurt`、`death`，以及逐兵需要的装填、鼓舞、治疗或维修；每项有中文说明、帧数、循环标记和可独立使用的完整英文提示词。
+- `attack` 对支援兵表示主动支援行为，不赋予额外伤害。动作条与单姿势角色图分开制作，每张动作条仅一种动作。
+- `reference_urls` 用于追溯风格；绘图时应向支持参考图片的工具实际附图，不能假设它自动读取网址。
 
-- 石棒战士：[Open generated image](https://www.canva.com/M/MAHWdoreYUc?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 投石猎手：[Open generated image](https://www.canva.com/M/MAHWe4iCiKw?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 猛犸骑手：[Open generated image](https://www.canva.com/M/MAHWe-RNWNs?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 骨矛猎手：[Open generated image](https://www.canva.com/M/MAHWe_EBFUs?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 火罐投手：[Open generated image](https://www.canva.com/M/MAHWezsxvG8?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 图腾鼓手：[Open generated image](https://www.canva.com/M/MAHWe-q77p4?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 剑盾士兵：[Open generated image](https://www.canva.com/M/MAHWe2dT8ts?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 长弓手：[Open generated image](https://www.canva.com/M/MAHWe7GSxcA?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 重甲枪兵：[Open generated image](https://www.canva.com/M/MAHWewVFWIE?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 弩车手：[Open generated image](https://www.canva.com/M/MAHWe6_M4ng?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 战车突袭兵：[Open generated image](https://www.canva.com/M/MAHWe465YpE?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
-- 战地医师：[Open generated image](https://www.canva.com/M/MAHWe0OYstk?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_create_image_asset_opened)
+旧角色图片、来源记录、预览页、素材清单和生成任务记录已清理。本目录仅保留这份说明和新提示词清单；不存在可用的新角色图片或动作帧，也未指定生成供应商。
 
-原图与正式头像后续另行导出；本轮先交付用户确认的预览图。
-
-## 2026-09-29 续作进度
-
-新增 6 张透明 PNG 预览：猛犸骑手、骨矛猎手、火罐投手、剑盾士兵、长弓手、重甲枪兵。当前共 12 张概念图、8 张透明图；8 个合格兵种全部以透明图接入小游戏。
-
-Canva 新图生成两次返回 `Too many requests`，未创建新生成任务；18 个兵种尚未生成，4 个旧概念仍需重绘，不计作已完成。
-
-- 猛犸骑手：[Open generated image](https://www.canva.com/M/MAHWkX4Ymtg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_heavy/unit_age1_heavy_portrait_preview_v01.png)
-- 骨矛猎手：[Open generated image](https://www.canva.com/M/MAHWkdq9keU?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_spear/unit_age1_spear_portrait_preview_v01.png)
-- 火罐投手：[Open generated image](https://www.canva.com/M/MAHWkWuSj5g?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age1/age1_fire/unit_age1_fire_portrait_preview_v01.png)
-- 剑盾士兵：[Open generated image](https://www.canva.com/M/MAHWkVRVC-E?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_melee/unit_age2_melee_portrait_preview_v01.png)
-- 长弓手：[Open generated image](https://www.canva.com/M/MAHWkWMGJRg?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_range/unit_age2_range_portrait_preview_v01.png)
-- 重甲枪兵：[Open generated image](https://www.canva.com/M/MAHWkYWn5xY?utm_source=OC-AaBlKrqBJJNF&utm_campaign=agent_connector_image_remove_background_asset_opened)；[透明预览](age2/age2_heavy/unit_age2_heavy_portrait_preview_v01.png)
+后续先确认样板，再生成图片并检查比例、装备、透明度与缩小剪影。只有实际文件保存和验收后才记录生成日期、工具、尺寸、版本与文件路径，并更新素材完成状态。运行时接入继续按单位 ID 查找资源，由独立角色表现模块读取状态和事件，保留文字回退。
