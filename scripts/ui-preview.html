@@ -16,12 +16,16 @@ const {GameApp}=load('src/app.js'),{UNITS}=load('src/data.js'),{LEVELS}=load('sr
 const canvas=document.querySelector('#game'),scenarios=['首页','战役路线','关卡详情','图鉴','兵种详情','设置','PvP','战场','密集战场','未来战场','防御塔','暂停','操作说明','覆盖确认','投降确认','取消生产','胜利','失败','平局','按下状态','拒绝反馈','队列成功'];
 const select=document.querySelector('#scenario'),device=document.querySelector('#device');
 scenarios.forEach((name,i)=>select.add(new Option(name,i)));
+const previewParams=new URLSearchParams(location.search);
+if(previewParams.has('scenario'))select.value=previewParams.get('scenario');
+if(previewParams.get('device')==='phone')device.value='phone';
 let app,handlers,live=false,last=0;
 window.requestAnimationFrame=()=>0;
 function fixture(){
   handlers={};const storage={},phone=device.value==='phone',width=phone?844:1280,height=phone?390:720;
-  const wx={createCanvas:()=>canvas,getWindowInfo:()=>({windowWidth:width,windowHeight:height,pixelRatio:2,safeArea:{left:phone?47:0,right:phone?797:width,top:0,bottom:phone?369:height}}),getMenuButtonBoundingClientRect:()=>({bottom:phone?34:0}),onTouchStart:f=>handlers.start=f,onTouchMove:f=>handlers.move=f,onTouchEnd:f=>handlers.end=f,onTouchCancel:f=>handlers.cancel=f,onHide:f=>handlers.hide=f,onShow:f=>handlers.show=f,getStorageSync:k=>storage[k],setStorageSync:(k,v)=>{storage[k]=structuredClone(v);},removeStorageSync:k=>{delete storage[k];},createInnerAudioContext:()=>({play(){},stop(){},onError(){}})};
-  app=new GameApp(wx);const name=scenarios[Number(select.value)];
+  let current;
+  const wx={createCanvas:()=>canvas,resolveAssetPath:path=>new URL('/'+path,location.href).href,createImage:()=>{const image=new Image();image.addEventListener('load',()=>setTimeout(()=>{if(app===current&&!app.hidden)app.renderer.draw();},0));return image;},getWindowInfo:()=>({windowWidth:width,windowHeight:height,pixelRatio:2,safeArea:{left:phone?47:0,right:phone?797:width,top:0,bottom:phone?369:height}}),getMenuButtonBoundingClientRect:()=>({bottom:phone?34:0}),onTouchStart:f=>handlers.start=f,onTouchMove:f=>handlers.move=f,onTouchEnd:f=>handlers.end=f,onTouchCancel:f=>handlers.cancel=f,onHide:f=>handlers.hide=f,onShow:f=>handlers.show=f,getStorageSync:k=>storage[k],setStorageSync:(k,v)=>{storage[k]=structuredClone(v);},removeStorageSync:k=>{delete storage[k];},createInnerAudioContext:()=>({play(){},stop(){},onError(){}})};
+  app=new GameApp(wx);current=app;const name=scenarios[Number(select.value)];
   if(name==='战役路线'||name==='关卡详情'){app.navigate('campaign');app.progress.records={'1-1':{cleared:true,bestHp:.72,bestTime:126}};if(name==='关卡详情')app.modal={levelId:'1-2'};}
   else if(name==='图鉴'||name==='兵种详情'){app.navigate('codex');app.codexEra=4;if(name==='兵种详情')app.modal={unit:UNITS[28].id};}
   else if(name==='设置')app.navigate('settings');else if(name==='PvP')app.navigate('pvp');

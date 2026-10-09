@@ -42,7 +42,7 @@ test('new battle asks before replacing a saved battle; surrender confirms and re
 test('victory settlement is persisted once and next level can start',()=>{
   const a=new GameApp(platform());a.startBattle({mode:'campaign',levelId:'1-1'});a.battle.sides[1].hp=0;a.frame(1000);a.frame(1100);assert.ok(a.progress.records['1-1']);const progress=JSON.stringify(a.progress);a.frame(1200);assert.equal(JSON.stringify(a.progress),progress);assert.equal(a.wx.data[KEYS.progress].records['1-1'].cleared,true);tapLabel(a,'下一关');assert.equal(a.view.rules.levelId,'1-2');assert.equal(a.view.result,null);
 });
-test('all screens, every unit detail and crowded text render without image loading or mutation',()=>{
+test('all screens, every unit detail and crowded text render with unsupported-image fallback and no mutation',()=>{
   const a=new GameApp(platform());for(const scene of ['home','campaign','codex','settings','pvp']){a.navigate(scene);for(let i=0;i<5;i++){a.chapter=i;a.codexEra=i;a.renderer.draw();}}for(const d of UNITS){a.modal={unit:d.id};a.renderer.draw();}
   a.modal=null;a.startBattle();for(let side=0;side<2;side++)for(let i=0;i<30;i++){const u=a.battle.spawn(side,'age1_melee');u.x=500;}
   const before=a.battle.snapshot();a.renderer.draw();assert.deepEqual(a.battle.snapshot(),before);assert.ok(a.wx.texts.includes('我·石棒×30'));assert.ok(a.wx.texts.includes('敌·石棒×30'));

@@ -81,16 +81,16 @@ class Renderer extends UIComponents {
     const a=this.app;this.painter.shape(0,495,1280,225,C.panel,null,'round',18);this.icon('clock',36,524,23,C.muted);this.text('队列',55,524,21,C.muted);
     if(!p.queue.length)this.text('选择兵种，组织下一轮推进。',141,525,21,C.muted);
     p.queue.forEach((q,i)=>{const d=BY_ID[q.typeId],x=140+i*180,state=a.feedback.state('battle:main:queue:'+q.id);
-      this.button(d.shortName+(i===0?' '+q.remaining.toFixed(1)+'秒':' · 等待'),x,504,169,39,()=>a.queueCancel(q.id),true,true,{id:'queue:'+q.id,variant:'soft',selected:state.alpha>0,icon:i===0?'clock':null});
+      this.button(d.shortName+(i===0?' '+q.remaining.toFixed(1)+'秒':' · 等待'),x,504,169,39,()=>a.queueCancel(q.id),true,true,{id:'queue:'+q.id,variant:'soft',selected:state.alpha>0,portraitId:d.id});
       if(i===0)this.bar(x+9,548,151,4,1-q.remaining/d.train,C.gold);
     });
     UNITS.filter(u=>u.era===p.era).slice(a.page*3,a.page*3+3).forEach((d,i)=>{
       const x=24+i*244,reason=p.gold<d.cost?'金币不足':p.queue.length>=5?'队列已满':b.population+d.pop>30?'人口已满':null,queueIndex=p.queue.findIndex(q=>q.typeId===d.id),producing=queueIndex===0?p.queue[0]:null;
       this.region(x,565,230,129,()=>a.command({type:'train',id:d.id}),()=>{a.modal={unit:d.id};a.skillMode=false;},{id:'card:'+d.id,enabled:!reason,disabledReason:reason,draw:state=>{
-        this.panel(x,565,230,129,state.pressed||state.kind==='success'&&state.alpha>0?C.goldLight:C.panel,14);this.badge(d.support?'heart':d.mechanical?'gear':d.range>70?'target':'swords',x+24,587,13,C.tealLight,ERA_COLORS[d.era]);this.fitText(d.name,x+45,586,175,24);
-        this.tag(d.role,x+10,605,C.tealLight,C.teal,17);this.icon('coin',x+21,642,19,C.gold);this.text(d.cost+' 金 · '+d.pop+' 人',x+36,642,20,C.muted);
-        if(producing){const progress=Math.max(0,Math.min(1,1-producing.remaining/d.train));this.bar(x+10,569,210,3,progress,C.gold);this.text('生产 '+Math.round(progress*100)+'%',x+216,619,17,C.teal,'right');}
-        else if(queueIndex>0)this.text('排队中',x+216,619,17,C.muted,'right');
+        this.panel(x,565,230,129,state.pressed||state.kind==='success'&&state.alpha>0?C.goldLight:C.panel,14);this.unitPortrait(d.id,x+8,575,62,64);this.fitText(d.name,x+80,586,140,21);
+        this.tag(d.role,x+80,605,C.tealLight,C.teal,16);this.icon('coin',x+83,642,15,C.gold);this.text(d.cost+'金 · '+d.pop+'人',x+94,642,16,C.muted);
+        if(producing){const progress=Math.max(0,Math.min(1,1-producing.remaining/d.train));this.bar(x+10,569,210,3,progress,C.gold);this.text(Math.round(progress*100)+'%',x+39,647,14,C.teal,'center');}
+        else if(queueIndex>0)this.text('排队',x+39,647,14,C.muted,'center');
       }});
       this.button('详情',x+9,660,61,29,()=>{a.modal={unit:d.id};a.skillMode=false;},true,true,{id:'detail:'+d.id,variant:'ghost'});
       this.button(reason||'生产 '+d.train+'秒',x+82,655,139,36,()=>a.command({type:'train',id:d.id}),!reason,true,{id:'train:'+d.id,variant:'primary',disabledReason:reason});
@@ -111,14 +111,15 @@ class Renderer extends UIComponents {
   close(){this.button('关闭',968,88,137,47,()=>{this.app.modal=null;},true,true,{id:'close',variant:'ghost',icon:'close'});}
   details(d){
     if(!d)return;this.overlay(d.name+' · '+d.role,d.support?'heart':d.mechanical?'gear':'swords');this.close();
-    this.text(ERAS[d.era].name+' / '+(d.armor==='heavy'?'重甲':'轻甲')+' / '+(d.mechanical?'机械':'生物'),184,177,22,C.muted);
-    [['heart','生命',d.hp],['swords',d.support?'支援量':'伤害',d.damage],['target','射程',d.range],['flag','移速',d.speed]].forEach(([icon,label,value],i)=>{const x=184+i*220;this.painter.shape(x,202,204,63,C.tealLight,null,'round',12);this.icon(icon,x+24,233,25,C.teal);this.text(label,x+46,219,18,C.muted);this.text(value,x+46,246,25,C.ink);});
-    this.text(d.cost+' 金 · '+d.pop+' 人 · '+d.train+' 秒生产 · 间隔 '+d.interval+' 秒 · 前摇 '+d.windup+' 秒',184,289,22);
-    this.wrap(TRAITS[d.trait]||(DAMAGE[d.type]+'伤害，自动锁定最近有效敌兵'),184,331,850,23,30);
-    this.icon('check',197,402,24,C.teal);this.wrap('优势：'+d.strength,221,402,813,23,30);
-    this.icon('shield',197,457,24,C.red);this.wrap('弱点：'+d.weakness,221,457,813,23,30);
-    this.icon('people',197,512,24,C.gold);this.wrap('搭配：'+d.partners,221,512,813,23,30);
-    this.text(this.app.scene==='battle'?'详情不暂停战斗；需要时请先暂停。':'每个时代六种兵，进化后全部开放。',184,592,22,C.muted);
+    this.painter.shape(176,186,290,399,C.tealLight,null,'round',20);this.unitPortrait(d.id,186,199,270,350);this.text('静态立绘 · 朝右侧视',321,567,19,C.muted,'center');
+    this.fitText(ERAS[d.era].name+' / '+(d.armor==='heavy'?'重甲':'轻甲')+' / '+(d.mechanical?'机械':'生物'),496,179,592,21,C.muted);
+    [['heart','生命',d.hp],['swords',d.support?'支援量':'伤害',d.damage],['target','射程',d.range],['flag','移速',d.speed]].forEach(([icon,label,value],i)=>{const x=496+i%2*300,y=207+Math.floor(i/2)*69;this.painter.shape(x,y,280,56,C.tealLight,null,'round',12);this.icon(icon,x+24,y+28,25,C.teal);this.text(label,x+46,y+16,17,C.muted);this.text(value,x+46,y+40,24,C.ink);});
+    this.text(d.cost+' 金 · '+d.pop+' 人 · '+d.train+' 秒生产',496,355,22);this.text('间隔 '+d.interval+' 秒 · 前摇 '+d.windup+' 秒',496,386,20,C.muted);
+    this.wrap(TRAITS[d.trait]||(DAMAGE[d.type]+'伤害，自动锁定最近有效敌兵'),496,422,592,20,26);
+    this.icon('check',507,482,22,C.teal);this.wrap('优势：'+d.strength,531,482,557,20,26);
+    this.icon('shield',507,529,22,C.red);this.wrap('弱点：'+d.weakness,531,529,557,20,26);
+    this.icon('people',507,576,22,C.gold);this.wrap('搭配：'+d.partners,531,576,557,20,26);
+    this.text(this.app.scene==='battle'?'详情不暂停战斗；需要时请先暂停。':'每个时代六种兵，进化后全部开放。',184,627,20,C.muted);
   }
   levelDetails(l){
     const a=this.app;this.overlay(l.id+' '+l.name,'flag');this.close();this.text(l.lesson,184,178,25,C.teal);
@@ -150,8 +151,8 @@ class Renderer extends UIComponents {
   cancelQueue(view){
     const a=this.app,id=a.modal.cancel,p=view.sides[0],index=p.queue.findIndex(q=>q.id===id);this.overlay('取消生产','clock');this.close();
     if(index<0){this.text('该单位已经出场或队列已发生变化。',184,253,25);return;}
-    const q=p.queue[index],refund=Math.floor(q.paid*(index===0?0.75:1));this.text(BY_ID[q.typeId].name+' · '+(index===0?'正在生产':'等待生产'),184,237,27);
-    this.tag('返还 '+refund+' 金币',184,289,C.goldLight,C.ink,24,226);this.text(index===0?'正在生产的单位返还实付费用的 75%。':'等待生产的单位全额退款。',184,355,24,C.muted);this.text('确认时按当前队列核对；出生后不能取消。',184,407,22,C.muted);
+    const q=p.queue[index],refund=Math.floor(q.paid*(index===0?0.75:1));this.unitPortrait(q.typeId,184,194,166,240);this.text(BY_ID[q.typeId].name+' · '+(index===0?'正在生产':'等待生产'),386,237,27);
+    this.tag('返还 '+refund+' 金币',386,289,C.goldLight,C.ink,24,226);this.text(index===0?'正在生产的单位返还实付费用的 75%。':'等待生产的单位全额退款。',386,355,24,C.muted);this.text('确认时按当前队列核对；出生后不能取消。',386,407,22,C.muted);
     this.button('确认取消',184,475,884,64,()=>{a.modal=null;a.command({type:'cancel',id});},true,false,{id:'confirm-cancel',variant:'gold',shape:'cut'});
   }
   result(result){

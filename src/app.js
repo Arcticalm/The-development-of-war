@@ -6,6 +6,7 @@ const {LocalBattleSession}=require('./sessions/local');
 const {StorageService,KEYS,unlocked,settleProgress}=require('./services/storage');
 const {AudioService}=require('./services/audio');
 const {UnavailablePvpService}=require('./services/pvp');
+const {PortraitService}=require('./services/portraits');
 const {Renderer}=require('./renderer');
 const {FeedbackController}=require('./ui/feedback');
 const SAVE_KEY=KEYS.snapshot;
@@ -16,6 +17,7 @@ class GameApp {
     this.wx=platform;this.canvas=platform.createCanvas();this.ctx=this.canvas.getContext('2d');
     this.storage=services.storage||new StorageService(platform);this.settings=this.storage.loadSettings();this.progress=this.storage.loadProgress();
     this.audio=services.audio||new AudioService(platform,this.settings);this.pvp=services.pvp||new UnavailablePvpService();
+    this.portraits=services.portraits||new PortraitService(platform);
     this.feedback=new FeedbackController();this.activeControl=null;this.actionOutcome='tap';this.actionAudio=null;
     this.session=null;this.scene='home';this.page=0;this.modal=null;this.skillMode=false;this.hidden=false;
     this.toast='';this.toastKind='info';this.toastTime=0;this.difficulty='normal';this.lastTime=0;this.saveClock=0;this.chapter=0;this.codexEra=0;

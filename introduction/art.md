@@ -1,6 +1,6 @@
 # 《战争进化史》美术规范与绘图提示词
 
-> 更新：2026-10-09；美术规范版本：`aow1-reference-v1`。当前交付为**提示词已准备，图片未生成**。游戏继续使用文字角色，本轮保留现有指挥台 UI、音效、点击反馈和全部玩法。
+> 更新：2026-10-09；美术规范版本：`aow1-reference-v1`。当前交付：**30 张静态角色立绘已生成、验收并接入静态页面**；原图在 `assets/units/age1/`～`age5/`，透明 PNG，以单位 ID 命名。图鉴、详情、出兵卡片、生产队列及取消弹窗使用展示图，战场实体继续使用文字。动作帧与场景／建筑／特效图未生成，现有 UI、音效、点击反馈和玩法保持兼容。
 
 ## 1. 参考与改动原则
 
@@ -142,10 +142,14 @@ Draw a wide horizontal battlefield background staying very close to the FIRST Ag
 
 ## 7. 清单、状态与接入边界
 
-`assets/units/` 当前只保留 [素材说明](../assets/units/README.md) 和 [30 兵提示词清单](../assets/units/generation-plan.json)。旧角色图片、来源记录、预览页、任务记录和旧绘图样本已清理。新清单不包含历史媒体链接、任务编号或已生成文件路径。
+`assets/units/` 保留 [素材说明](../assets/units/README.md)、[30 兵提示词清单](../assets/units/generation-plan.json)、30 张已生成的立绘（实际归档于 `age1/`、`age2/`、`age3/`、`age4/`、`age5/`，每时代六张，文件名 `<unit_id>.png`，透明 PNG）与 `_work/` 下的风格锚点、原件备份和制作脚本。较早版本角色图片、来源记录、预览页和任务记录已清理；本轮保留已验收原图与生成记录。
 
 清单保持 JSON 数组结构，每项包含 `unit_id`、`name`、`age`、`role`、`style_version`、`reference_urls`、`description_zh`、`prompt`、`negative_prompt`、`animation_prompts` 和 `status`。`animation_prompts` 中每个动作包含 `description_zh`、`frames`、`loop`、`prompt`；英文动作提示词包含单位装备与风格，可单独复制使用。五个基础动作键为 `idle`、`move`、`attack`、`hurt`、`death`，附加动作按需要补充。
 
-当前全部状态为 `提示词已准备，图片未生成`。提示词完成、静态图片生成、透明图验收、动作帧验收和运行时接入是不同阶段，不能相互代替。后续生成后再记录实际工具、日期、尺寸、文件路径、版本和透明度，只有落盘并审核通过的图片才计入素材完成数量。
+当前 30 项状态为 `已生成并验收通过（2026-10-09）`，`generated` 字段记录了实际工具（image_edit / seedream_5.0_flash）、日期、尺寸（1536×2048 或 2048×2048）、文件路径与透明度（真 RGBA）。提示词完成、静态图片生成、透明图验收、动作帧验收和运行时接入是不同阶段，不能相互代替；动作帧与场景图尚未生成。
 
-正式图片及动画接入点仍为角色表现模块；资源按单位 ID 查找，不写入战斗数值、快照或 PvP 协议。打包忽略设置本轮保持原样，待正式资源接入时再调整。现有指挥台 UI 的米色、深绿与金色是界面规范，本次角色与场景风格替换不修改这些控件。
+静态展示图由 `scripts/build-unit-portraits.py` 从原图派生：仅裁外围透明留白，等比缩至最长边 360 像素，加四边各 12 像素透明边距，保存 RGBA PNG 至 `assets/unit-portraits/`；索引在 `src/config/unit-portraits.js`。原图哈希保持不变。图片按需加载，最多缓存 12 张，等比完整展示，加载中或失败时回退图标与文字。资源只进入表现层，不写入战斗数值、快照或 PvP 协议。
+
+动作源帧默认 512×512 透明 PNG，统一比例与脚底锚点、朝右方向；按 `assets/units/animations/<age>/<unit_id>/v01/<action>/0001.png` 归档，工作文件在 `assets/units/_work/animations/` 下的对应路径。支援兵的 `attack` 是 `encourage`／`heal`／`repair` 别名，不重复生成。177 条动作提示词对应 172 组独立动画、1136 帧，全部待生成；30 兵制作表、版本和 manifest 格式见[素材说明](../assets/units/README.md)。未来运行时图集另行构建，制作源帧不直接打包。
+
+游戏包包含静态展示图，排除 `assets/units/`、未引用的 `assets/ui/` 和 `assets/reference-screenshots/` 以及 `output/`，验收预算 3.5 MiB。现有指挥台 UI 的米色、深绿与金色继续作为界面规范。

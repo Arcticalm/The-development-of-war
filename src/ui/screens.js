@@ -26,7 +26,7 @@ function home(r){
   [['战役 · 五章十五关','沿地图逐章推进','flag','campaign'],['兵种图鉴 · 全部开放','查看定位、克制与搭配','book','codex'],['设置','声音与显示偏好','gear','settings'],['PvP 在线对战','真人匹配与好友房待开放','swords','pvp']].forEach(([title,sub,icon,scene],i)=>r.tile(scene,title,sub,icon,816,272+i*97,416,81,()=>a.navigate(scene),entrances[scene]));
   if(a.invalidSaved)r.text('旧版或不完整对局无法恢复，请重新挑战。',64,680,21,C.red);
   else if(a.saveUnavailable)r.text('本地存储不可用，本次仍可进行单机游戏。',64,680,21,C.red);
-  else {r.icon('shield',79,680,22,C.teal);r.text('单机指挥 · 文字角色原型',102,680,21,C.muted);}
+  else {r.icon('shield',79,680,22,C.teal);r.text('单机指挥 · 静态立绘已接入',102,680,21,C.muted);}
 }
 function campaign(r){
   const a=r.app,C=r.colors;r.heading('时代战役','沿路线通关，下一站随胜利解锁；已完成关卡可重玩。','flag');chapterTabs(r,'chapter');
@@ -51,9 +51,10 @@ function codex(r){
   UNITS.filter(d=>d.era===a.codexEra).forEach((d,i)=>{
     const x=48+i%3*402,y=273+Math.floor(i/3)*191;
     r.region(x,y,380,168,()=>{a.modal={unit:d.id};},null,{id:'unit:'+d.id,radius:18,draw:state=>{
-      r.panel(x,y,380,168,state.pressed?C.goldLight:C.panel);r.badge(d.support?'heart':d.mechanical?'gear':d.range>70?'target':'swords',x+38,y+40,24,C.tealLight,ERA_COLORS[d.era]);
-      r.fitText(d.name,x+75,y+35,285,27);r.tag(d.role,x+20,y+73,C.tealLight,C.teal,19);r.tag(d.armor==='heavy'?'重甲':'轻甲',x+266,y+73,C.goldLight,C.ink,18,94);
-      r.icon('coin',x+28,y+130,21,C.gold);r.text(d.cost+'金 · '+d.pop+'人 · '+d.train+'秒',x+47,y+130,20,C.muted);
+      r.panel(x,y,380,168,state.pressed?C.goldLight:C.panel);r.unitPortrait(d.id,x+12,y+12,100,144);
+      r.fitText(d.name,x+126,y+29,238,26);r.tag(d.role,x+126,y+51,C.tealLight,C.teal,17);
+      r.tag(d.armor==='heavy'?'重甲':'轻甲',x+126,y+87,C.goldLight,C.ink,16,65);
+      r.icon('coin',x+133,y+139,18,C.gold);r.text(d.cost+'金 · '+d.pop+'人',x+147,y+139,17,C.muted);r.text(d.train+'秒生产',x+208,y+101,17,C.muted);
     }});
     r.button('查看详情',x+258,y+109,104,43,()=>{a.modal={unit:d.id};},true,true,{id:'detail:'+d.id,variant:'ghost'});
   });
@@ -75,7 +76,7 @@ function settings(r){
   r.button('试听',1100,365,98,50,()=>a.audio.play('evolve'),true,true,{id:'listen',variant:'outline'});
   toggle(r,'background',a.settings.simpleBackground?'简化':'完整',988,508,a.settings.simpleBackground,()=>a.changeSetting('simpleBackground',!a.settings.simpleBackground));
   r.button('操作说明',64,638,198,48,()=>{a.modal='help';},true,true,{id:'help',variant:'soft',icon:'book'});
-  r.text(a.audio.failed?'当前设备音频播放不可用，游戏可继续。':'角色采用文字显示；正式造型与动作将在后续完善。',296,663,22,a.audio.failed?C.red:C.muted);
+  r.text(a.audio.failed?'当前设备音频播放不可用，游戏可继续。':'静态立绘已接入；战场单位暂用文字，动作帧待制作。',296,663,22,a.audio.failed?C.red:C.muted);
 }
 function pvp(r){
   const a=r.app,C=r.colors;r.heading('PvP 在线对战','指挥台已就绪，真人匹配与好友房尚未开放。','swords');

@@ -1,6 +1,6 @@
 # 战争进化史 · 微信小游戏
 
-横屏 Canvas 小游戏，入口是 `game.js`，无需 npm 安装或构建步骤。当前版本为 `text-prototype-0.2`：先完成单机玩法，全部角色以文字显示，随后再制作造型和动画。
+横屏 Canvas 小游戏，入口是 `game.js`，运行无需 npm 安装。配置版本保持 `text-prototype-0.2`；30 兵静态立绘已接入图鉴、详情、出兵卡片、队列及取消生产弹窗，战场实体继续使用文字，动作帧待制作。
 
 ## 当前可玩内容
 
@@ -37,15 +37,17 @@
 | `src/app.js` | 场景切换、触控与手势、生命周期、会话和服务协调 |
 | `src/renderer.js`、`src/ui/` | Canvas 页面、弹层、文字角色布局；不计算伤害 |
 | `src/ui/theme.js`、`primitives.js`、`components.js`、`feedback.js` | 主题、原生形状与图标、稳定控件描述、独立 UI 反馈时钟 |
-| `src/services/` | 微信存储、音频和待接入的 PvP 服务 |
+| `src/services/` | 微信存储、音频、最多 12 张的静态立绘缓存和待接入的 PvP 服务 |
 
-详细接口和后续接入方式见 [架构说明](introduction/architecture.md)。完整首版目标保留在 `introduction/gameplay.md`、`design-process.md` 和 `art.md`，其中真人 PvP 与正式美术仍属于后续阶段。
+详细接口和后续接入方式见 [架构说明](introduction/architecture.md)。完整首版目标保留在 `introduction/gameplay.md`、`design-process.md` 和 `art.md`，其中真人 PvP、角色动作和场景美术仍属于后续阶段。
 
 ## 美术规范与提示词
 
-角色与场景参考初代《战争进化史》的比例、黑色线条、平涂色块及简单场景观感，尽量少改动；详细参考来源、五时代基地、十种防御塔、战场与特效提示词见 [美术规范](introduction/art.md)。[30 兵提示词清单](assets/units/generation-plan.json) 提供每兵可直接使用的绘图、负面及动作提示词，统一状态为“提示词已准备，图片未生成”，不绑定绘图供应商。
+角色与场景参考初代《战争进化史》的比例、黑色线条、平涂色块及简单场景观感，尽量少改动；详细参考来源、五时代基地、十种防御塔、战场与特效提示词见 [美术规范](introduction/art.md)。[30 兵提示词清单](assets/units/generation-plan.json) 保留绘图、负面、动作提示词及实际立绘生成记录。30 张立绘已验收并完成静态接入，动作帧尚未生成。
 
-旧角色图片、来源记录、预览页、清单、生成任务与绘图样本已清理，`assets/units/` 只保留新说明和提示词清单。本版继续使用文字角色，保留当前 UI 与点击反馈；打包仍忽略 `assets/units/` 和 `output/`。后续通过独立角色表现模块接入正式图片与动画，通用动作逻辑仍保留。基础音效是 `assets/audio/` 中的本地 WAV，可用 `python scripts/build-audio.py` 重新生成。
+原图位于 `assets/units/age1/`～`age5/`，本轮保持原样。运行 `python scripts/build-unit-portraits.py`（需要 Pillow）生成 `assets/unit-portraits/` 展示图与 `src/config/unit-portraits.js` 索引：透明裁边、最长边 360 像素、四边各 12 像素透明边距。图片服务按需加载并复用，最多缓存 12 张，加载中或失败时回退图标和文字；所有静态展示等比完整居中。
+
+游戏包只引用展示图，忽略 `assets/units/` 原图与工作资料、`assets/ui/`、`assets/reference-screenshots/` 和 `output/`，预算 3.5 MiB。战场文字表现、UI、点击反馈和音效保持兼容。后续 172 组独立动画、1136 张帧图及统一保存路径见 [兵种素材说明](assets/units/README.md)；制作源帧不直接打包。基础音效是 `assets/audio/` 中的本地 WAV，可用 `python scripts/build-audio.py` 重新生成。
 
 ## 验证
 
@@ -71,5 +73,7 @@ Windows PowerShell 可使用测试脚本（自动寻找 `node`）：
 本次 UI 改版的 **71 项测试、15 关合法指令通关验证**、Canvas 检查画面和模拟器接口限制见 [UI 验证记录](scripts/diagnostics/ui-redesign-validation.md)。
 
 美术提示词重写、旧素材清理及兼容验证见 [美术整理验证记录](scripts/diagnostics/art-rewrite-validation.md)。
+
+静态立绘接入的 **83 项测试、15 关通关验证**、包体审计与 49 个模拟器 Canvas 场景见 [立绘验收记录](scripts/diagnostics/portrait-integration-validation.md)。资源检查可运行 `python scripts/check-unit-portraits.py`（需要 Pillow）。
 
 可用本地预览工具逐页检查布局：运行 `python scripts/ui-preview.py`，打开 `http://127.0.0.1:8123/scripts/ui-preview.html`。预览复用实际游戏模块，提供页面、弹窗、结算、密集战场和手机安全区场景，使用独立测试存储；`scripts/` 不进入小游戏包。

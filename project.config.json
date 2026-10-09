@@ -72,6 +72,14 @@
       {
         "value": "assets/units/generation-jobs.json",
         "type": "file"
+      },
+      {
+        "value": "assets/ui",
+        "type": "folder"
+      },
+      {
+        "value": "assets/reference-screenshots",
+        "type": "folder"
       }
     ],
     "include": []

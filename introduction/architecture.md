@@ -1,8 +1,8 @@
 # 文字单机原型架构
 
-更新：2026-10-09；配置版本：`text-prototype-0.2`。已完成 UI 与触控反馈改版，本轮重写美术提示词并清理旧素材，沿用战斗规则和存储版本。
+更新：2026-10-09；配置版本：`text-prototype-0.2`。已完成 UI、触控反馈及 30 兵静态立绘接入，沿用战斗规则和存储版本。
 
-当前执行顺序为文字角色 → 完整单机玩法 → 后续联网和正式美术。PvP 大厅可以进入，实际联网服务尚未接入。旧角色图片、生成记录、图片映射及其专用脚本已清理；通用 `animation.js` 与对应测试保留，当前运行路径仍使用文字角色，不引用该动作模块。新规范与 30 兵提示词见 [美术规范](art.md)，提示词不参与运行时加载。
+当前单机玩法已实现，静态页面使用已验收立绘；战场仍由 `TextUnitPresenter` 绘制文字。PvP 大厅可以进入，实际联网服务尚未接入。通用 `animation.js` 与对应测试保留，当前战场不引用该动作模块。新规范与 30 兵提示词见 [美术规范](art.md)，提示词不参与运行时加载。
 
 ## 模块与数据流
 
@@ -19,6 +19,8 @@ flowchart LR
     View --> Renderer[Renderer 页面与弹层]
     Renderer --> Presenter[TextUnitPresenter]
     Renderer --> Components[UIComponents / UIPainter / Theme]
+    Components --> Portraits[PortraitService 静态立绘 LRU]
+    Portraits --> Index[按 ID 查找的展示图索引]
     App --> Feedback[FeedbackController UI 时钟]
     Feedback --> Renderer
     App --> Storage[StorageService]
@@ -43,6 +45,8 @@ flowchart LR
 | `ui/units.js` | 短名、阵营、血量、状态、密集单位分组和标签避让 |
 | `services/storage.js` | 读写失败处理、数据校验、顺序解锁和结算去重 |
 | `services/audio.js` | 本地短音效、音量、关闭与后台停止 |
+| `services/portraits.js`、`config/unit-portraits.js` | 按 ID 按需加载、加载结果、错误回退、最多 12 张 LRU 与构建生成的尺寸索引 |
+| `ui/portraits.js` | 纯函数计算等比完整居中位置；绘制不改变控件边界 |
 | `services/pvp.js` | 真人匹配和房间服务的替换边界 |
 
 ## 对局会话契约
@@ -99,6 +103,10 @@ flowchart LR
 
 `UnavailablePvpService` 保留 `ensureSession`、`matchmake`、`cancelMatchmaking`、`createRoom`、`joinRoom`、`leaveRoom`、`setReady`、`connectMatch`、`reconnect`。当前每项返回明确的 `PVP_UNAVAILABLE`，大厅操作仅显示说明。`LocalBattleSession` 拒绝启动 PvP，防止入口意外运行本地 AI。真实实现应返回远端会话，由服务端维护资源、时钟、合法指令与唯一结算，再补齐搜索、房间和重连场景。
 
-正式美术接入点是 `ui/units.js` 的角色表现模块，可替换为图片或动画表现；继续使用单位 ID、状态和攻击／治疗／死亡事件。保留文字回退显示，动画时钟受会话暂停控制，动画帧率不决定伤害。恢复图集后再调整打包忽略项，无需改写经济、战役或存档流程。
+静态立绘由 `UIComponents.unitPortrait` 统一绘制，仅用于图鉴、详情、出兵卡片、队列与取消弹窗。`PortraitService` 用平台 `createImage` 按需加载；相同 ID 复用加载中或已加载项，最多保留 12 项 LRU，失败项驻留期间不逐帧重试，淘汰后的迟到回调不会回写缓存。普通游戏帧自动重绘；浏览器预览使用原生 Image、项目根路径与加载后重绘，旧预览实例的回调不重绘新实例。
 
-美术清单保持 JSON 数组结构，按 `unit_id` 对齐 `src/data.js`，包含时代、名称、职责、风格版本、参考链接、绘图／负面／动作提示词与准备状态。`animation_prompts` 的基础键为 `idle`、`move`、`attack`、`hurt`、`death`，每项提供中文说明、帧数、循环标记与完整英文提示词。它描述后续制作，不产生战斗事件，也不表示帧图已存在；全部状态当前为“提示词已准备，图片未生成”。
+`scripts/build-unit-portraits.py` 只读取原图，透明裁边后等比缩小至最长边 360，加四边 12 像素透明边距，导出 RGBA PNG 和路径／尺寸索引。打包只包含 `assets/unit-portraits/` 展示图；原图、工作资料、提示词和未引用参考图排除，包体预算 3.5 MiB。
+
+未来战场动画接入点仍为 `ui/units.js`，使用单位 ID、状态和攻击／治疗／死亡事件，保留文字回退；动画时钟受会话暂停控制，帧率不决定伤害。未来运行时图集另行构建，无需改写经济、战役或存档流程。
+
+美术清单保持 JSON 数组结构，按 `unit_id` 对齐 `src/data.js`，保留实际生成记录；静态立绘已生成并接入。`animation_prompts` 描述后续制作，不产生战斗事件，也不表示帧图已存在。177 条动作提示词中的 5 个支援 `attack` 是 `encourage`／`heal`／`repair` 的别名；实际共 172 组独立动画、1136 帧，全部待生成。动作源帧、版本、锚点、清单和保存路径见 [兵种素材说明](../assets/units/README.md)。

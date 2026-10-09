@@ -44,7 +44,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 石棒战士 (age1_melee). Stone Club Warrior, a prehistoric low-cost frontline fighter with slim bare limbs, a short plain brown hide skirt and untidy hair. Hold a simple wooden club with a gray stone head; keep hands modest and omit elaborate jewelry.\n\nCreate ONE horizontal 6-frame sprite strip showing ONLY the death action, facing RIGHT. Buckle the knees, lose balance, and settle on the ground with the weapon or kit beside the body. Keep the final fallen pose stable. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_melee.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age1_range",
@@ -97,7 +106,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 投石猎手 (age1_range). Stone Slinger, a slim prehistoric ranged fighter in a plain hide skirt, with a small stone pouch at the waist and a short simple sling. Use the reference cavemen's skin and earth colors; keep the sling, not a bow.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Retrieve a stone from the waist pouch, open the sling pocket, seat the stone, and return to a loaded grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_range.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age1_heavy",
@@ -150,7 +168,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 猛犸骑手 (age1_heavy). Mammoth Rider, one slim prehistoric rider on one brown mammoth. Identify the mount with simple fur masses, curved tusks and a trunk, without individual-hair texture. The rider wears a plain hide skirt, holds a short stone mallet and sits on a simple rope saddle. Preserve a mammoth, not a dinosaur.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the charge action, facing RIGHT. Push off with the mammoth's hind legs, lower its head and neck, brace the forward-leaning rider, then finish with a planted recovery step. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_heavy.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age1_spear",
@@ -197,7 +224,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 骨矛猎手 (age1_spear). Bone Spear Hunter, a slim prehistoric fighter with a plain hide skirt and a narrow wooden spear tipped with a pale bone point. Make the spear's length distinguish him from the club warrior; keep the kit sparse.\n\nCreate ONE horizontal 6-frame sprite strip showing ONLY the death action, facing RIGHT. Buckle the knees, lose balance, and settle on the ground with the weapon or kit beside the body. Keep the final fallen pose stable. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_spear.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age1_fire",
@@ -250,7 +286,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 火罐投手 (age1_fire). Fire Pot Thrower, a slim prehistoric fighter in a plain hide skirt, with one small spare pot at the waist. Hold a round earthy-brown clay pot with a tiny orange flame at its mouth, not a giant magical fireball.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Take a spare pot from the waist, check its small flame, and return both hands to the ready support position. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_fire.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age1_support",
@@ -303,7 +348,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 图腾鼓手 (age1_support). Totem Drummer, ONE slim prehistoric support fighter in a plain hide skirt, with a small wooden drum hung in front of the torso and one short beater in each hand. Use a plain drum face and minimal kit, not a large ornate totem or a multi-character composition.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the encourage action, facing RIGHT. Raise both beaters, play two alternating light beats and one strong beat with separate wrist and shoulder motion, then recover. Show only this drummer, no allied soldiers or large aura. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age1/age1_support.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age1"
+    }
   },
   {
     "unit_id": "age2_melee",
@@ -356,7 +410,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 剑盾士兵 (age2_melee). Sword-and-Shield Soldier, a slim cold-weapon-era frontline fighter with a simple iron helmet, plain short tunic and modest gray armor patches. Carry a short straight sword and a plain wooden shield, close to the reference's simple medieval soldier shapes, without elaborate insignia.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the guard action, facing RIGHT. Lift the shield to cover the upper body, plant and bend the front leg, absorb a small impact through shield and arm recoil, then return to ready. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_melee.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age2_range",
@@ -409,7 +472,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 长弓手 (age2_range). Longbow Archer, a slim cold-weapon-era ranged fighter in plain brown-green cloth and a small simple cap, with a tall wooden bow and small hip quiver. Keep the reference's sparse soldier detail and modest face.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Take one arrow from the quiver, place it against the bowstring, adjust the nock with the fingers, and settle the bow grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_range.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age2_heavy",
@@ -456,7 +528,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 重甲枪兵 (age2_heavy). Armored Spearman, a cold-weapon-era heavy anti-armor fighter. Add mass through a plain gray breastplate, simple helmet and shoulder plates while keeping restrained human head, hands and limb proportions. Hold a long wooden spear with a narrow iron point; no bodybuilder anatomy.\n\nCreate ONE horizontal 6-frame sprite strip showing ONLY the death action, facing RIGHT. Buckle the knees, lose balance, and settle on the ground with the weapon or kit beside the body. Keep the final fallen pose stable. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_heavy.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age2_ballista",
@@ -509,7 +590,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 弩车手 (age2_ballista). Ballista Operator, ONE slim operator with ONE simple wooden wheeled ballista. Show the wooden wheels, bow arms, rope string and one long bolt clearly. The operator wears plain cold-weapon-era cloth, not a prehistoric hide skirt; the operator and weapon are one composite unit.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Turn the small winding handle to draw the string, place one long bolt on the rail, then return the hand to the release grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_ballista.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age2_chariot",
@@ -562,7 +652,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 战车突袭兵 (age2_chariot). Chariot Raider, ONE cold-weapon-era driver with ONE horse and a simple two-wheeled wooden chariot as one composite unit. Wear a plain short tunic and small helmet, carry reins and a short spear, and keep the chassis free of ornate carvings.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the charge action, facing RIGHT. Lower the horse's head and quicken its strides, roll the wheels, brace the forward-leaning driver on the reins, then finish on planted hooves with the spear recovered. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_chariot.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age2_support",
@@ -615,7 +714,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 战地医师 (age2_support). Field Physician, ONE slim cold-weapon-era support character in a plain cloth tunic and simple head wrap, with a small medicine pouch at the waist. Carry a small cloth roll or vial; show no patient or second physician.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the heal action, facing RIGHT. Take medicine from the pouch, open the vial, extend the front hand, hold briefly, then stow the vial. Show only the physician, without a separate patient. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age2/age2_support.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age2"
+    }
   },
   {
     "unit_id": "age3_melee",
@@ -662,7 +770,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 刺刀步兵 (age3_melee). Bayonet Infantry, a slim gunpowder-era low-cost frontline soldier in a plain brown-gray coat, dark simple cap and boots. Carry a long wooden-stock musket with a narrow bayonet; no modern tactical vest or elaborate uniform.\n\nCreate ONE horizontal 6-frame sprite strip showing ONLY the death action, facing RIGHT. Buckle the knees, lose balance, and settle on the ground with the weapon or kit beside the body. Keep the final fallen pose stable. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_melee.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age3_range",
@@ -715,7 +832,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 火枪手 (age3_range). Musketeer, a slim gunpowder-era ranged soldier with a plain brown-gray coat, dark cap and small ammunition pouch. Use a long wooden-stock musket and narrow dark barrel, with little metal detailing.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Lower the barrel, retrieve ammunition, load and seat it with a short ramrod, stow the rod, then regrip the musket. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_range.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age3_heavy",
@@ -768,7 +894,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 重炮兵 (age3_heavy). Heavy Cannon Crew, ONE slim gunpowder operator with ONE large simple dark-gray cannon on a two-wooden-wheel carriage. The operator wears a plain coat and dark cap. Show the barrel, muzzle and entire carriage as one readable composite unit, without a second crew member.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Swab the muzzle, insert one round shell, seat it with a loading rod, stow the rod, and restore the barrel's rightward aim. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_heavy.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age3_grenade",
@@ -821,7 +956,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 掷弹兵 (age3_grenade). Grenadier, a slim gunpowder-era fighter in a plain short military coat and dark cap, with a few simple round grenades at the waist. Hold one small dark spherical grenade with a short fuse; no oversized bomb or modern plate carrier.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Take the next round grenade from the waist pouch, check its fuse, and return it to the ready position near the torso. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_grenade.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age3_antiarmor",
@@ -874,7 +1018,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 穿甲枪手 (age3_antiarmor). Armor-Piercing Rifleman, a slim gunpowder-era fighter in plain gray-brown cloth and a dark cap. Carry a slightly longer straight dark barrel with a simple wood stock to distinguish the rifle from the ordinary musket, without modern scopes or large fantasy attachments.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Raise the muzzle slightly, open the loading position, insert and seat ammunition, close it, and return to the shouldered grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_antiarmor.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age3_support",
@@ -927,7 +1080,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 军旗鼓手 (age3_support). Banner Drummer, ONE slim gunpowder-era support soldier in a plain coat. Strap a small unlettered banner behind the shoulder and a small drum at the waist, with two short beaters in hand. Keep the flag, drum and soldier wholly visible and sparsely detailed.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the encourage action, facing RIGHT. Play two light beats and one strong beat, with delayed banner and drum-strap motion while keeping the soldier's feet anchored. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age3/age3_support.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age3"
+    }
   },
   {
     "unit_id": "age4_melee",
@@ -980,7 +1142,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 突击兵 (age4_melee). Assault Soldier, a slim modern frontline fighter in plain olive fatigues, a small steel helmet and minimal belt pouches. Carry a compact dark-gray assault rifle, close to the reference's simple modern infantry, without dense tactical attachments.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Steady the rifle with the rear hand, remove and replace the magazine with the front hand, operate the bolt, and restore the two-handed grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_melee.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age4_range",
@@ -1033,7 +1204,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 精确射手 (age4_range). Precision Shooter, a slim modern ranged soldier in plain khaki fatigues and a small helmet, holding a long dark-gray rifle with one small scope. Use the reference's modest military detailing; no flowing cape or elaborate camouflage net.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Operate the bolt with the rear hand while the front hand stabilizes the rifle, replenish ammunition, close the bolt, and return to aim. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_range.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age4_heavy",
@@ -1086,7 +1266,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 重装机枪兵 (age4_heavy). Heavy Machine Gunner, a modern armored fighter with restrained head and hands, plain olive uniform and simple dark-gray plates. Broaden the silhouette through modest shoulder armor and a long machine gun with a short ammo belt, not giant muscles or ornate equipment.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Steady the weapon, open the feed cover with the front hand, seat the short ammunition belt, close the cover, and restore the support grip. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_heavy.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age4_rocket",
@@ -1139,7 +1328,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 火箭筒兵 (age4_rocket). Rocket Soldier, a slim modern fighter in plain olive fatigues and a small helmet. Shoulder a simple cylindrical launcher clearly distinct from a rifle, with a modest kit and sparse fittings rather than a large futuristic weapon.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Lower the launcher, stabilize the tube with one hand, insert and lock a new round at the rear, then shoulder it again. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_rocket.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age4_vehicle",
@@ -1192,7 +1390,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 履带突击车 (age4_vehicle). Tracked Assault Vehicle, a low olive-green armored tracked vehicle with a simple hull, dark treads, small road wheels and a short RIGHT-facing gun. Keep the reference's plain tank proportions and sparse fittings; no separate visible driver, fantasy spikes, or dense armor texture.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Return the gun to its neutral position, make a short mechanical loading adjustment in its mount, keep hatch and hull steady, then settle back to idle. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_vehicle.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age4_support",
@@ -1245,7 +1452,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 战地医疗兵 (age4_support). Combat Medic, ONE slim modern support soldier in plain khaki or olive fatigues, a small helmet and compact medical satchel. Use a simple unlettered medical mark and one small treatment tool, with no group of patients or extra independent person.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the heal action, facing RIGHT. Retrieve a small vial or tool, perform three restrained treatment gestures with slight waist turns, then stow the tool. Show only the medic. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age4/age4_support.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age4"
+    }
   },
   {
     "unit_id": "age5_melee",
@@ -1298,7 +1514,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 能量剑士 (age5_melee). Energy Swordsman, a slim futuristic humanoid in simple dark-gray light armor and a modest closed helmet, holding one narrow red or cyan energy sword. Identify the blade with a flat energy-color fill and very restrained glow; keep the reference's plain future soldier silhouette.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the charge action, facing RIGHT. Push off the rear leg, lean the torso forward with the sword held close, and settle on the front foot into ready. Do not depict teleportation. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_melee.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   },
   {
     "unit_id": "age5_range",
@@ -1351,7 +1576,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 等离子射手 (age5_range). Plasma Shooter, a slim futuristic ranged soldier in simple dark-gray segmented armor and a small closed helmet. Carry a short, moderately thick but plain plasma gun with one small red or cyan muzzle, no dense circuit decoration or oversized energy backpack.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Check and replace the small energy cartridge with the front hand while the rear hand steadies the gun; restore the small indicator and return to idle. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_range.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   },
   {
     "unit_id": "age5_heavy",
@@ -1404,7 +1638,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 动力装甲兵 (age5_heavy). Powered Armor Soldier, a futuristic heavy humanoid with mass added by plain dark-gray chest, shoulder and leg plates. Keep the helmet and hands modest and the joints readable. Use a short integrated energy gun on the right forearm and one small shield-status light, not a huge permanent glowing bubble.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the shield_activate action, facing RIGHT. On spawn, unfold chest and shoulders into the standing pose, flash the small shield-status light briefly, then settle it. Depict one activation, not recurring shield regeneration. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_heavy.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   },
   {
     "unit_id": "age5_rail",
@@ -1457,7 +1700,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 磁轨炮手 (age5_rail). Railgunner, a slim futuristic anti-armor soldier in simple dark-gray light armor and a modest helmet. Carry a long weapon with two straight parallel rails and one small cyan indicator, clearly distinct from the plasma gun without elaborate attachments.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Operate the side loading lever with the rear hand while the front hand steadies the rails, lock the cartridge, and restore the muzzle line. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_rail.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   },
   {
     "unit_id": "age5_siege",
@@ -1516,7 +1768,16 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 攻城机甲 (age5_siege). Siege Mech, a simple futuristic two-legged mechanical siege platform with broad dark-gray masses, a few light-gray panels, clear knee and ankle joints, a short heavy RIGHT-facing cannon arm, and a closed cockpit. Keep the reference's plain future machine vocabulary, without dense greebles or a visible extra pilot.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the reload action, facing RIGHT. Retract the barrel, cycle the small loading assembly, return the gun arm to ready, and keep the mechanical feet planted. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_siege.png",
+      "size": "2048x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   },
   {
     "unit_id": "age5_support",
@@ -1569,6 +1830,15 @@
         "prompt": "Stay very close to the supplied screenshots of the FIRST Age of War Flash game: early-Flash hand-drawn 2D side-view art, clear black contours, flat local-color fills, only a few hard-edged shadow patches, and sparse readable detail. Where a human appears, use slim simplified proportions, restrained heads and hands, and narrow articulated limbs. Preserve the reference silhouette language, line weight, palette, and modest level of detail; make only the changes required by this unit's equipment and role. Bulky armor, mounts, and machines may add mass without turning the people into chibi or muscular caricatures.\n\nUnit: 维修机兵 (age5_support). Repair Robot, ONE slender mechanical support humanoid with a simple gray torso, small sensor head, narrow articulated legs, a short repair tool in one hand and a compact tool pack in the other, plus one small cyan light. No massive backpack or separate machine being repaired.\n\nCreate ONE horizontal 8-frame sprite strip showing ONLY the repair action, facing RIGHT. Align and extend the tool arm, make two tightening rotations and one light tap, then retract. Use only a tiny restrained tool light and no separate target machine. Show clear preparation, action, follow-through and settling as appropriate; this is a non-looping action. Use equal-size cells with a consistent camera, character scale and ground anchor; leave clear space for the full weapon, limbs, mount and mechanism in every cell. Articulate body parts and equipment rather than moving, rotating or scaling a single whole-body cutout. Transparent background. No visible cell borders, text, UI, scenery, extra independent soldiers or target characters. A rider and mount or one operator and artillery remain ONE composite unit. Keep all frames the same costume, weapon and proportions; do not mix other actions into this strip."
       }
     },
-    "status": "提示词已准备，图片未生成"
+    "status": "已生成并验收通过（2026-10-09）",
+    "generated": {
+      "date": "2026-10-09",
+      "tool": "image_edit seedream_5.0_flash",
+      "anchor": "trial1a.jpg（A粗粝块面版）",
+      "file": "assets/units/age5/age5_support.png",
+      "size": "1536x2048",
+      "alpha": true,
+      "era_dir": "age5"
+    }
   }
 ]
